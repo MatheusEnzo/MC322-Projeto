@@ -47,5 +47,19 @@ public class Membro extends Usuario {
 	public void setSuspensao(int suspensao) {
 		this.suspensao = suspensao;
 	}
+
+    public void adicionarItemEmprestado(Item item) {
+        emprestimos.add(item);
+        System.out.println("Item adicionado aos empréstimos de " + getNome() + ": " + item.getTitulo());
+    }
+    
+    public void removerItemEmprestado(Item item) {
+        if (emprestimos.contains(item)) {
+            emprestimos.remove(item);
+            System.out.println("Item removido dos empréstimos de " + getNome() + ": " + item.getTitulo());
+        } else {
+            System.out.println("O item não está em posse de " + getNome() + ": " + item.getTitulo());
+        }
+    }
 	
 }
