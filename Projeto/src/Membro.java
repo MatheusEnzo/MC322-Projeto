@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class Membro extends Usuario {
@@ -60,6 +61,24 @@ public class Membro extends Usuario {
         } else {
             System.out.println("O item não está em posse de " + getNome() + ": " + item.getTitulo());
         }
+    }
+    
+    public String toCsvString() {
+        String csvString = super.toCsvString();  // Chamada ao método toCsvString() da classe Usuario
+        return csvString;
+    }
+    
+    public static Membro fromCsvString(String csvString) throws ParseException {
+        String[] values = csvString.split(","); // Divide a string CSV nos valores individuais
+        
+        // Extrai os valores do array e cria um novo objeto Membro
+        String nome = values[0];
+        String endereco = values[1];
+        String cpf = values[2];
+        String email = values[4];
+        String telefone = values[4];
+        
+        return new Membro(nome, endereco, cpf, email, telefone);
     }
 	
 }

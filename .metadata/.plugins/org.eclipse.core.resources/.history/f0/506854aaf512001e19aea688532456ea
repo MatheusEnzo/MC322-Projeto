@@ -1,0 +1,38 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Artigo extends Item {
+	private final String doi;
+	
+	public Artigo(String titulo, String autor, String editora, Date data, String genero, String doi)
+	{
+		super(titulo, autor, editora, data, genero);
+		this.doi = doi;
+	}
+
+	public String getDoi() {
+		return doi;
+	}
+	
+    public String toCsvString() {
+        String csvString = super.toCsvString();  // Chamada ao método toCsvString() da classe Item
+        csvString += "," + doi;  // Adiciona o DOI ao final da string CSV
+        return csvString;
+    }
+    
+    public static Artigo fromCsvString(String csvString) throws ParseException {
+        String[] values = csvString.split(","); // Divide a string CSV nos valores individuais
+        
+        // Extrai os valores do array e cria um novo objeto Artigo
+        String titulo = values[0];
+        String autor = values[1];
+        String editora = values[2];
+        Date data = new SimpleDateFormat("dd/MM/yyyy").parse(values[3]);
+        String genero = values[4];
+        int paginas = Integer.parseInt(values[5]);
+        String doi = values[6];
+        
+        return new Artigo(titulo, autor, editora, data, genero, paginas, doi);
+    }
+}

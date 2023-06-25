@@ -1,0 +1,89 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+public class Membro extends Usuario {
+	private int limite;
+	private ArrayList<Item> emprestimos;
+	private ArrayList<Item> historico;
+	private int suspensao;
+	
+	public Membro(String nome, String endereco, String cpf, String email, String telefone)
+	{
+		super(nome, endereco, cpf, email, telefone);
+		
+		this.limite = 5;
+		this.emprestimos = new ArrayList<Item>();
+		this.historico = new ArrayList<Item>();
+		this.suspensao = 0;
+	}
+
+	public int getLimite() {
+		return limite;
+	}
+
+	public void setLimite(int limite) {
+		this.limite = limite;
+	}
+
+	public ArrayList<Item> getEmprestimos() {
+		return emprestimos;
+	}
+
+	public void setEmprestimos(ArrayList<Item> emprestimos) {
+		this.emprestimos = emprestimos;
+	}
+
+	public ArrayList<Item> getHistorico() {
+		return historico;
+	}
+
+	public void setHistorico(ArrayList<Item> historico) {
+		this.historico = historico;
+	}
+
+	public int getSuspensao() {
+		return suspensao;
+	}
+
+	public void setSuspensao(int suspensao) {
+		this.suspensao = suspensao;
+	}
+
+    public void adicionarItemEmprestado(Item item) {
+        emprestimos.add(item);
+        System.out.println("Item adicionado aos empréstimos de " + getNome() + ": " + item.getTitulo());
+    }
+    
+    public void removerItemEmprestado(Item item) {
+        if (emprestimos.contains(item)) {
+            emprestimos.remove(item);
+            System.out.println("Item removido dos empréstimos de " + getNome() + ": " + item.getTitulo());
+        } else {
+            System.out.println("O item não está em posse de " + getNome() + ": " + item.getTitulo());
+        }
+    }
+    
+    public String toCsvString() {
+        String csvString = super.toCsvString();  // Chamada ao método toCsvString() da classe Item
+        csvString += "," + doi;  // Adiciona o DOI ao final da string CSV
+        return csvString;
+    }
+    
+    public static Artigo fromCsvString(String csvString) throws ParseException {
+        String[] values = csvString.split(","); // Divide a string CSV nos valores individuais
+        
+        // Extrai os valores do array e cria um novo objeto Artigo
+        String titulo = values[0];
+        String autor = values[1];
+        String editora = values[2];
+        Date data = new SimpleDateFormat("dd/MM/yyyy").parse(values[3]);
+        String genero = values[4];
+        int paginas = Integer.parseInt(values[5]);
+        String doi = values[6];
+        
+        return new Artigo(titulo, autor, editora, data, genero, paginas, doi);
+    }
+	
+}

@@ -1,0 +1,51 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Livro extends Item {
+	private final String isbn;
+	private int exemplares;
+	private String formato;
+	
+	public Livro(String titulo, String autor, String editora, Date data, String genero, int paginas, String isbn, String formato)
+	{
+		super(titulo, autor, editora, data, genero, paginas);
+		this.isbn = isbn;
+		this.formato = formato;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public String getFormato() {
+		return formato;
+	}
+
+	public void setFormato(String formato) {
+		this.formato = formato;
+	}
+	
+    public String toCsvString() {
+        String csvString = super.toCsvString();  // Chamada ao método toCsvString() da classe Item
+        csvString += "," + isbn;  // Adiciona o ISBN ao final da string CSV
+        csvString += "," + formato;  // Adiciona o formato ao final da string CSV
+        return csvString;
+    }
+    
+    public static Livro fromCsvString(String csvString) throws ParseException {
+        String[] values = csvString.split(","); // Divide a string CSV nos valores individuais
+        
+        // Extrai os valores do array e cria um novo objeto Livro
+        String titulo = values[0];
+        String autor = values[1];
+        String editora = values[2];
+        Date data = new SimpleDateFormat("dd/MM/yyyy").parse(values[3]);
+        String genero = values[4];
+        int paginas = Integer.parseInt(values[5]);
+        String isbn = values[6];
+        String formato = values[7];
+        
+        return new Livro(titulo, autor, editora, data, genero, paginas, isbn, formato);
+    }
+}

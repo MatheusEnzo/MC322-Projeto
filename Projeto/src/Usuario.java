@@ -51,4 +51,13 @@ public abstract class Usuario {
 		return cpf;
 	}
 	
+    public String toCsvString() {
+        String csvString = nome + ","
+        + endereco + ","
+        + cpf + ","
+        + email + ","
+        + telefone;
+        return csvString;
+    }
+	
 }
