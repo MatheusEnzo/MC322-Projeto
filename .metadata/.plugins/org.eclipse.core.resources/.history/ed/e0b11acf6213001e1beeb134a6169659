@@ -35,8 +35,7 @@ public class ArquivoLivro {
         }
     }
     
-    
- // Método para ler o arquivo
+    // Método para ler o arquivo
     public String lerArquivo(Bibliotecario bibliotecario) {
         StringBuilder conteudo = new StringBuilder();
 
@@ -79,14 +78,8 @@ public class ArquivoLivro {
 
                                                 // Cria uma instância de Livro com os dados da linha
                                                 Livro livro = new Livro(titulo, autor, editora, parseData(dataString), genero, isbn, formato);
-                                                
-                                                // Verifica se a data é nula antes de adicionar o livro à biblioteca
-                                                if (livro.getData() != null) {
-                                                    // Adiciona o livro à biblioteca
-                                                    bibliotecario.adicionarItem(livro);
-                                                } else {
-                                                    System.out.println("Data de publicação inválida para o livro: " + titulo);
-                                                }
+                                                // Adiciona o livro à biblioteca
+                                                bibliotecario.adicionarItem(livro);
                                             }
                                         }
                                     }
@@ -106,25 +99,14 @@ public class ArquivoLivro {
         return conteudo.toString();
     }
 
-    
+
     // Método auxiliar para converter uma string em uma data
     private Date parseData(String dataString) {
         try {
-            SimpleDateFormat dateFormat;
-
-            // Verifica se a data está no formato "dd/MM/yyyy" ou "MM/yyyy"
-            if (dataString.matches("\\d{2}/\\d{2}/\\d{4}")) {
-                dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            } else if (dataString.matches("\\d{2}/\\d{4}")) {
-                dateFormat = new SimpleDateFormat("MM/yyyy");
-            } else {
-                System.out.println("Formato de data inválido: " + dataString);
-                return null;
-            }
-
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             return dateFormat.parse(dataString);
         } catch (ParseException e) {
-            System.out.println("Erro ao converter a data: " + e.getMessage());
+            System.out.println("Erro ao converter a data.");
             return null;
         }
     }
