@@ -24,7 +24,7 @@ public class ArquivoLivro {
     	// Itera sobre os artigos e os escreve no arquivo
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CAMINHO_ARQUIVO))) {
             // Escreve os nomes das colunas no início do arquivo
-            writer.write("Título, Autor, Editora, Data de Publicação, Gênero, ISBN, Formato, Disponível");
+            writer.write("Título, Autor, Editora, Data de Publicação, Gênero, ISBN, Exemplares, Disponível");
             writer.newLine();
             
             // Itera sobre os livros e os escreve no arquivo
@@ -82,10 +82,10 @@ public class ArquivoLivro {
                                             String isbn = tokenizer.nextToken();
                                             // Verifica novamente antes de chamar nextToken()
                                             if (tokenizer.hasMoreTokens()) {
-                                                String formato = tokenizer.nextToken();
-
+                                                int exemplares = Integer.parseInt(tokenizer.nextToken());
+                                                
                                                 // Cria uma instância de Livro com os dados da linha
-                                                Livro livro = new Livro(titulo, autor, editora, parseData(dataString), genero, isbn, formato);
+                                                Livro livro = new Livro(titulo, autor, editora, parseData(dataString), genero, isbn, exemplares);
                                                 
                                                 // Verifica se a data é nula antes de adicionar o livro à biblioteca
                                                 if (livro.getData() != null) {

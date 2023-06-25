@@ -6,9 +6,9 @@ public class Artigo extends Item {
 	private final String doi;
 	
     //Construtor
-	public Artigo(String titulo, String autor, String editora, Date data, String genero, String doi)
+	public Artigo(String titulo, String autor, String editora, Date data, String genero, String doi, int exemplares)
 	{
-		super(titulo, autor, editora, data, genero);
+		super(titulo, autor, editora, data, genero, exemplares);
 		this.doi = doi;
 	}
 
@@ -26,7 +26,9 @@ public class Artigo extends Item {
     public String toCsvString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dataString = dateFormat.format(super.getData());
-        return super.getTitulo() + "," + super.getAutor() + "," + super.getEditora() + "," + dataString + "," + super.getGenero() + "," + doi;
+        
+        String disponivelString = super.isDisponivel() ? "Sim" : "Não";
+        return super.getTitulo() + "," + super.getAutor() + "," + super.getEditora() + "," + dataString + "," + super.getGenero() + "," + doi + "," + super.getExemplares() + "," + disponivelString;
     }
     
     public static Artigo fromCsvString(String csvString) throws ParseException {
@@ -39,8 +41,9 @@ public class Artigo extends Item {
         Date data = new SimpleDateFormat("dd/MM/yyyy").parse(values[3]);
         String genero = values[4];
         String doi = values[5];
+        int exemplares = Integer.parseInt(values[6]);
         
-        return new Artigo(titulo, autor, editora, data, genero, doi);
+        return new Artigo(titulo, autor, editora, data, genero, doi, exemplares);
     }
     
     public String toString() {

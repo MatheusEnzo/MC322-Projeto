@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Revista extends Item {
 	private final String issn;
+	private int exemplares;
 	
     //Construtor
 	public Revista(String titulo, String autor, String editora, Date data, String genero, String issn, int exemplares)
@@ -15,6 +16,14 @@ public class Revista extends Item {
     //Getters e Setters
 	public String getIssn() {
 		return issn;
+	}
+	
+	public int getExemplares() {
+		return exemplares;
+	}
+
+	public void setExemplares(int exemplares) {
+		this.exemplares = exemplares;
 	}
 	
 	//Determina se uma revista tem issn válido
@@ -29,7 +38,7 @@ public class Revista extends Item {
 
 	    String disponivelString = super.isDisponivel() ? "Sim" : "Não";
 
-	    return super.getTitulo() + "," + super.getAutor() + "," + super.getEditora() + "," + dataString + "," + super.getGenero() + "," + issn + "," + disponivelString;
+	    return super.getTitulo() + "," + super.getAutor() + "," + super.getEditora() + "," + dataString + "," + super.getGenero() + "," + issn + ","+ super.getExemplares() + "," + disponivelString;
 	}
 
     
@@ -43,7 +52,7 @@ public class Revista extends Item {
         Date data = new SimpleDateFormat("dd/MM/yyyy").parse(values[3]);
         String genero = values[4];
         String issn = values[5];
-        String formato = values[6];
+        int exemplares = Integer.parseInt(values[6]);
         
         return new Revista(titulo, autor, editora, data, genero, issn, exemplares);
     }

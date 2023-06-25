@@ -24,7 +24,7 @@ public class ArquivoRevista {
     	// Itera sobre os artigos e os escreve no arquivo
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CAMINHO_ARQUIVO))) {
             // Escreve os nomes das colunas no início do arquivo
-            writer.write("Título, Autor, Editora, Data de Publicação, Gênero, ISSN, Formato, Disponível");
+            writer.write("Título, Autor, Editora, Data de Publicação, Gênero, ISSN, Exemplares, Disponível");
             writer.newLine();
             
             // Itera sobre as revistas e os escreve no arquivo
@@ -81,12 +81,18 @@ public class ArquivoRevista {
                                             String issn = tokenizer.nextToken();
                                             // Verifica novamente antes de chamar nextToken()
                                             if (tokenizer.hasMoreTokens()) {
-                                                String formato = tokenizer.nextToken();
-
+                                            	int exemplares = Integer.parseInt((tokenizer.nextToken()));
+                                            	
                                                 // Cria uma instância de Livro com os dados da linha
-                                                Revista revista = new Revista(titulo, autor, editora, parseData(dataString), genero, issn, formato);
-                                                // Adiciona o livro à biblioteca
-                                                bibliotecario.adicionarItem(revista);
+                                                Revista revista = new Revista(titulo, autor, editora, parseData(dataString), genero, issn, exemplares);
+                                                
+                                                // Verifica se a data é nula antes de adicionar a revista à biblioteca
+                                                if (revista.getData() != null) {
+                                                    // Adiciona a revista à biblioteca
+                                                    bibliotecario.adicionarItem(revista);
+                                                } else {
+                                                    System.out.println("Data de publicação inválida para a revista: " + titulo);
+                                                }
                                             }
                                         }
                                     }

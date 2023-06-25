@@ -24,7 +24,7 @@ public class ArquivoArtigo {
     	// Itera sobre os artigos e os escreve no arquivo
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CAMINHO_ARQUIVO))) {
             // Escreve os nomes das colunas no início do arquivo
-            writer.write("Título, Autor, Editora, Data de Publicação, Gênero, DOI");
+            writer.write("Título, Autor, Editora, Data de Publicação, Gênero, DOI, Exemplares, Disponível");
             writer.newLine();
             
             // Itera sobre os artigos e os escreve no arquivo
@@ -79,11 +79,21 @@ public class ArquivoArtigo {
                                         // Verifica novamente antes de chamar nextToken()
                                         if (tokenizer.hasMoreTokens()) {
                                             String doi = tokenizer.nextToken();
-                                            
-                                            // Cria uma instância de Livro com os dados da linha
-                                            Artigo artigo = new Artigo(titulo, autor, editora, parseData(dataString), genero, doi);
-                                            // Adiciona o livro à biblioteca
-                                            bibliotecario.adicionarItem(artigo);
+                                            // Verifica novamente antes de chamar nextToken()
+                                            if (tokenizer.hasMoreTokens()) {
+                                            	int exemplares = Integer.parseInt((tokenizer.nextToken()));
+                                            	
+                                                // Cria uma instância de Livro com os dados da linha
+                                                Artigo artigo = new Artigo(titulo, autor, editora, parseData(dataString), genero, doi, exemplares);
+                                                
+                                                // Verifica se a data é nula antes de adicionar o artigo à biblioteca
+                                                if (artigo.getData() != null) {
+                                                    // Adiciona o livro à biblioteca
+                                                    bibliotecario.adicionarItem(artigo);
+                                                } else {
+                                                    System.out.println("Data de publicação inválida para o artigo: " + titulo);
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -134,6 +144,5 @@ public class ArquivoArtigo {
         ArquivoArtigo.gravarArtigos(biblioteca);
 
     }
-    
     
 }
