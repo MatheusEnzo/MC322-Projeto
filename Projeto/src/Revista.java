@@ -7,6 +7,7 @@ public class Revista extends Item {
 	private int exemplares;
 	private String formato;
 	
+    //Construtor
 	public Revista(String titulo, String autor, String editora, Date data, String genero, String issn, String formato)
 	{
 		super(titulo, autor, editora, data, genero);	
@@ -14,6 +15,7 @@ public class Revista extends Item {
 		this.formato = formato;
 	}
 
+    //Getters e Setters
 	public String getFormato() {
 		return formato;
 	}

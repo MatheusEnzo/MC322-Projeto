@@ -1,12 +1,20 @@
-
-
 public class Bibliotecario extends Usuario {
     private Biblioteca biblioteca;
 
+    //Construtor
     public Bibliotecario(String nome, String endereco, String cpf, String email, String telefone, Biblioteca biblioteca) {
         super(nome, endereco, cpf, email, telefone);
         this.biblioteca = biblioteca;
     }
+
+    //Getters e Setters
+	public Biblioteca getBiblioteca() {
+		return biblioteca;
+	}
+
+	public void setBiblioteca(Biblioteca biblioteca) {
+		this.biblioteca = biblioteca;
+	}
 
     // Método para cadastrar um membro (usuário)
     public void cadastrarMembro(Usuario usuario) {
@@ -70,14 +78,5 @@ public class Bibliotecario extends Usuario {
             System.out.println("O item não está em posse de " + membro.getNome() + ": " + item.getTitulo());
         }
     }
-
-	public Biblioteca getBiblioteca() {
-		return biblioteca;
-	}
-
-	public void setBiblioteca(Biblioteca biblioteca) {
-		this.biblioteca = biblioteca;
-	}
-    
     
 }

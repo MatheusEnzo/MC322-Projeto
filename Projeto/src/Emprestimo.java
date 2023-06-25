@@ -6,6 +6,7 @@ public class Emprestimo {
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
 
+    //Construtor
     public Emprestimo(Item itemEmprestado, Usuario usuario, LocalDate dataEmprestimo, LocalDate dataDevolucao) {
         this.itemEmprestado = itemEmprestado;
         this.usuario = usuario;
@@ -17,6 +18,7 @@ public class Emprestimo {
         return itemEmprestado;
     }
 
+    //Getters e Setters
     public void setItem(Item item) {
         this.itemEmprestado = item;
     }

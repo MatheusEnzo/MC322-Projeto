@@ -7,6 +7,7 @@ public class Membro extends Usuario {
 	private ArrayList<Item> historico;
 	private int suspensao;
 	
+	//Construtor
 	public Membro(String nome, String endereco, String cpf, String email, String telefone)
 	{
 		super(nome, endereco, cpf, email, telefone);
@@ -17,6 +18,7 @@ public class Membro extends Usuario {
 		this.suspensao = 0;
 	}
 
+	//Getters e Setters
 	public int getLimite() {
 		return limite;
 	}

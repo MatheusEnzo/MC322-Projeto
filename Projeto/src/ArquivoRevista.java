@@ -62,7 +62,7 @@ public class ArquivoRevista {
     public static void main(String[] args) {
         List<Revista> revistas = new ArrayList<>();
         Date data = new Date();
-        Revista revista = new Revista("titulo", "autor", "editora", data, "genero", 50, "14359802190", "Digital");
+        Revista revista = new Revista("titulo", "autor", "editora", data, "genero", "14359802190", "Digital");
         revistas.add(revista);
         ArquivoRevista.gravarRevistas(revistas);
     }

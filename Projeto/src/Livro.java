@@ -7,6 +7,7 @@ public class Livro extends Item {
 	private int exemplares;
 	private String formato;
 	
+    //Construtor
 	public Livro(String titulo, String autor, String editora, Date data, String genero, String isbn, String formato)
 	{
 		super(titulo, autor, editora, data, genero);
@@ -14,6 +15,7 @@ public class Livro extends Item {
 		this.formato = formato;
 	}
 
+    //Getters e Setters
 	public String getIsbn() {
 		return isbn;
 	}

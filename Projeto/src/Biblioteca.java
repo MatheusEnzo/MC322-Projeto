@@ -9,6 +9,7 @@ public class Biblioteca {
 	private ArrayList<Item> listaItem;
 	private ArrayList<Usuario> listaUsuario;
 	
+	//Construtor
 	public Biblioteca(String nome, String endereco, LocalTime abertura, LocalTime fechamento)
 	{
 		this.nome = nome;
@@ -19,6 +20,7 @@ public class Biblioteca {
 		this.listaUsuario = new ArrayList<Usuario>();
 	}
 
+	//Getters e Setters
 	public String getNome() {
 		return nome;
 	}

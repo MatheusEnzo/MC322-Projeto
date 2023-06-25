@@ -62,7 +62,7 @@ public class ArquivoArtigo {
     public static void main(String[] args) {
         List<Artigo> artigos = new ArrayList<>();
         Date data = new Date();
-        Artigo artigo = new Artigo("titulo", "autor", "editora", data, "genero", 50, "14359802190");
+        Artigo artigo = new Artigo("titulo", "autor", "editora", data, "genero", "14359802190");
         artigos.add(artigo);
         ArquivoArtigo.gravarArtigos(artigos);
     }
