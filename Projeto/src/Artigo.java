@@ -17,6 +17,7 @@ public class Artigo extends Item {
 		return doi;
 	}
 	
+    //Determina se um artigo tem doi válido
     public boolean isValido(){
         Validacao validacao = new Validacao(this);
         return validacao.validarCodigo();

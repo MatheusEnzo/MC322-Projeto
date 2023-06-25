@@ -97,7 +97,10 @@ public class Bibliotecario extends Usuario {
 
     //Método para verificar validade de código Issn
     public void verificarValidade(Artigo artigo){
-        System.out.println("Contatar a agência registradora relevante");
+        String validade = "inválido";
+        if (artigo.isValido())
+            validade = "válido";
+        System.out.println("Item possui Doi " + validade);
     }
     
 }

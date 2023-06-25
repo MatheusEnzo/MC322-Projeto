@@ -36,6 +36,7 @@ public class Revista extends Item {
 		this.exemplares = exemplares;
 	}
 	
+	//Determina se uma revista tem issn válido
     public boolean isValido(){
         Validacao validacao = new Validacao(this);
         return validacao.validarCodigo();

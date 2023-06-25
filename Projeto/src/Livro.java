@@ -36,6 +36,7 @@ public class Livro extends Item {
 		this.exemplares = exemplares;
 	}
 
+	//Determina se um Livro tem isbn válido
     public boolean isValido(){
         Validacao validacao = new Validacao(this);
         return validacao.validarCodigo();
