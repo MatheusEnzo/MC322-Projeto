@@ -1,6 +1,7 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 public class Livro extends Item {
 	private final String isbn;
@@ -35,6 +36,14 @@ public class Livro extends Item {
 	public void setExemplares(int exemplares) {
 		this.exemplares = exemplares;
 	}
+	
+    // Método para gerar o formato aleatoriamente entre "Físico" e "Digital"
+    public String gerarFormatoAleatorio() {
+        Random random = new Random();
+        boolean formatoFisico = random.nextBoolean();
+        String formato = formatoFisico ? "Físico" : "Digital";
+        return formato;
+    }
 
 	//Determina se um Livro tem isbn válido
     public boolean isValido(){
@@ -70,6 +79,7 @@ public class Livro extends Item {
     public String toString() {
     	String output = super.toString();
     	output += "ISBN: " + isbn + "\n";
+    	output += "Formato: " + formato + "\n";
     	return output;
     }
 }
