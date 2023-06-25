@@ -36,6 +36,11 @@ public class Livro extends Item {
 		this.exemplares = exemplares;
 	}
 	
+    public boolean isValido(){
+        Validacao validacao = new Validacao(this);
+        return validacao.validarCodigo();
+    }
+	
     public String toCsvString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dataString = dateFormat.format(super.getData());
@@ -59,5 +64,11 @@ public class Livro extends Item {
         String formato = values[6];
         
         return new Livro(titulo, autor, editora, data, genero, isbn, formato);
+    }
+    
+    public String toString() {
+    	String output = super.toString();
+    	output += "ISBN: " + isbn + "\n";
+    	return output;
     }
 }

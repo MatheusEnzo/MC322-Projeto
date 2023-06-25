@@ -17,6 +17,11 @@ public class Artigo extends Item {
 		return doi;
 	}
 	
+    public boolean isValido(){
+        Validacao validacao = new Validacao(this);
+        return validacao.validarCodigo();
+    }
+    
     public String toCsvString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dataString = dateFormat.format(super.getData());
@@ -35,5 +40,12 @@ public class Artigo extends Item {
         String doi = values[5];
         
         return new Artigo(titulo, autor, editora, data, genero, doi);
+    }
+    
+    
+    public String toString() {
+    	String output = super.toString();
+    	output += "DOI: " + doi + "\n";
+    	return output;
     }
 }

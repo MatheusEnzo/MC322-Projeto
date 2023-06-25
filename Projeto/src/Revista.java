@@ -36,6 +36,11 @@ public class Revista extends Item {
 		this.exemplares = exemplares;
 	}
 	
+    public boolean isValido(){
+        Validacao validacao = new Validacao(this);
+        return validacao.validarCodigo();
+    }
+	
 	public String toCsvString() {
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	    String dataString = dateFormat.format(super.getData());
@@ -59,6 +64,12 @@ public class Revista extends Item {
         String formato = values[6];
         
         return new Revista(titulo, autor, editora, data, genero, issn, formato);
+    }
+    
+    public String toString() {
+    	String output = super.toString();
+    	output += "ISSN: " + issn + "\n";
+    	return output;
     }
 	
 }

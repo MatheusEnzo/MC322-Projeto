@@ -69,6 +69,9 @@ public abstract class Item {
 		this.disponivel = disponivel;
 	}
 	
+	//Determina se o código identificador de um Item é válido
+	public abstract boolean isValido();
+	
     public String toCsvString() {
         String csvString = titulo + ","
         + autor + ","
