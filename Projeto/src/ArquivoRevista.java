@@ -146,11 +146,7 @@ public class ArquivoRevista {
         
         System.out.println("---- REVISTAS ----");
         System.out.println(biblioteca.PrintaListaItens());
-        
-        Date data = new Date();
-        Revista revista = new Revista("titulo", "autor", "editora", data, "genero", "14359802190", "Digital");
-        revistas.add(revista);
-        ArquivoRevista.gravarRevistas(revistas);
+
     }
     
 }

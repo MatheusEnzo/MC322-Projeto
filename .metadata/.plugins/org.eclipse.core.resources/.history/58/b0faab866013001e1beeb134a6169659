@@ -141,7 +141,10 @@ public class ArquivoArtigo {
         
         System.out.println("---- ARTIGOS ----");
         System.out.println(biblioteca.PrintaListaItens());
-
+        Date data = new Date();
+        Artigo artigo = new Artigo("titulo", "autor", "editora", data, "genero", "14359802190");
+        artigos.add(artigo);
+        ArquivoArtigo.gravarArtigos(artigos);
     }
     
     
