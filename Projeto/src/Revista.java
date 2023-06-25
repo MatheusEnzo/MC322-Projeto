@@ -27,10 +27,9 @@ public class Revista extends Item {
 	}
 	
     public String toCsvString() {
-        String csvString = super.toCsvString();  // Chamada ao método toCsvString() da classe Item
-        csvString += "," + issn;  // Adiciona o ISSN ao final da string CSV
-        csvString += "," + formato;  // Adiciona o formato ao final da string CSV
-        return csvString;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dataString = dateFormat.format(super.getData());
+        return super.getTitulo() + "," + super.getAutor() + "," + super.getEditora() + "," + dataString + "," + super.getGenero() + "," + issn + "," + formato;
     }
     
     public static Revista fromCsvString(String csvString) throws ParseException {

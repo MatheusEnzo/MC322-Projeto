@@ -27,11 +27,11 @@ public class Livro extends Item {
 	}
 	
     public String toCsvString() {
-        String csvString = super.toCsvString();  // Chamada ao método toCsvString() da classe Item
-        csvString += "," + isbn;  // Adiciona o ISBN ao final da string CSV
-        csvString += "," + formato;  // Adiciona o formato ao final da string CSV
-        return csvString;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dataString = dateFormat.format(super.getData());
+        return super.getTitulo() + "," + super.getAutor() + "," + super.getEditora() + "," + dataString + "," + super.getGenero() + "," + isbn + "," + formato;
     }
+
     
     public static Livro fromCsvString(String csvString) throws ParseException {
         String[] values = csvString.split(","); // Divide a string CSV nos valores individuais

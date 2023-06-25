@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +21,7 @@ public class ArquivoLivro {
     	// Itera sobre os artigos e os escreve no arquivo
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CAMINHO_ARQUIVO))) {
             // Escreve os nomes das colunas no início do arquivo
-            writer.write("Título, Autor, Editora, Data de Publicação, Gênero, Páginas, ISBN, Formato");
+            writer.write("Título, Autor, Editora, Data de Publicação, Gênero, ISBN, Formato");
             writer.newLine();
             
             // Itera sobre os livros e os escreve no arquivo
@@ -33,71 +34,76 @@ public class ArquivoLivro {
             System.out.println("Erro ao gravar livros: " + e.getMessage());
         }
     }
+    
+    // Método para ler o arquivo
+    public String lerArquivo(Bibliotecario bibliotecario) {
+        StringBuilder conteudo = new StringBuilder();
 
-    // Método para ler os artigos do arquivo
-    public static List<Livro> lerLivros() {
-        List<Livro> livros = new ArrayList<>();
         File arquivo = new File(CAMINHO_ARQUIVO);
 
         // Verifica se o arquivo existe
         if (arquivo.exists()) {
-            try (BufferedReader reader = new BufferedReader(new FileReader(CAMINHO_ARQUIVO))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
                 String linha;
-                // Lê cada linha do arquivo e cria os objetos Livro correspondentes
+
+                // Lê a primeira linha do arquivo (cabeçalho) e descarta
+                reader.readLine();
+
+                // Lê cada linha do arquivo a partir da segunda linha
                 while ((linha = reader.readLine()) != null) {
-                    try {
-                        Livro livro = Livro.fromCsvString(linha);
-                        livros.add(livro);
-                    } catch (ParseException e) {
-                        System.out.println("Erro ao ler artigo: " + e.getMessage());
+                    // Quebra a linha em campos usando a vírgula como separador
+                    StringTokenizer tokenizer = new StringTokenizer(linha, ",");
+
+                    // Verifica se há mais elementos antes de chamar nextToken()
+                    if (tokenizer.hasMoreTokens()) {
+                        String titulo = tokenizer.nextToken();
+                        // Verifica novamente antes de chamar nextToken()
+                        if (tokenizer.hasMoreTokens()) {
+                            String autor = tokenizer.nextToken();
+                            // Verifica novamente antes de chamar nextToken()
+                            if (tokenizer.hasMoreTokens()) {
+                                String editora = tokenizer.nextToken();
+                                // Verifica novamente antes de chamar nextToken()
+                                if (tokenizer.hasMoreTokens()) {
+                                    String dataString = tokenizer.nextToken();
+                                    // Verifica novamente antes de chamar nextToken()
+                                    if (tokenizer.hasMoreTokens()) {
+                                        String genero = tokenizer.nextToken();
+                                        // Verifica novamente antes de chamar nextToken()
+                                        if (tokenizer.hasMoreTokens()) {
+                                            String isbn = tokenizer.nextToken();
+                                            // Verifica novamente antes de chamar nextToken()
+                                            if (tokenizer.hasMoreTokens()) {
+                                                String formato = tokenizer.nextToken();
+
+                                                // Cria uma instância de Livro com os dados da linha
+                                                Livro livro = new Livro(titulo, autor, editora, parseData(dataString), genero, isbn, formato);
+                                                // Adiciona o livro à biblioteca
+                                                bibliotecario.adicionarItem(livro);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             } catch (IOException e) {
-                System.out.println("Erro ao ler livros: " + e.getMessage());
+                System.out.println("Erro ao ler o arquivo: " + e.getMessage());
             }
-        }
-
-        return livros;
-    }
-    
-    public String lerArquivo() {
-        StringBuilder conteudo = new StringBuilder();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(CAMINHO_ARQUIVO))) {
-            String linha;
-
-            // Lê cada linha do arquivo
-            while ((linha = reader.readLine()) != null) {
-                // Quebra a linha em campos usando a vírgula como separador
-                StringTokenizer tokenizer = new StringTokenizer(linha, ",");
-                
-                // Extrai os campos da linha
-                String titulo = tokenizer.nextToken();
-                String autor = tokenizer.nextToken();
-                String editora = tokenizer.nextToken();
-                Date data = parseData(tokenizer.nextToken());
-                String genero = tokenizer.nextToken();
-                String isbn = tokenizer.nextToken();
-                String formato = tokenizer.nextToken();
-
-                // Cria uma instância de Livro com os dados da linha
-                Livro livro = new Livro(titulo, autor, editora, data, genero, isbn, formato);
-
-                // Adiciona o livro ao conteúdo
-                conteudo.append(livro.toString()).append("\n");
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao ler o arquivo.");
+        } else {
+            System.out.println("Arquivo não encontrado.");
         }
 
         // Retorna o conteúdo do arquivo como uma string
         return conteudo.toString();
     }
 
+
     // Método auxiliar para converter uma string em uma data
     private Date parseData(String dataString) {
         try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/yyyy");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             return dateFormat.parse(dataString);
         } catch (ParseException e) {
             System.out.println("Erro ao converter a data.");
@@ -106,16 +112,40 @@ public class ArquivoLivro {
     }
 
     
-    // APENAS PARA TESTE, TIRAR ISSO DEPOIS
+    // !!!!! APENAS PARA TESTE, TIRAR ISSO DEPOIS E IMPLEMENTAR NA CLASSE MAIN !!!!!
     public static void main(String[] args) {
-//        List<Livro> livros = new ArrayList<>();
-//        Date data = new Date();
-//        Livro livro = new Livro("titulo", "autor", "editora", data, "genero", "14359802190", "Físico");
-//        livros.add(livro);
-//        ArquivoLivro.gravarLivros(livros);
+    	//Teste da gravação de arquivos
+        List<Livro> livros = new ArrayList<>();
+    	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    	Date data1, data2, data3;
+        try {
+            data1 = dateFormat.parse("01/01/2003");
+            data2 = dateFormat.parse("11/07/2000");
+            data3 = dateFormat.parse("22/12/1990");
+            Livro livro1 = new Livro("titulo1", "autor1", "editora1", data1, "genero1", "14359802190", "Físico");
+            Livro livro2 = new Livro("titulo2", "autor2", "editora2", data2, "genero2", "99353302156", "Físico");
+            Livro livro3 = new Livro("titulo3", "autor3", "editora3", data3, "genero3", "76598302128", "Digital");
+            livros.add(livro1);
+            livros.add(livro2);
+            livros.add(livro3);
+            ArquivoLivro.gravarLivros(livros);
+        } catch (ParseException e) {
+            System.out.println("Erro ao converter a data: " + e.getMessage());
+        }
+    	
+    	// Teste da leitura de arquivos
+    	LocalTime horario1 = LocalTime.of(9, 0);
+    	LocalTime horario2 = LocalTime.of(18, 0);
+    	Biblioteca biblioteca = new Biblioteca("Biblioteca teste", "Rua A, 123", horario1, horario2);
+    	Bibliotecario bibliotecario = new Bibliotecario("Jose", "Rua B, 456", "12854091607", "emailteste@gmail.com", "(00) 912345678", biblioteca);
+    	biblioteca.getListaUsuario().add(bibliotecario);
+    	
         ArquivoLivro arquivo = new ArquivoLivro();
-        String conteudoArquivo = arquivo.lerArquivo();
+        String conteudoArquivo = arquivo.lerArquivo(bibliotecario);
         System.out.println(conteudoArquivo);
+        
+        System.out.println("---- LIVROS ----");
+        System.out.println(biblioteca.PrintaListaItens());
     }
     
 }

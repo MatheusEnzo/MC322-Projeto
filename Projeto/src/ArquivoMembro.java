@@ -5,8 +5,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class ArquivoMembro {
 	// Caminho do arquivo onde os membros serão gravados
@@ -30,34 +34,88 @@ public class ArquivoMembro {
         }
     }
 
-    public static List<Membro> lerMembros() {
-        List<Membro> membros = new ArrayList<>();
+ // Método para ler o arquivo
+    public String lerArquivo(Bibliotecario bibliotecario) {
+        StringBuilder conteudo = new StringBuilder();
+
         File arquivo = new File(CAMINHO_ARQUIVO);
 
+        // Verifica se o arquivo existe
         if (arquivo.exists()) {
-            try (BufferedReader reader = new BufferedReader(new FileReader(CAMINHO_ARQUIVO))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
                 String linha;
 
+                // Lê a primeira linha do arquivo (cabeçalho) e descarta
+                reader.readLine();
+
+                // Lê cada linha do arquivo a partir da segunda linha
                 while ((linha = reader.readLine()) != null) {
-                    try {
-                        Membro membro = Membro.fromCsvString(linha);
-                        membros.add(membro);
-                    } catch (ParseException e) {
-                        System.out.println("Erro ao ler membro: " + e.getMessage());
+                    // Quebra a linha em campos usando a vírgula como separador
+                    StringTokenizer tokenizer = new StringTokenizer(linha, ",");
+
+                    // Verifica se há mais elementos antes de chamar nextToken()
+                    if (tokenizer.hasMoreTokens()) {
+                        String nome = tokenizer.nextToken();
+                        // Verifica novamente antes de chamar nextToken()
+                        if (tokenizer.hasMoreTokens()) {
+                            String endereco = tokenizer.nextToken();
+                            // Verifica novamente antes de chamar nextToken()
+                            if (tokenizer.hasMoreTokens()) {
+                                String cpf = tokenizer.nextToken();
+                                // Verifica novamente antes de chamar nextToken()
+                                if (tokenizer.hasMoreTokens()) {
+                                    String email = tokenizer.nextToken();
+                                    // Verifica novamente antes de chamar nextToken()
+                                    if (tokenizer.hasMoreTokens()) {
+                                        String telefone = tokenizer.nextToken();
+
+                                        // Cria uma instância de Membro com os dados da linha
+                                        Membro membro = new Membro(nome, endereco, cpf, email, telefone);
+                                        // Adiciona o membro à biblioteca
+                                        bibliotecario.cadastrarMembro(membro);
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             } catch (IOException e) {
-                System.out.println("Erro ao ler membros: " + e.getMessage());
+                System.out.println("Erro ao ler o arquivo: " + e.getMessage());
             }
+        } else {
+            System.out.println("Arquivo não encontrado.");
         }
 
-        return membros;
+        // Retorna o conteúdo do arquivo como uma string
+        return conteudo.toString();
     }
 
+
     public static void main(String[] args) {
+    	//Teste da gravação de arquivos
         List<Membro> membros = new ArrayList<>();
-        Membro membro = new Membro("Nome", "endereco", "cpf-teste", "email-teste", "telefone-teste");
-        membros.add(membro);
+        Membro membro1 = new Membro("nome1", "endereco1", "cpf1", "email1", "telefone1");
+        Membro membro2 = new Membro("nome2", "endereco2", "cpf2", "email2", "telefone2");
+        Membro membro3 = new Membro("nome3", "endereco3", "cpf3", "email3", "telefone3");
+        membros.add(membro1);
+        membros.add(membro2);
+        membros.add(membro3);
         ArquivoMembro.gravarMembros(membros);
+        
+    	// Teste da leitura de arquivos
+    	LocalTime horario1 = LocalTime.of(9, 0);
+    	LocalTime horario2 = LocalTime.of(18, 0);
+    	Biblioteca biblioteca = new Biblioteca("Biblioteca teste", "Rua A, 123", horario1, horario2);
+    	Bibliotecario bibliotecario = new Bibliotecario("Jose", "Rua B, 456", "12854091607", "emailteste@gmail.com", "(00) 912345678", biblioteca);
+    	biblioteca.getListaUsuario().add(bibliotecario);
+    	
+    	ArquivoMembro arquivo = new ArquivoMembro();
+        String conteudoArquivo = arquivo.lerArquivo(bibliotecario);
+        System.out.println(conteudoArquivo);
+        
+        System.out.println("---- MEMBROS ----");
+        System.out.println(biblioteca.PrintaListaMembros());
+
+        
     }
 }

@@ -1,0 +1,63 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ArquivoMembro {
+	// Caminho do arquivo onde os membros serão gravados
+    private static final String CAMINHO_ARQUIVO = "Arquivos/membros.csv";
+
+    // Método para gravar os membros no arquivo
+    public static void gravarMembros(List<Membro> membros) {
+    	// Itera sobre os membros e os escreve no arquivo
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CAMINHO_ARQUIVO))) {
+        	// Escreve os nomes das colunas no início do arquivo
+            writer.write("Nome, Endereço, CPF, Email, Telefone");
+            writer.newLine();
+
+            for (Membro membro : membros) {
+                writer.write(membro.toCsvString());
+                writer.newLine();
+            }
+            System.out.println("Membros gravados com sucesso.");
+        } catch (IOException e) {
+            System.out.println("Erro ao gravar membros: " + e.getMessage());
+        }
+    }
+
+    public static List<Membro> lerMembros() {
+        List<Membro> membros = new ArrayList<>();
+        File arquivo = new File(CAMINHO_ARQUIVO);
+
+        if (arquivo.exists()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(CAMINHO_ARQUIVO))) {
+                String linha;
+
+                while ((linha = reader.readLine()) != null) {
+                    try {
+                        Membro membro = Membro.fromCsvString(linha);
+                        membros.add(membro);
+                    } catch (ParseException e) {
+                        System.out.println("Erro ao ler membro: " + e.getMessage());
+                    }
+                }
+            } catch (IOException e) {
+                System.out.println("Erro ao ler membros: " + e.getMessage());
+            }
+        }
+
+        return membros;
+    }
+
+    public static void main(String[] args) {
+        List<Membro> membros = new ArrayList<>();
+        Membro membro = new Membro("Nome", "endereco", "cpf-teste", "email-teste", "telefone-teste");
+        membros.add(membro);
+        ArquivoMembro.gravarMembros(membros);
+    }
+}

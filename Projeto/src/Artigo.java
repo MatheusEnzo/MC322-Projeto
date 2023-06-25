@@ -16,9 +16,9 @@ public class Artigo extends Item {
 	}
 	
     public String toCsvString() {
-        String csvString = super.toCsvString();  // Chamada ao método toCsvString() da classe Item
-        csvString += "," + doi;  // Adiciona o DOI ao final da string CSV
-        return csvString;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dataString = dateFormat.format(super.getData());
+        return super.getTitulo() + "," + super.getAutor() + "," + super.getEditora() + "," + dataString + "," + super.getGenero() + "," + doi;
     }
     
     public static Artigo fromCsvString(String csvString) throws ParseException {

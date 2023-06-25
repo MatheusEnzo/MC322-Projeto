@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public abstract class Item {
@@ -74,5 +75,15 @@ public abstract class Item {
         + genero + ",";
         return csvString;
     }
+    
 	
+    @Override
+    public String toString() {
+        String output = "Título: " + titulo + "\n";
+        output += "Autor: " + autor + "\n";
+        output += "Editora: " + editora + "\n";
+        output += "Data de publicacao: " + data + "\n";
+        output += "Gênero: " + genero + "\n";
+        return output;
+    }
 }

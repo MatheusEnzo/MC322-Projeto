@@ -75,7 +75,7 @@ public class Membro extends Usuario {
         String nome = values[0];
         String endereco = values[1];
         String cpf = values[2];
-        String email = values[4];
+        String email = values[3];
         String telefone = values[4];
         
         return new Membro(nome, endereco, cpf, email, telefone);

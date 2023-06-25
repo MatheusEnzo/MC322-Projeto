@@ -89,4 +89,58 @@ public class Biblioteca {
         }
     	return listaDisponiveis;
     }
+    
+    public String PrintaListaItens() {
+    	StringBuilder sb = new StringBuilder();
+
+        if (listaItem.isEmpty()) {
+            sb.append("A biblioteca não possui itens.");
+        } else {
+            for (Item item : listaItem) {
+            	sb.append(item).append("\n");
+            }
+        }
+        
+        return sb.toString();
+    }
+    
+    public String PrintaListaMembros() {
+        StringBuilder sb = new StringBuilder();
+
+        if (listaUsuario.isEmpty()) {
+            sb.append("A biblioteca não possui usuários.");
+        } else {
+            for (Usuario usuario : listaUsuario) {
+                if (usuario instanceof Membro) {
+                    sb.append(usuario).append("\n");
+                }
+                else {
+                	sb.append("A biblioteca não possui membros.");
+                }
+            }
+        }
+
+        return sb.toString();
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nome: ").append(nome).append("\n");
+        sb.append("Endereço: ").append(endereco).append("\n");
+        sb.append("Horário de Abertura: ").append(horarioAbertura).append("\n");
+        sb.append("Horário de Fechamento: ").append(horarioFechamento).append("\n");
+        
+        sb.append("Lista de Itens:\n");
+        for (Item item : listaItem) {
+            sb.append(item).append("\n");
+        }
+        
+        sb.append("Lista de Usuários:\n");
+        for (Usuario usuario : listaUsuario) {
+            sb.append(usuario).append("\n");
+        }
+        
+        return sb.toString();
+    }
 }

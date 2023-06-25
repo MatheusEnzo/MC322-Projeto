@@ -60,4 +60,15 @@ public abstract class Usuario {
         return csvString;
     }
 	
+    
+    @Override
+    public String toString() {
+        String output = "Nome: " + nome + "\n";
+        output += "Endereço: " + endereco + "\n";
+        output += "CPF:  " + cpf + "\n";
+        output += "Email:  " + email + "\n";
+        output += "Telefone:  " + telefone + "\n";
+        return output;
+    }
+
 }

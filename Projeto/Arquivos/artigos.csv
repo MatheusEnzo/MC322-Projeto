@@ -1,2 +1,4 @@
-Título,Autor,Editora,Data,Genero,Páginas,DOI
-titulo,autor,editora,Sat Jun 24 21:02:51 BRT 2023,genero,50,14359802190
+Título, Autor, Editora, Data de Publicação, Gênero, DOI
+titulo1,autor1,editora1,01/01/2003,genero1,14359802190
+titulo2,autor2,editora2,11/07/2000,genero2,99353302156
+titulo3,autor3,editora3,22/12/1990,genero3,76598302128

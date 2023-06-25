@@ -1,2 +1,4 @@
-Título, Autor, Editora, Data de Publicação, Gênero, Páginas, ISSN, Formato
-titulo,autor,editora,Sat Jun 24 21:58:28 BRT 2023,genero,50,14359802190
+Título, Autor, Editora, Data de Publicação, Gênero, ISSN, Formato
+titulo1,autor1,editora1,01/01/2003,genero1,14359802190,Físico
+titulo2,autor2,editora2,11/07/2000,genero2,99353302156,Físico
+titulo3,autor3,editora3,22/12/1990,genero3,76598302128,Digital
