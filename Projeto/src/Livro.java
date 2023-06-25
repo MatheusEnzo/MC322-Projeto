@@ -5,15 +5,12 @@ import java.util.Random;
 
 public class Livro extends Item {
 	private final String isbn;
-	private int exemplares;
-	private String formato;
 	
     //Construtor
-	public Livro(String titulo, String autor, String editora, Date data, String genero, String isbn, String formato)
+	public Livro(String titulo, String autor, String editora, Date data, String genero, String isbn, int exemplares)
 	{
-		super(titulo, autor, editora, data, genero);
+		super(titulo, autor, editora, data, genero, exemplares);
 		this.isbn = isbn;
-		this.formato = formato;
 	}
 
     //Getters e Setters
@@ -57,7 +54,7 @@ public class Livro extends Item {
         
 	    String disponivelString = super.isDisponivel() ? "Sim" : "Não";
 	    
-        return super.getTitulo() + "," + super.getAutor() + "," + super.getEditora() + "," + dataString + "," + super.getGenero() + "," + isbn + "," + formato + "," + disponivelString;
+        return super.getTitulo() + "," + super.getAutor() + "," + super.getEditora() + "," + dataString + "," + super.getGenero() + "," + isbn  + "," + disponivelString;
     }
 
     
@@ -73,13 +70,12 @@ public class Livro extends Item {
         String isbn = values[5];
         String formato = values[6];
         
-        return new Livro(titulo, autor, editora, data, genero, isbn, formato);
+        return new Livro(titulo, autor, editora, data, genero, isbn, exemplares);
     }
     
     public String toString() {
     	String output = super.toString();
     	output += "ISBN: " + isbn + "\n";
-    	output += "Formato: " + formato + "\n";
     	return output;
     }
 }

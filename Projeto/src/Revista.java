@@ -4,36 +4,17 @@ import java.util.Date;
 
 public class Revista extends Item {
 	private final String issn;
-	private int exemplares;
-	private String formato;
 	
     //Construtor
-	public Revista(String titulo, String autor, String editora, Date data, String genero, String issn, String formato)
+	public Revista(String titulo, String autor, String editora, Date data, String genero, String issn, int exemplares)
 	{
-		super(titulo, autor, editora, data, genero);	
+		super(titulo, autor, editora, data, genero, exemplares);	
 		this.issn = issn;
-		this.formato = formato;
 	}
 
     //Getters e Setters
-	public String getFormato() {
-		return formato;
-	}
-
-	public void setFormato(String formato) {
-		this.formato = formato;
-	}
-
 	public String getIssn() {
 		return issn;
-	}
-	
-	public int getExemplares() {
-		return exemplares;
-	}
-
-	public void setExemplares(int exemplares) {
-		this.exemplares = exemplares;
 	}
 	
 	//Determina se uma revista tem issn válido
@@ -48,7 +29,7 @@ public class Revista extends Item {
 
 	    String disponivelString = super.isDisponivel() ? "Sim" : "Não";
 
-	    return super.getTitulo() + "," + super.getAutor() + "," + super.getEditora() + "," + dataString + "," + super.getGenero() + "," + issn + "," + formato + "," + disponivelString;
+	    return super.getTitulo() + "," + super.getAutor() + "," + super.getEditora() + "," + dataString + "," + super.getGenero() + "," + issn + "," + disponivelString;
 	}
 
     
@@ -64,7 +45,7 @@ public class Revista extends Item {
         String issn = values[5];
         String formato = values[6];
         
-        return new Revista(titulo, autor, editora, data, genero, issn, formato);
+        return new Revista(titulo, autor, editora, data, genero, issn, exemplares);
     }
     
     public String toString() {

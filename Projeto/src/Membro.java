@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 public class Membro extends Usuario {
 	private int limite;
-	private ArrayList<Item> emprestimos;
-	private ArrayList<Item> historico;
+	private ArrayList<Emprestimo> emprestimos;
+	private ArrayList<Emprestimo> historico;
 	private int suspensao;
 	
 	//Construtor
@@ -13,8 +13,8 @@ public class Membro extends Usuario {
 		super(nome, endereco, cpf, email, telefone);
 		
 		this.limite = 5;
-		this.emprestimos = new ArrayList<Item>();
-		this.historico = new ArrayList<Item>();
+		this.emprestimos = new ArrayList<Emprestimo>();
+		this.historico = new ArrayList<Emprestimo>();
 		this.suspensao = 0;
 	}
 
@@ -27,19 +27,19 @@ public class Membro extends Usuario {
 		this.limite = limite;
 	}
 
-	public ArrayList<Item> getEmprestimos() {
+	public ArrayList<Emprestimo> getEmprestimos() {
 		return emprestimos;
 	}
 
-	public void setEmprestimos(ArrayList<Item> emprestimos) {
+	public void setEmprestimos(ArrayList<Emprestimo> emprestimos) {
 		this.emprestimos = emprestimos;
 	}
 
-	public ArrayList<Item> getHistorico() {
+	public ArrayList<Emprestimo> getHistorico() {
 		return historico;
 	}
 
-	public void setHistorico(ArrayList<Item> historico) {
+	public void setHistorico(ArrayList<Emprestimo> historico) {
 		this.historico = historico;
 	}
 
@@ -51,19 +51,6 @@ public class Membro extends Usuario {
 		this.suspensao = suspensao;
 	}
 
-    public void adicionarItemEmprestado(Item item) {
-        emprestimos.add(item);
-        System.out.println("Item adicionado aos empréstimos de " + getNome() + ": " + item.getTitulo());
-    }
-    
-    public void removerItemEmprestado(Item item) {
-        if (emprestimos.contains(item)) {
-            emprestimos.remove(item);
-            System.out.println("Item removido dos empréstimos de " + getNome() + ": " + item.getTitulo());
-        } else {
-            System.out.println("O item não está em posse de " + getNome() + ": " + item.getTitulo());
-        }
-    }
     
     public String toCsvString() {
         String csvString = super.toCsvString();  // Chamada ao método toCsvString() da classe Usuario

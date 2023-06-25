@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Bibliotecario extends Usuario {
     private Biblioteca biblioteca;
 
@@ -23,13 +25,22 @@ public class Bibliotecario extends Usuario {
     }
 
     // Método para remover um membro (usuário)
-    public boolean removerMembro(Usuario usuario) {
-        boolean removido = biblioteca.getListaUsuario().remove(usuario);
+    public boolean removerMembro(String cpf) {
+        boolean removido=false;
+    
+        for(int i=0;i<biblioteca.getListaUsuario().size();i++) {
+        	if(biblioteca.getListaUsuario().get(i).getCpf().equals(cpf))
+        	{
+        		biblioteca.getListaUsuario().remove(i);
+        		removido = true;
+        		break;
+        	}
+        }
         if (removido) {
-            System.out.println("Membro removido com sucesso: " + usuario.getNome());
+            System.out.println("Membro removido com sucesso.");
             return true;
         } else {
-            System.out.println("Não foi possível remover o membro: " + usuario.getNome());
+            System.out.println("Não foi possível remover o membro.");
             return false;
         }
     }
@@ -56,10 +67,19 @@ public class Bibliotecario extends Usuario {
     public void emprestarItem(Membro membro, Item item) {
         if (biblioteca.getListaItem().contains(item)) {
             if (item.isDisponivel()) {
-                item.setDisponivel(false);
-                membro.adicionarItemEmprestado(item);
+                LocalDate dataAtual = LocalDate.now();
+                Emprestimo novo = new Emprestimo(item, membro, dataAtual, dataAtual.plusDays(7));
+                biblioteca.getListaEmprestimo().add(novo);
+                membro.getEmprestimos().add(novo);
                 System.out.println("Item emprestado para " + membro.getNome() + ": " + item.getTitulo());
-            } else {
+                int numero = item.getExemplares() - 1;
+                item.setExemplares(numero);
+                if(item.getExemplares()==0)
+                {
+                	item.setDisponivel(false);
+                }
+            }
+            else {
                 System.out.println("O item já está emprestado: " + item.getTitulo());
             }
         } else {

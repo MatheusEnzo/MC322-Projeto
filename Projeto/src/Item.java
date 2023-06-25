@@ -8,9 +8,10 @@ public abstract class Item {
 	private Date data;
 	private String genero;
 	private boolean disponivel;
+	private int exemplares;
 	
 	//Construtor
-	public Item(String titulo, String autor, String editora, Date data, String genero)
+	public Item(String titulo, String autor, String editora, Date data, String genero, int exemplares)
 	{
 		this.titulo = titulo;
 		this.autor = autor;
@@ -18,6 +19,7 @@ public abstract class Item {
 		this.editora = editora;
 		this.genero = genero;
 		this.disponivel = true;
+		this.exemplares = exemplares;
 	}
 
 	//Getters e Setters
@@ -69,6 +71,14 @@ public abstract class Item {
 		this.disponivel = disponivel;
 	}
 	
+	public int getExemplares() {
+		return exemplares;
+	}
+
+	public void setExemplares(int exemplares) {
+		this.exemplares = exemplares;
+	}
+
 	//Determina se o código identificador de um Item é válido
 	public abstract boolean isValido();
 	
@@ -95,6 +105,7 @@ public abstract class Item {
         sb.append("Data de publicação: ").append(formatDate(data)).append("\n");
         sb.append("Gênero: ").append(genero).append("\n");
         sb.append("Disponível: ").append(disponivel ? "Sim" : "Não").append("\n");
+        sb.append("Exemplares disponíveis: ").append(exemplares).append("\n");
         return sb.toString();
     }
 

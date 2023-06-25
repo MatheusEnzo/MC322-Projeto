@@ -7,6 +7,7 @@ public class Biblioteca {
 	private LocalTime horarioAbertura;
 	private LocalTime horarioFechamento;
 	private ArrayList<Item> listaItem;
+	private ArrayList<Emprestimo> listaEmprestimo;
 	private ArrayList<Usuario> listaUsuario;
 	
 	//Construtor
@@ -17,7 +18,16 @@ public class Biblioteca {
 		this.horarioAbertura = abertura;
 		this.horarioFechamento = fechamento;
 		this.listaItem = new ArrayList<Item>();
+		this.listaEmprestimo = new ArrayList<Emprestimo>();
 		this.listaUsuario = new ArrayList<Usuario>();
+	}
+
+	public ArrayList<Emprestimo> getListaEmprestimo() {
+		return listaEmprestimo;
+	}
+
+	public void setListaEmprestimo(ArrayList<Emprestimo> listaEmprestimo) {
+		this.listaEmprestimo = listaEmprestimo;
 	}
 
 	//Getters e Setters
