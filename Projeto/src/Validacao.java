@@ -1,18 +1,21 @@
-
 public class Validacao {
     private String codigo;
     private String tipo; //define a operacao de acordo com classe
 
-    //Construtor
-    Validacao(Item item){
-        if (item instanceof Livro){
-            this.tipo = "Livro";
-            this.codigo = ((Livro) item).getIsbn();
-        }
-        else if (item instanceof Revista){
-            this.tipo = "Revista";
-            this.codigo = ((Revista) item).getIssn();
-        }
+    //Construtores
+    Validacao(Livro livro){
+        this.tipo = "Livro";
+        this.codigo = livro.getIsbn();
+    }
+    
+    Validacao(Revista revista){
+        this.tipo = "Revista";
+        this.codigo = revista.getIssn();
+    }
+
+     Validacao(Artigo artigo){
+        this.tipo = "Artigo";
+        this.codigo = artigo.getDoi();
     }
 
     //Getters e Setters
@@ -39,6 +42,8 @@ public class Validacao {
             return validarLivro(this.codigo);
             case "Revista":
             return validarRevista(this.codigo);
+            case "Artigo":
+            return validarArtigo(this.codigo);
             default:
             return false;
         }
@@ -66,14 +71,29 @@ public class Validacao {
         return false;
     }
 
+    //Verifica formato do Doi
+    public boolean validarArtigo(String codigo){
+        String[] doi = codigo.split("/"); // Divide a string codigo
+        // Extrai os valores do array e separa o prefixo
+        String prefixo = doi[0];
+        //O guia oficial DOI indica que os mesmos devem estar no formato "doi:10.nnnn[...]/[sufixo]", com o numero de 'n's >= 4
+        if (prefixo.length() < 11)
+            return false;
+        else if (prefixo.charAt(4) != '1' || prefixo.charAt(5) != '0')
+            return false;
+        return true;
+
+    }
+
     //Verifica se 10o digito condiz com 9 primeiros
     public boolean algoritmoIsbn2001(String isbn){
+        //Soma dos 9 primeiros digitos multiplicados pela posição da esquerda para a direita. O módulo 11 da soma deve ser 0
         int soma = 0, checkdigit;
-        if (isbn.charAt(8) == 'X')
+        if (isbn.charAt(9) == 'X')
             checkdigit = 10;
         else
-            checkdigit = isbn.charAt(8) - 48;
-        for (int i = 0; i < 8; i++)
+            checkdigit = isbn.charAt(9) - 48;
+        for (int i = 0; i < 9; i++)
             soma += (i + 1) * (isbn.charAt(i) - 48);
         int resto = (soma % 11);
         if (resto == 0)
@@ -84,12 +104,13 @@ public class Validacao {
 
       //Verifica se 13o digito condiz com 12 primeiros
       public boolean algoritmoIsbn2005(String issn){
+        //Multiplica alternadamente cada um dos 12 digitos por 1 ou 3. O módulo 10 da soma total deve ser 0
         int soma = 0, mult = 1, checkdigit;
-        if (issn.charAt(8) == 'X')
+        if (issn.charAt(12) == 'X')
             checkdigit = 10;
         else
-            checkdigit = issn.charAt(8) - 48;
-        for (int i = 0; i < 8; i++){
+            checkdigit = issn.charAt(12) - 48;
+        for (int i = 0; i < 12; i++){
             soma += mult * (issn.charAt(i) - 48);
             if (mult == 1)
                 mult = 3;
@@ -105,15 +126,14 @@ public class Validacao {
 
     //Verifica se 8o digito condiz com 7 primeiros
     public boolean algoritmoIssn(String issn){
+        //Soma dos oito digitos multiplicados pela posição da direita para a esquerda. O módulo 11 da soma deve ser 0
         int soma = 0, mult = 8, checkdigit;
-        if (issn.charAt(8) == 'X')
+        if (issn.charAt(7) == 'X')
             checkdigit = 10;
         else
-            checkdigit = issn.charAt(8) - 48;
-        for (int i = 0; i < 8; i++){
-            soma += mult * (issn.charAt(i) - 48);
-            mult --;
-        }
+            checkdigit = issn.charAt(7) - 48;
+        for (int i = 0; i < 7; i++)
+            soma += (mult - i) * (issn.charAt(i) - 48);
         int resto = (soma % 11);
         if (resto == 0)
             return (checkdigit == 0);
