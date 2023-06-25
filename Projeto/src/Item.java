@@ -89,7 +89,7 @@ public abstract class Item {
         sb.append("Título: ").append(titulo).append("\n");
         sb.append("Autor: ").append(autor).append("\n");
         sb.append("Editora: ").append(editora).append("\n");
-        sb.append("Data: ").append(formatDate(data)).append("\n");
+        sb.append("Data de publicação: ").append(formatDate(data)).append("\n");
         sb.append("Gênero: ").append(genero).append("\n");
         sb.append("Disponível: ").append(disponivel ? "Sim" : "Não").append("\n");
         return sb.toString();
