@@ -78,16 +78,21 @@ public abstract class Item {
         return csvString;
     }
     
-	
+    private String formatDate(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        return format.format(date);
+    }
 
     @Override
     public String toString() {
-        String output = "Título: " + titulo + "\n";
-        output += "Autor: " + autor + "\n";
-        output += "Editora: " + editora + "\n";
-        output += "Data de publicacao: " + data + "\n";
-        output += "Gênero: " + genero + "\n";
-        return output;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Título: ").append(titulo).append("\n");
+        sb.append("Autor: ").append(autor).append("\n");
+        sb.append("Editora: ").append(editora).append("\n");
+        sb.append("Data: ").append(formatDate(data)).append("\n");
+        sb.append("Gênero: ").append(genero).append("\n");
+        sb.append("Disponível: ").append(disponivel ? "Sim" : "Não").append("\n");
+        return sb.toString();
     }
 
 	//Determina se o codigo identificador de um Item eh valido
