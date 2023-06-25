@@ -28,10 +28,21 @@ public class Livro extends Item {
 		this.formato = formato;
 	}
 	
+	public int getExemplares() {
+		return exemplares;
+	}
+
+	public void setExemplares(int exemplares) {
+		this.exemplares = exemplares;
+	}
+	
     public String toCsvString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dataString = dateFormat.format(super.getData());
-        return super.getTitulo() + "," + super.getAutor() + "," + super.getEditora() + "," + dataString + "," + super.getGenero() + "," + isbn + "," + formato;
+        
+	    String disponivelString = super.isDisponivel() ? "Sim" : "Não";
+	    
+        return super.getTitulo() + "," + super.getAutor() + "," + super.getEditora() + "," + dataString + "," + super.getGenero() + "," + isbn + "," + formato + "," + disponivelString;
     }
 
     

@@ -17,7 +17,10 @@ public class ArquivoArtigo {
     private static final String CAMINHO_ARQUIVO = "Arquivos/artigos.csv";
 
     // Método para gravar os artigos no arquivo
-    public static void gravarArtigos(List<Artigo> artigos) {
+    public static void gravarArtigos(Biblioteca biblioteca) {
+    	List<Item> itens = new ArrayList<>();
+    	itens = biblioteca.getListaItem();
+    	
     	// Itera sobre os artigos e os escreve no arquivo
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CAMINHO_ARQUIVO))) {
             // Escreve os nomes das colunas no início do arquivo
@@ -25,9 +28,13 @@ public class ArquivoArtigo {
             writer.newLine();
             
             // Itera sobre os artigos e os escreve no arquivo
-            for (Artigo artigo : artigos) {
-                writer.write(artigo.toCsvString());
-                writer.newLine();
+            for (Item item : itens) {
+            	if (item instanceof Artigo) {
+            		Artigo artigo = (Artigo) item;
+                    writer.write(artigo.toCsvString());
+                    writer.newLine();
+            	}
+
             }
             System.out.println("Artigos gravados com sucesso.");
         } catch (IOException e) {
@@ -108,29 +115,10 @@ public class ArquivoArtigo {
 
     
     // APENAS PARA TESTE, TIRAR ISSO DEPOIS
-    public static void main(String[] args) {        
-    	//Teste da gravação de arquivos
-        List<Artigo> artigos = new ArrayList<>();
-    	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date data1, data2, data3;
-        try {
-            data1 = dateFormat.parse("01/01/2003");
-            data2 = dateFormat.parse("11/07/2000");
-            data3 = dateFormat.parse("22/12/1990");
-            Artigo artigo1 = new Artigo("titulo1", "autor1", "editora1", data1, "genero1", "14359802190");
-            Artigo artigo2 = new Artigo("titulo2", "autor2", "editora2", data2, "genero2", "99353302156");
-            Artigo artigo3 = new Artigo("titulo3", "autor3", "editora3", data3, "genero3", "76598302128");
-            artigos.add(artigo1);
-            artigos.add(artigo2);
-            artigos.add(artigo3);
-            ArquivoArtigo.gravarArtigos(artigos);
-        } catch (ParseException e) {
-            System.out.println("Erro ao converter a data: " + e.getMessage());
-        }
-        
+    public static void main(String[] args) {                
     	// Teste da leitura de arquivos
-    	LocalTime horario1 = LocalTime.of(9, 0);
-    	LocalTime horario2 = LocalTime.of(18, 0);
+    	LocalTime horario1 = LocalTime.of(9, 0); //HORARIO DE ABERTURA DA BIBLIOTECA
+    	LocalTime horario2 = LocalTime.of(18, 0); //HORARIO DE FECHAMENTO DA BIBLIOTECA
     	Biblioteca biblioteca = new Biblioteca("Biblioteca teste", "Rua A, 123", horario1, horario2);
     	Bibliotecario bibliotecario = new Bibliotecario("Jose", "Rua B, 456", "12854091607", "emailteste@gmail.com", "(00) 912345678", biblioteca);
     	biblioteca.getListaUsuario().add(bibliotecario);
@@ -141,6 +129,9 @@ public class ArquivoArtigo {
         
         System.out.println("---- ARTIGOS ----");
         System.out.println(biblioteca.PrintaListaItens());
+        
+    	//Teste da gravação de arquivos
+        ArquivoArtigo.gravarArtigos(biblioteca);
 
     }
     

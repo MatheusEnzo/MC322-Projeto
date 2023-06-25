@@ -17,17 +17,24 @@ public class ArquivoLivro {
     private static final String CAMINHO_ARQUIVO = "Arquivos/livros.csv";
 
     // Método para gravar os livros no arquivo
-    public static void gravarLivros(List<Livro> livros) {
+    public static void gravarLivros(Biblioteca biblioteca) {
+    	List<Item> itens = new ArrayList<>();
+    	itens = biblioteca.getListaItem();
+    	
     	// Itera sobre os artigos e os escreve no arquivo
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CAMINHO_ARQUIVO))) {
             // Escreve os nomes das colunas no início do arquivo
-            writer.write("Título, Autor, Editora, Data de Publicação, Gênero, ISBN, Formato");
+            writer.write("Título, Autor, Editora, Data de Publicação, Gênero, ISBN, Formato, Disponível");
             writer.newLine();
             
             // Itera sobre os livros e os escreve no arquivo
-            for (Livro livro : livros) {
-                writer.write(livro.toCsvString());
-                writer.newLine();
+            for (Item item : itens) {
+            	if (item instanceof Livro) {
+            		Livro livro = (Livro) item;
+                    writer.write(livro.toCsvString());
+                    writer.newLine();
+            	}
+
             }
             System.out.println("Livros gravados com sucesso.");
         } catch (IOException e) {
@@ -132,28 +139,9 @@ public class ArquivoLivro {
     
     // !!!!! APENAS PARA TESTE, TIRAR ISSO DEPOIS E IMPLEMENTAR NA CLASSE MAIN !!!!!
     public static void main(String[] args) {
-    	//Teste da gravação de arquivos
-//        List<Livro> livros = new ArrayList<>();
-//    	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//    	Date data1, data2, data3;
-//        try {
-//            data1 = dateFormat.parse("01/01/2003");
-//            data2 = dateFormat.parse("11/07/2000");
-//            data3 = dateFormat.parse("22/12/1990");
-//            Livro livro1 = new Livro("titulo1", "autor1", "editora1", data1, "genero1", "14359802190", "Físico");
-//            Livro livro2 = new Livro("titulo2", "autor2", "editora2", data2, "genero2", "99353302156", "Físico");
-//            Livro livro3 = new Livro("titulo3", "autor3", "editora3", data3, "genero3", "76598302128", "Digital");
-//            livros.add(livro1);
-//            livros.add(livro2);
-//            livros.add(livro3);
-//            ArquivoLivro.gravarLivros(livros);
-//        } catch (ParseException e) {
-//            System.out.println("Erro ao converter a data: " + e.getMessage());
-//        }
-    	
     	// Teste da leitura de arquivos
-    	LocalTime horario1 = LocalTime.of(9, 0);
-    	LocalTime horario2 = LocalTime.of(18, 0);
+    	LocalTime horario1 = LocalTime.of(9, 0); //HORARIO DE ABERTURA DA BIBLIOTECA
+    	LocalTime horario2 = LocalTime.of(18, 0); //HORARIO DE FECHAMENTO DA BIBLIOTECA
     	Biblioteca biblioteca = new Biblioteca("Biblioteca teste", "Rua A, 123", horario1, horario2);
     	Bibliotecario bibliotecario = new Bibliotecario("Jose", "Rua B, 456", "12854091607", "emailteste@gmail.com", "(00) 912345678", biblioteca);
     	biblioteca.getListaUsuario().add(bibliotecario);
@@ -164,6 +152,10 @@ public class ArquivoLivro {
         
         System.out.println("---- LIVROS ----");
         System.out.println(biblioteca.PrintaListaItens());
+        
+    	//Teste da gravação de arquivos
+        ArquivoLivro.gravarLivros(biblioteca);
+
     }
     
 }

@@ -83,6 +83,13 @@ public abstract class Item {
         return format.format(date);
     }
 
+	//Determina se o codigo identificador de um Item eh valido
+	public boolean Validar(){
+        Validacao validacao = new Validacao(this);
+        return validacao.validarCodigo();
+
+    }
+	
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -95,10 +102,4 @@ public abstract class Item {
         return sb.toString();
     }
 
-	//Determina se o codigo identificador de um Item eh valido
-	public boolean Validar(){
-        Validacao validacao = new Validacao(this);
-        return validacao.validarCodigo();
-
-    }
 }

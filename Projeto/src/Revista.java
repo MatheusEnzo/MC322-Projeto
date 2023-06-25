@@ -28,11 +28,23 @@ public class Revista extends Item {
 		return issn;
 	}
 	
-    public String toCsvString() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String dataString = dateFormat.format(super.getData());
-        return super.getTitulo() + "," + super.getAutor() + "," + super.getEditora() + "," + dataString + "," + super.getGenero() + "," + issn + "," + formato;
-    }
+	public int getExemplares() {
+		return exemplares;
+	}
+
+	public void setExemplares(int exemplares) {
+		this.exemplares = exemplares;
+	}
+	
+	public String toCsvString() {
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	    String dataString = dateFormat.format(super.getData());
+
+	    String disponivelString = super.isDisponivel() ? "Sim" : "Não";
+
+	    return super.getTitulo() + "," + super.getAutor() + "," + super.getEditora() + "," + dataString + "," + super.getGenero() + "," + issn + "," + formato + "," + disponivelString;
+	}
+
     
     public static Revista fromCsvString(String csvString) throws ParseException {
         String[] values = csvString.split(","); // Divide a string CSV nos valores individuais

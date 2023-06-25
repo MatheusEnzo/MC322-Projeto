@@ -4,11 +4,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -17,16 +14,23 @@ public class ArquivoMembro {
     private static final String CAMINHO_ARQUIVO = "Arquivos/membros.csv";
 
     // Método para gravar os membros no arquivo
-    public static void gravarMembros(List<Membro> membros) {
+    public static void gravarMembros(Biblioteca biblioteca) {
+    	List<Usuario> usuarios = new ArrayList<>();
+    	usuarios = biblioteca.getListaUsuario();
+    	
     	// Itera sobre os membros e os escreve no arquivo
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CAMINHO_ARQUIVO))) {
         	// Escreve os nomes das colunas no início do arquivo
             writer.write("Nome, Endereço, CPF, Email, Telefone");
             writer.newLine();
 
-            for (Membro membro : membros) {
-                writer.write(membro.toCsvString());
-                writer.newLine();
+            for (Usuario usuario : usuarios) {
+            	if (usuario instanceof Membro) {
+            		Membro membro = (Membro) usuario;
+                    writer.write(membro.toCsvString());
+                    writer.newLine();
+            	}
+
             }
             System.out.println("Membros gravados com sucesso.");
         } catch (IOException e) {
@@ -91,20 +95,10 @@ public class ArquivoMembro {
     }
 
 
-    public static void main(String[] args) {
-    	//Teste da gravação de arquivos
-        List<Membro> membros = new ArrayList<>();
-        Membro membro1 = new Membro("nome1", "endereco1", "cpf1", "email1", "telefone1");
-        Membro membro2 = new Membro("nome2", "endereco2", "cpf2", "email2", "telefone2");
-        Membro membro3 = new Membro("nome3", "endereco3", "cpf3", "email3", "telefone3");
-        membros.add(membro1);
-        membros.add(membro2);
-        membros.add(membro3);
-        ArquivoMembro.gravarMembros(membros);
-        
+    public static void main(String[] args) {        
     	// Teste da leitura de arquivos
-    	LocalTime horario1 = LocalTime.of(9, 0);
-    	LocalTime horario2 = LocalTime.of(18, 0);
+    	LocalTime horario1 = LocalTime.of(9, 0); //HORARIO DE ABERTURA DA BIBLIOTECA
+    	LocalTime horario2 = LocalTime.of(18, 0); //HORARIO DE FECHAMENTO DA BIBLIOTECA
     	Biblioteca biblioteca = new Biblioteca("Biblioteca teste", "Rua A, 123", horario1, horario2);
     	Bibliotecario bibliotecario = new Bibliotecario("Jose", "Rua B, 456", "12854091607", "emailteste@gmail.com", "(00) 912345678", biblioteca);
     	biblioteca.getListaUsuario().add(bibliotecario);
@@ -116,6 +110,8 @@ public class ArquivoMembro {
         System.out.println("---- MEMBROS ----");
         System.out.println(biblioteca.PrintaListaMembros());
 
+    	//Teste da gravação de arquivos
+        ArquivoMembro.gravarMembros(biblioteca);
         
     }
 }

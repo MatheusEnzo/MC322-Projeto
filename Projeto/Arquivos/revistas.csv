@@ -1,4 +1,4 @@
-Título, Autor, Editora, Data de Publicação, Gênero, ISSN, Formato
-titulo1,autor1,editora1,01/01/2003,genero1,14359802190,Físico
-titulo2,autor2,editora2,11/07/2000,genero2,99353302156,Físico
-titulo3,autor3,editora3,22/12/1990,genero3,76598302128,Digital
+Título, Autor, Editora, Data de Publicação, Gênero, ISSN, Formato, Disponível
+titulo1,autor1,editora1,01/01/2003,genero1,14359802190,Físico,Sim
+titulo2,autor2,editora2,11/07/2000,genero2,99353302156,Físico,Sim
+titulo3,autor3,editora3,22/12/1990,genero3,76598302128,Digital,Sim

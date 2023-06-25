@@ -17,17 +17,24 @@ public class ArquivoRevista {
     private static final String CAMINHO_ARQUIVO = "Arquivos/revistas.csv";
 
     // Método para gravar as revistas no arquivo
-    public static void gravarRevistas(List<Revista> revistas) {
+    public static void gravarRevistas(Biblioteca biblioteca) {
+    	List<Item> itens = new ArrayList<>();
+    	itens = biblioteca.getListaItem();
+    	
     	// Itera sobre os artigos e os escreve no arquivo
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CAMINHO_ARQUIVO))) {
             // Escreve os nomes das colunas no início do arquivo
-            writer.write("Título, Autor, Editora, Data de Publicação, Gênero, ISSN, Formato");
+            writer.write("Título, Autor, Editora, Data de Publicação, Gênero, ISSN, Formato, Disponível");
             writer.newLine();
             
-            // Itera sobre os artigos e os escreve no arquivo
-            for (Revista revista : revistas) {
-                writer.write(revista.toCsvString());
-                writer.newLine();
+            // Itera sobre as revistas e os escreve no arquivo
+            for (Item item : itens) {
+            	if (item instanceof Revista) {
+            		Revista revista = (Revista) item;
+                    writer.write(revista.toCsvString());
+                    writer.newLine();
+            	}
+
             }
             System.out.println("Revistas gravadas com sucesso.");
         } catch (IOException e) {
@@ -112,30 +119,10 @@ public class ArquivoRevista {
 
     
     // APENAS PARA TESTE, TIRAR ISSO DEPOIS
-    public static void main(String[] args) {
-    	//Teste da gravação de arquivos
-        List<Revista> revistas = new ArrayList<>();
-
-    	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date data1, data2, data3;
-        try {
-            data1 = dateFormat.parse("01/01/2003");
-            data2 = dateFormat.parse("11/07/2000");
-            data3 = dateFormat.parse("22/12/1990");
-            Revista revista1 = new Revista("titulo1", "autor1", "editora1", data1, "genero1", "14359802190", "Físico");
-            Revista revista2 = new Revista("titulo2", "autor2", "editora2", data2, "genero2", "99353302156", "Físico");
-            Revista revista3 = new Revista("titulo3", "autor3", "editora3", data3, "genero3", "76598302128", "Digital");
-            revistas.add(revista1);
-            revistas.add(revista2);
-            revistas.add(revista3);
-            ArquivoRevista.gravarRevistas(revistas);
-        } catch (ParseException e) {
-            System.out.println("Erro ao converter a data: " + e.getMessage());
-        }
-    	
+    public static void main(String[] args) {    	
     	// Teste da leitura de arquivos
-    	LocalTime horario1 = LocalTime.of(9, 0);
-    	LocalTime horario2 = LocalTime.of(18, 0);
+    	LocalTime horario1 = LocalTime.of(9, 0); //HORARIO DE ABERTURA DA BIBLIOTECA
+    	LocalTime horario2 = LocalTime.of(18, 0); //HORARIO DE FECHAMENTO DA BIBLIOTECA
     	Biblioteca biblioteca = new Biblioteca("Biblioteca teste", "Rua A, 123", horario1, horario2);
     	Bibliotecario bibliotecario = new Bibliotecario("Jose", "Rua B, 456", "12854091607", "emailteste@gmail.com", "(00) 912345678", biblioteca);
     	biblioteca.getListaUsuario().add(bibliotecario);
@@ -146,6 +133,9 @@ public class ArquivoRevista {
         
         System.out.println("---- REVISTAS ----");
         System.out.println(biblioteca.PrintaListaItens());
+        
+    	//Teste da gravação de arquivos
+        ArquivoRevista.gravarRevistas(biblioteca);
 
     }
     
