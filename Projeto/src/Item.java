@@ -76,4 +76,14 @@ public abstract class Item {
 		this.disponivel = disponivel;
 	}
 	
+    public String toCsvString() {
+        String csvString = titulo + ","
+        + autor + ","
+        + editora + ","
+        + data.toString() + ","
+        + genero + ","
+        + paginas;
+        return csvString;
+    }
+	
 }

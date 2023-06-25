@@ -6,8 +6,7 @@ public abstract class Revista extends Item {
 	
 	public Revista(String titulo, String autor, String editora, Date data, String genero, int paginas, String issn, int formato)
 	{
-		super(titulo, autor, editora, data, genero, paginas);
-		
+		super(titulo, autor, editora, data, genero, paginas);	
 		this.issn = issn;
 		this.formato = formato;
 	}

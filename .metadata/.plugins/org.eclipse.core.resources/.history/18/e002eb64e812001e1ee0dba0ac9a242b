@@ -1,0 +1,22 @@
+import java.util.Date;
+
+public class Artigo extends Item {
+	private final String doi;
+	
+	public Artigo(String titulo, String autor, String editora, Date data, String genero, int paginas, String doi)
+	{
+		super(titulo, autor, editora, data, genero, paginas);
+		this.doi = doi;
+	}
+
+	public String getDoi() {
+		return doi;
+	}
+	
+    public String toCsvString() {
+        String csvString = super.toCsvString();  // Chamada ao método toCsvString() da classe Item
+        csvString += "," + doi;  // Adiciona o DOI ao final da string CSV
+        return csvString;
+    }
+	
+}

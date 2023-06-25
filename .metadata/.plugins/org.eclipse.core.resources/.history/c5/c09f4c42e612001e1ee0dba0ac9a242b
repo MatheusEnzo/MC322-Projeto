@@ -1,0 +1,18 @@
+import java.util.Date;
+
+public class Artigo extends Item {
+	private final String doi;
+	
+	public Artigo(String titulo, String autor, String editora, Date data, String genero, int paginas, String doi)
+	{
+		super(titulo, autor, editora, data, genero, paginas);
+	
+		this.doi = doi;
+	}
+
+	public String getDoi() {
+		return doi;
+	}
+
+	
+}
