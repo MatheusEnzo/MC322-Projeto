@@ -79,24 +79,4 @@ public class Bibliotecario extends Usuario {
         }
     }
     
-    //Método para verificar validade de código Isbn
-    public void verificarValidade(Livro livro){
-        String validade = "inválido";
-        if (livro.isValido())
-            validade = "válido";
-        System.out.println("Item possui Isbn " + validade);
-    }
-
-    //Método para verificar validade de código Issn
-    public void verificarValidade(Revista revista){
-        String validade = "inválido";
-        if (revista.isValido())
-            validade = "válido";
-        System.out.println("Item possui Issn " + validade);
-    }
-
-    //Método para verificar validade de código Issn
-    public void verificarValidade(Artigo artigo){
-        System.out.println("Contatar a agência registradora relevante");
-    }
 }

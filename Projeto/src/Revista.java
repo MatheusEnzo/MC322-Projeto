@@ -49,8 +49,4 @@ public class Revista extends Item {
         return new Revista(titulo, autor, editora, data, genero, issn, formato);
     }
 	
-    public boolean isValido(){
-        Validacao validacao = new Validacao(this);
-        return validacao.validarCodigo();
-    }
 }

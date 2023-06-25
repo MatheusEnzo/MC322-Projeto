@@ -95,6 +95,10 @@ public abstract class Item {
         return sb.toString();
     }
 
-	//Determina se o código identificador de um Item é válido
-	public abstract boolean isValido();
+	//Determina se o codigo identificador de um Item eh valido
+	public boolean Validar(){
+        Validacao validacao = new Validacao(this);
+        return validacao.validarCodigo();
+
+    }
 }

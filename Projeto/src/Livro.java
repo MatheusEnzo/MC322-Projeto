@@ -49,9 +49,4 @@ public class Livro extends Item {
         
         return new Livro(titulo, autor, editora, data, genero, isbn, formato);
     }
-
-    public boolean isValido(){
-        Validacao validacao = new Validacao(this);
-        return validacao.validarCodigo();
-    }
 }

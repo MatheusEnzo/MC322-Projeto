@@ -36,9 +36,4 @@ public class Artigo extends Item {
         
         return new Artigo(titulo, autor, editora, data, genero, doi);
     }
-
-    public boolean isValido(){
-        Validacao validacao = new Validacao(this);
-        return validacao.validarCodigo();
-    }
 }
