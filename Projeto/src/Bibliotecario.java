@@ -8,47 +8,76 @@ public class Bibliotecario extends Usuario {
         this.biblioteca = biblioteca;
     }
 
-    public void cadastrarMembro(Membro membro) {
-        biblioteca.cadastrarMembro(membro);
-        System.out.println("Membro cadastrado com sucesso: " + membro.getNome());
+    // Método para cadastrar um membro (usuário)
+    public void cadastrarMembro(Usuario usuario) {
+        biblioteca.getListaUsuario().add(usuario);
+        System.out.println("Membro cadastrado com sucesso: " + usuario.getNome());
     }
 
-    public void removerMembro(Membro membro) {
-        boolean removido = biblioteca.removerMembro(membro);
+    // Método para remover um membro (usuário)
+    public boolean removerMembro(Usuario usuario) {
+        boolean removido = biblioteca.getListaUsuario().remove(usuario);
         if (removido) {
-            System.out.println("Membro removido com sucesso: " + membro.getNome());
+            System.out.println("Membro removido com sucesso: " + usuario.getNome());
+            return true;
         } else {
-            System.out.println("Não foi possível remover o membro: " + membro.getNome());
+            System.out.println("Não foi possível remover o membro: " + usuario.getNome());
+            return false;
         }
     }
 
-    public void adicionarItem(Livro livro) {
-        biblioteca.adicionarItem(livro);
-        System.out.println("Item adicionado com sucesso: " + livro.getTitulo());
+    // Método para adicionar um item à biblioteca
+    public void adicionarItem(Item item) {
+        biblioteca.getListaItem().add(item);
+        System.out.println("Item adicionado com sucesso: " + item.getTitulo());
     }
 
-    public void removerItem(Livro livro) {
-        boolean removido = biblioteca.removerItem(livro);
+    // Método para remover um item da biblioteca
+    public boolean removerItem(Item item) {
+        boolean removido = biblioteca.getListaItem().remove(item);
         if (removido) {
-            System.out.println("Item removido com sucesso: " + livro.getTitulo());
+            System.out.println("Item removido com sucesso: " + item.getTitulo());
+            return true;
         } else {
-            System.out.println("Não foi possível remover o item: " + livro.getTitulo());
+            System.out.println("Não foi possível remover o item: " + item.getTitulo());
+            return false;
         }
     }
 
-    public void realizarEmprestimo(Membro membro, Item item) {
-        biblioteca.emprestarItem(membro, item);
+    // Método para emprestar um item para um membro (usuário)
+    public void emprestarItem(Membro membro, Item item) {
+        if (biblioteca.getListaItem().contains(item)) {
+            if (item.isDisponivel()) {
+                item.setDisponivel(false);
+                membro.adicionarItemEmprestado(item);
+                System.out.println("Item emprestado para " + membro.getNome() + ": " + item.getTitulo());
+            } else {
+                System.out.println("O item já está emprestado: " + item.getTitulo());
+            }
+        } else {
+            System.out.println("O item não está disponível na biblioteca: " + item.getTitulo());
+        }
     }
 
-    public void realizarDevolucao(Membro membro, Item item) {
-        biblioteca.devolverItem(membro, item);
+
+    // Método para devolver um item emprestado por um membro (usuário)
+    public void devolverItem(Membro membro, Item item) {
+        if (membro.getEmprestimos().contains(item)) {
+            item.setDisponivel(true);
+            membro.removerItemEmprestado(item);
+            System.out.println("Item devolvido por " + membro.getNome() + ": " + item.getTitulo());
+        } else {
+            System.out.println("O item não está em posse de " + membro.getNome() + ": " + item.getTitulo());
+        }
     }
 
-    public List<Livro> pesquisarLivrosPorTitulo(String titulo) {
-        return biblioteca.pesquisarLivrosPorTitulo(titulo);
-    }
+	public Biblioteca getBiblioteca() {
+		return biblioteca;
+	}
 
-    public List<Livro> pesquisarLivrosDisponiveis() {
-        return biblioteca.pesquisarLivrosDisponiveis();
-    }
+	public void setBiblioteca(Biblioteca biblioteca) {
+		this.biblioteca = biblioteca;
+	}
+    
+    
 }
