@@ -5,9 +5,9 @@ import java.util.Date;
 public class Artigo extends Item {
 	private final String doi;
 	
-	public Artigo(String titulo, String autor, String editora, Date data, String genero, int paginas, String doi)
+	public Artigo(String titulo, String autor, String editora, Date data, String genero, String doi)
 	{
-		super(titulo, autor, editora, data, genero, paginas);
+		super(titulo, autor, editora, data, genero);
 		this.doi = doi;
 	}
 
@@ -30,9 +30,8 @@ public class Artigo extends Item {
         String editora = values[2];
         Date data = new SimpleDateFormat("dd/MM/yyyy").parse(values[3]);
         String genero = values[4];
-        int paginas = Integer.parseInt(values[5]);
-        String doi = values[6];
+        String doi = values[5];
         
-        return new Artigo(titulo, autor, editora, data, genero, paginas, doi);
+        return new Artigo(titulo, autor, editora, data, genero, doi);
     }
 }

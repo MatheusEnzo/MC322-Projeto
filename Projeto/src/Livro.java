@@ -7,9 +7,9 @@ public class Livro extends Item {
 	private int exemplares;
 	private String formato;
 	
-	public Livro(String titulo, String autor, String editora, Date data, String genero, int paginas, String isbn, String formato)
+	public Livro(String titulo, String autor, String editora, Date data, String genero, String isbn, String formato)
 	{
-		super(titulo, autor, editora, data, genero, paginas);
+		super(titulo, autor, editora, data, genero);
 		this.isbn = isbn;
 		this.formato = formato;
 	}
@@ -42,10 +42,9 @@ public class Livro extends Item {
         String editora = values[2];
         Date data = new SimpleDateFormat("dd/MM/yyyy").parse(values[3]);
         String genero = values[4];
-        int paginas = Integer.parseInt(values[5]);
-        String isbn = values[6];
-        String formato = values[7];
+        String isbn = values[5];
+        String formato = values[6];
         
-        return new Livro(titulo, autor, editora, data, genero, paginas, isbn, formato);
+        return new Livro(titulo, autor, editora, data, genero, isbn, formato);
     }
 }

@@ -6,17 +6,15 @@ public abstract class Item {
 	private String editora;
 	private Date data;
 	private String genero;
-	private int paginas;
 	private boolean disponivel;
 	
-	public Item(String titulo, String autor, String editora, Date data, String genero, int paginas)
+	public Item(String titulo, String autor, String editora, Date data, String genero)
 	{
 		this.titulo = titulo;
 		this.autor = autor;
 		this.data = data;
 		this.editora = editora;
 		this.genero = genero;
-		this.paginas = paginas;
 		this.disponivel = true;
 	}
 
@@ -60,14 +58,6 @@ public abstract class Item {
 		this.genero = genero;
 	}
 
-	public int getPaginas() {
-		return paginas;
-	}
-
-	public void setPaginas(int paginas) {
-		this.paginas = paginas;
-	}
-
 	public boolean isDisponivel() {
 		return disponivel;
 	}
@@ -81,8 +71,7 @@ public abstract class Item {
         + autor + ","
         + editora + ","
         + data.toString() + ","
-        + genero + ","
-        + paginas;
+        + genero + ",";
         return csvString;
     }
 	

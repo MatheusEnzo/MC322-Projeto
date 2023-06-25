@@ -7,9 +7,9 @@ public class Revista extends Item {
 	private int exemplares;
 	private String formato;
 	
-	public Revista(String titulo, String autor, String editora, Date data, String genero, int paginas, String issn, String formato)
+	public Revista(String titulo, String autor, String editora, Date data, String genero, String issn, String formato)
 	{
-		super(titulo, autor, editora, data, genero, paginas);	
+		super(titulo, autor, editora, data, genero);	
 		this.issn = issn;
 		this.formato = formato;
 	}
@@ -42,11 +42,10 @@ public class Revista extends Item {
         String editora = values[2];
         Date data = new SimpleDateFormat("dd/MM/yyyy").parse(values[3]);
         String genero = values[4];
-        int paginas = Integer.parseInt(values[5]);
-        String issn = values[6];
-        String formato = values[7];
+        String issn = values[5];
+        String formato = values[6];
         
-        return new Revista(titulo, autor, editora, data, genero, paginas, issn, formato);
+        return new Revista(titulo, autor, editora, data, genero, issn, formato);
     }
 	
 }
