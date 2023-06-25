@@ -115,6 +115,7 @@ public class ArquivoRevista {
     public static void main(String[] args) {
     	//Teste da gravação de arquivos
         List<Revista> revistas = new ArrayList<>();
+
     	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date data1, data2, data3;
         try {
@@ -145,6 +146,11 @@ public class ArquivoRevista {
         
         System.out.println("---- REVISTAS ----");
         System.out.println(biblioteca.PrintaListaItens());
+        
+        Date data = new Date();
+        Revista revista = new Revista("titulo", "autor", "editora", data, "genero", "14359802190", "Digital");
+        revistas.add(revista);
+        ArquivoRevista.gravarRevistas(revistas);
     }
     
 }

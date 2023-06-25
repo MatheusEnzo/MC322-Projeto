@@ -5,12 +5,14 @@ import java.util.Date;
 public class Artigo extends Item {
 	private final String doi;
 	
+    //Construtor
 	public Artigo(String titulo, String autor, String editora, Date data, String genero, String doi)
 	{
 		super(titulo, autor, editora, data, genero);
 		this.doi = doi;
 	}
 
+    //Getters e Setters
 	public String getDoi() {
 		return doi;
 	}

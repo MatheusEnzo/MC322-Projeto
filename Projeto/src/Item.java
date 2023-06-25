@@ -9,6 +9,7 @@ public abstract class Item {
 	private String genero;
 	private boolean disponivel;
 	
+	//Construtor
 	public Item(String titulo, String autor, String editora, Date data, String genero)
 	{
 		this.titulo = titulo;
@@ -19,6 +20,7 @@ public abstract class Item {
 		this.disponivel = true;
 	}
 
+	//Getters e Setters
 	public String getEditora() {
 		return editora;
 	}
@@ -77,6 +79,7 @@ public abstract class Item {
     }
     
 	
+
     @Override
     public String toString() {
         String output = "Título: " + titulo + "\n";
@@ -85,5 +88,12 @@ public abstract class Item {
         output += "Data de publicacao: " + data + "\n";
         output += "Gênero: " + genero + "\n";
         return output;
+    }
+
+	//Determina se o codigo identificador de um Item eh valido
+	public boolean Validar(){
+        Validacao validacao = new Validacao(this);
+        return validacao.validarCodigo();
+
     }
 }

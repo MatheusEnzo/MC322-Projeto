@@ -6,6 +6,7 @@ public abstract class Usuario {
 	private String email;
 	private String telefone;
 	
+	//Construtor
 	public Usuario(String nome, String endereco, String cpf, String email, String telefone)
 	{
 		this.nome = nome;
@@ -15,6 +16,7 @@ public abstract class Usuario {
 		this.telefone = telefone;
 	}
 
+	//Getters e Setters
 	public String getNome() {
 		return nome;
 	}

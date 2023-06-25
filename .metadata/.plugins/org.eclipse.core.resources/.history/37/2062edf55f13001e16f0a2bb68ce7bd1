@@ -111,6 +111,7 @@ public class ArquivoArtigo {
     public static void main(String[] args) {        
     	//Teste da gravação de arquivos
         List<Artigo> artigos = new ArrayList<>();
+<<<<<<< HEAD
     	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date data1, data2, data3;
         try {
@@ -141,10 +142,12 @@ public class ArquivoArtigo {
         
         System.out.println("---- ARTIGOS ----");
         System.out.println(biblioteca.PrintaListaItens());
+=======
         Date data = new Date();
         Artigo artigo = new Artigo("titulo", "autor", "editora", data, "genero", "14359802190");
         artigos.add(artigo);
         ArquivoArtigo.gravarArtigos(artigos);
+>>>>>>> 0a9db907a5c4ae10f1fb3d4993c69685c0e74ef4
     }
     
     
