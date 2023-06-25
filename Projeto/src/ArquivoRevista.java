@@ -122,9 +122,9 @@ public class ArquivoRevista {
             data1 = dateFormat.parse("01/01/2003");
             data2 = dateFormat.parse("11/07/2000");
             data3 = dateFormat.parse("22/12/1990");
-            Revista revista1 = new Revista("titulo1", "autor1", "editora1", data1, "genero1", "14359802190", "Físico");
-            Revista revista2 = new Revista("titulo2", "autor2", "editora2", data2, "genero2", "99353302156", "Físico");
-            Revista revista3 = new Revista("titulo3", "autor3", "editora3", data3, "genero3", "76598302128", "Digital");
+            Revista revista1 = new Revista("titulo1", "autor1", "editora1", data1, "genero1", "12345678", "Físico"); //Issn válido
+            Revista revista2 = new Revista("titulo2", "autor2", "editora2", data2, "genero2", "99353302", "Físico"); //Issn inválido
+            Revista revista3 = new Revista("titulo3", "autor3", "editora3", data3, "genero3", "76598302128", "Digital"); //Issn inválido
             revistas.add(revista1);
             revistas.add(revista2);
             revistas.add(revista3);

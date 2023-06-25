@@ -117,9 +117,9 @@ public class ArquivoArtigo {
             data1 = dateFormat.parse("01/01/2003");
             data2 = dateFormat.parse("11/07/2000");
             data3 = dateFormat.parse("22/12/1990");
-            Artigo artigo1 = new Artigo("titulo1", "autor1", "editora1", data1, "genero1", "14359802190");
-            Artigo artigo2 = new Artigo("titulo2", "autor2", "editora2", data2, "genero2", "99353302156");
-            Artigo artigo3 = new Artigo("titulo3", "autor3", "editora3", data3, "genero3", "76598302128");
+            Artigo artigo1 = new Artigo("titulo1", "autor1", "editora1", data1, "genero1", "10.1435/9802190"); //Doi válido
+            Artigo artigo2 = new Artigo("titulo2", "autor2", "editora2", data2, "genero2", "10.993/53302156"); //Doi inválido
+            Artigo artigo3 = new Artigo("titulo3", "autor3", "editora3", data3, "genero3", "76.5983/02128"); //Doi inválido
             artigos.add(artigo1);
             artigos.add(artigo2);
             artigos.add(artigo3);
