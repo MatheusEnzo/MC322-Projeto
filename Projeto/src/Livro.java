@@ -35,13 +35,13 @@ public class Livro extends Item {
 	public void setExemplares(int exemplares) {
 		this.exemplares = exemplares;
 	}
-	
+
     public boolean isValido(){
         Validacao validacao = new Validacao(this);
         return validacao.validarCodigo();
     }
-	
-    public String toCsvString() {
+
+	public String toCsvString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dataString = dateFormat.format(super.getData());
         

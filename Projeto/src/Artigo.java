@@ -42,7 +42,6 @@ public class Artigo extends Item {
         return new Artigo(titulo, autor, editora, data, genero, doi);
     }
     
-    
     public String toString() {
     	String output = super.toString();
     	output += "DOI: " + doi + "\n";
