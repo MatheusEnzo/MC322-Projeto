@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Livro extends Item {
 	private final String isbn;
+	private int exemplares;
 	private String formato;
 	
 	public Livro(String titulo, String autor, String editora, Date data, String genero, int paginas, String isbn, String formato)

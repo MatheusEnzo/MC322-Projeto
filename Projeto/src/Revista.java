@@ -2,6 +2,7 @@ import java.util.Date;
 
 public abstract class Revista extends Item {
 	private final String issn;
+	private int exemplares;
 	private int formato;
 	
 	public Revista(String titulo, String autor, String editora, Date data, String genero, int paginas, String issn, int formato)
