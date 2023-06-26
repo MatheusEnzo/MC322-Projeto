@@ -1,4 +1,5 @@
 import java.time.LocalTime;
+import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
@@ -44,7 +45,126 @@ public class Main {
         ArquivoRevista.gravarRevistas(biblioteca);
         ///////////////////////////////////////////
         
+        // Implementação de um menu iterativo (SUBSTITUIR O QUE PRECISAR PRA IMPLEMENTAR A INTERFACE GRAFICA)
+        Scanner scanner = new Scanner(System.in);
+        int escolha;
         
+        do {
+            exibirMenuPrincipal();
+            escolha = scanner.nextInt();
+            scanner.nextLine(); // Limpar o buffer do scanner
 
+            // Executar a operação escolhida
+            switch (escolha) {
+                case 1:
+                    menuCadastro(scanner, bibliotecario);
+                    break;
+                case 0:
+                    sair();
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+                    break;
+            }
+        } while (escolha != 0);
+        
+        scanner.close();
 	}
+	
+	private static void exibirMenuPrincipal() {
+		System.out.println("----- Menu de Operações -----");
+		for (MenuOperacoes operacao : MenuOperacoes.values()) {
+			System.out.println(operacao.getOperacao() + " - " + operacao.name());
+            }
+		System.out.println("-----------------------------");
+		System.out.print("Escolha uma opção: ");
+        }
+	private static void menuCadastro(Scanner scanner, Bibliotecario bibliotecario) {
+        int escolha;
+
+        do {
+            exibirMenuCadastro();
+            escolha = scanner.nextInt();
+            scanner.nextLine(); // Limpar o buffer do scanner
+
+            // Executar a operação de cadastro escolhida
+            switch (escolha) {
+                case 1:
+                    MenuCadastrarMembro(scanner, bibliotecario);
+                    break;
+                case 3:
+                    System.out.println("Voltando ao menu principal...");
+                    sair();
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+                    break;
+            }
+        } while (escolha != 3);
+    }
+    
+    private static void exibirMenuCadastro() {
+        System.out.println("----- Menu de Cadastro -----");
+        System.out.println("1 - Cadastrar Membro");
+        System.out.println("2 - Cadastrar Item");
+        System.out.println("3 - Voltar");
+        System.out.print("Escolha uma opção: ");
+    }
+	
+    private static void MenuCadastrarMembro(Scanner scanner, Bibliotecario bibliotecario) {
+    	int escolha;
+    	
+    	do {
+    		System.out.println("----- Cadastrar Membro -----");
+    		System.out.println("1 - Cadastrar membro");
+            System.out.println("0 - Voltar");
+            
+            escolha = scanner.nextInt();
+            scanner.nextLine(); // Limpar o buffer do scanner
+            switch (escolha) {        
+            case 1:
+                cadastrarMembro(bibliotecario);
+                break;
+            case 0:
+                System.out.println("Voltando ao menu anterior");
+                sair();
+                break;
+            default:
+                System.out.println("Opção inválida. Tente novamente.");
+                break;
+            }
+    	} while (escolha != 0);
+    }
+
+    private static void cadastrarMembro(Bibliotecario bibliotecario) {
+        try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("----- Cadastro de Membro -----");
+			System.out.print("Nome: ");
+			String nome = scanner.nextLine();
+
+			System.out.print("Endereço: ");
+			String endereco = scanner.nextLine();
+
+			System.out.print("CPF: ");
+			String cpf = scanner.nextLine();
+
+			System.out.print("Email: ");
+			String email = scanner.nextLine();
+
+			System.out.print("Telefone: ");
+			String telefone = scanner.nextLine();
+			
+			// Instancia o membro
+			Membro membro = new Membro(nome, endereco, cpf, email, telefone);
+			bibliotecario.cadastrarMembro(membro);
+		}
+
+        System.out.println("Membro cadastrado com sucesso!");
+
+    }
+    
+    private static void sair() {
+        System.out.println("Opção 0 - Sair");
+        System.out.println("PROGRAMA ENCERRADO");
+    }
 }
