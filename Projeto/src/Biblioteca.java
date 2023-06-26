@@ -156,6 +156,7 @@ public class Biblioteca {
             }
         }
 
+        System.out.println(sb);
         return sb.toString();
     }
 

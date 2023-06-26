@@ -8,11 +8,11 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class ArquivoMembro {
 	// Caminho do arquivo onde os membros serão gravados
     private static final String CAMINHO_ARQUIVO = "Arquivos/membros.csv";
+    private static final String CAMINHO_ARQUIVO_backup = "Arquivos/backup/membros.csv";
 
     // Método para gravar os membros no arquivo
     public static void gravarMembros(Biblioteca biblioteca) {
@@ -20,7 +20,7 @@ public class ArquivoMembro {
     	usuarios = biblioteca.getListaUsuario();
     	
         // Cria uma cópia do arquivo atual como backup
-        File arquivoBackup = new File(CAMINHO_ARQUIVO + ".backup");
+        File arquivoBackup = new File(CAMINHO_ARQUIVO_backup + ".backup");
         File arquivoAtual = new File(CAMINHO_ARQUIVO);
         
         // Verifica se o arquivo atual existe
@@ -53,11 +53,9 @@ public class ArquivoMembro {
         }
     }
 
- // Método para ler o arquivo
-    public String lerArquivo(Bibliotecario bibliotecario) {
+ // Método para ler o arquivo CSV
+    public String lerArquivoCSV(File arquivo, Bibliotecario bibliotecario) {
         StringBuilder conteudo = new StringBuilder();
-
-        File arquivo = new File(CAMINHO_ARQUIVO);
 
         // Verifica se o arquivo existe
         if (arquivo.exists()) {
@@ -70,32 +68,22 @@ public class ArquivoMembro {
                 // Lê cada linha do arquivo a partir da segunda linha
                 while ((linha = reader.readLine()) != null) {
                     // Quebra a linha em campos usando a vírgula como separador
-                    StringTokenizer tokenizer = new StringTokenizer(linha, ",");
+                    String[] campos = linha.split(",");
 
-                    // Verifica se há mais elementos antes de chamar nextToken()
-                    if (tokenizer.hasMoreTokens()) {
-                        String nome = tokenizer.nextToken();
-                        // Verifica novamente antes de chamar nextToken()
-                        if (tokenizer.hasMoreTokens()) {
-                            String endereco = tokenizer.nextToken();
-                            // Verifica novamente antes de chamar nextToken()
-                            if (tokenizer.hasMoreTokens()) {
-                                String cpf = tokenizer.nextToken();
-                                // Verifica novamente antes de chamar nextToken()
-                                if (tokenizer.hasMoreTokens()) {
-                                    String email = tokenizer.nextToken();
-                                    // Verifica novamente antes de chamar nextToken()
-                                    if (tokenizer.hasMoreTokens()) {
-                                        String telefone = tokenizer.nextToken();
+                    // Verifica se há campos suficientes
+                    if (campos.length >= 5) {
+                        String nome = campos[0].trim();
+                        String endereco = campos[1].trim();
+                        String cpf = campos[2].trim();
+                        String email = campos[3].trim();
+                        String telefone = campos[4].trim();
 
-                                        // Cria uma instância de Membro com os dados da linha
-                                        Membro membro = new Membro(nome, endereco, cpf, email, telefone);
-                                        // Adiciona o membro à biblioteca
-                                        bibliotecario.cadastrarMembro(membro);
-                                    }
-                                }
-                            }
-                        }
+                        // Cria uma instância de Membro com os dados da linha
+                        Membro membro = new Membro(nome, endereco, cpf, email, telefone);
+                        // Adiciona o membro à biblioteca (ajuste o nome do objeto Bibliotecario conforme necessário)
+                        bibliotecario.cadastrarMembro(membro);
+                    } else {
+                        System.out.println("Formato inválido da linha no arquivo CSV: " + linha);
                     }
                 }
             } catch (IOException e) {
@@ -109,4 +97,5 @@ public class ArquivoMembro {
         System.out.println("A lista de membros foi lida com sucesso!");
         return conteudo.toString();
     }
+
 }

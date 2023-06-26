@@ -10,18 +10,18 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class ArquivoArtigo {
 	// Caminho do arquivo onde os artigos serão gravados
     private static final String CAMINHO_ARQUIVO = "Arquivos/artigos.csv";
+    private static final String CAMINHO_ARQUIVO_backup = "Arquivos/backup/artigos.csv";
 
     // Método para gravar os artigos no arquivo
     public static void gravarArtigos(Biblioteca biblioteca) {
         List<Item> itens = biblioteca.getListaItem();
 
         // Cria uma cópia do arquivo atual como backup
-        File arquivoBackup = new File(CAMINHO_ARQUIVO + ".backup");
+        File arquivoBackup = new File(CAMINHO_ARQUIVO_backup + ".backup");
         File arquivoAtual = new File(CAMINHO_ARQUIVO);
 
         // Verifica se o arquivo atual existe
@@ -54,11 +54,9 @@ public class ArquivoArtigo {
     }
 
     
-    // Método para ler o arquivo
-    public String lerArquivo(Bibliotecario bibliotecario) {
+ // Método para ler o arquivo CSV
+    public String lerArquivoCSV(File arquivo, Bibliotecario bibliotecario) {
         StringBuilder conteudo = new StringBuilder();
-
-        File arquivo = new File(CAMINHO_ARQUIVO);
 
         // Verifica se o arquivo existe
         if (arquivo.exists()) {
@@ -71,46 +69,30 @@ public class ArquivoArtigo {
                 // Lê cada linha do arquivo a partir da segunda linha
                 while ((linha = reader.readLine()) != null) {
                     // Quebra a linha em campos usando a vírgula como separador
-                    StringTokenizer tokenizer = new StringTokenizer(linha, ",");
+                    String[] campos = linha.split(",");
 
-                    // Verifica se há mais elementos antes de chamar nextToken()
-                    if (tokenizer.hasMoreTokens()) {
-                        String titulo = tokenizer.nextToken();
-                        // Verifica novamente antes de chamar nextToken()
-                        if (tokenizer.hasMoreTokens()) {
-                            String autor = tokenizer.nextToken();
-                            // Verifica novamente antes de chamar nextToken()
-                            if (tokenizer.hasMoreTokens()) {
-                                String editora = tokenizer.nextToken();
-                                // Verifica novamente antes de chamar nextToken()
-                                if (tokenizer.hasMoreTokens()) {
-                                    String dataString = tokenizer.nextToken();
-                                    // Verifica novamente antes de chamar nextToken()
-                                    if (tokenizer.hasMoreTokens()) {
-                                        String genero = tokenizer.nextToken();
-                                        // Verifica novamente antes de chamar nextToken()
-                                        if (tokenizer.hasMoreTokens()) {
-                                            String doi = tokenizer.nextToken();
-                                            // Verifica novamente antes de chamar nextToken()
-                                            if (tokenizer.hasMoreTokens()) {
-                                            	int exemplares = Integer.parseInt((tokenizer.nextToken()));
-                                            	
-                                                // Cria uma instância de Livro com os dados da linha
-                                                Artigo artigo = new Artigo(titulo, autor, editora, parseData(dataString), genero, doi, exemplares);
-                                                
-                                                // Verifica se a data é nula antes de adicionar o artigo à biblioteca
-                                                if (artigo.getData() != null) {
-                                                    // Adiciona o livro à biblioteca
-                                                    bibliotecario.adicionarItem(artigo);
-                                                } else {
-                                                    System.out.println("Data de publicação inválida para o artigo: " + titulo);
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                    // Verifica se há campos suficientes
+                    if (campos.length >= 8) {
+                        String titulo = campos[0].trim();
+                        String autor = campos[1].trim();
+                        String editora = campos[2].trim();
+                        String dataString = campos[3].trim();
+                        String genero = campos[4].trim();
+                        String doi = campos[5].trim();
+                        int exemplares = Integer.parseInt(campos[6].trim());                      
+
+                        // Cria uma instância de Artigo com os dados da linha
+                        Artigo artigo = new Artigo(titulo, autor, editora, parseData(dataString), genero, doi, exemplares);
+
+                        // Verifica se a data é nula antes de adicionar o artigo à biblioteca
+                        if (artigo.getData() != null) {
+                            // Adiciona o artigo à biblioteca (você pode ajustar o nome do objeto Bibliotecario conforme necessário)
+                            bibliotecario.adicionarItem(artigo);
+                        } else {
+                            System.out.println("Data de publicação inválida para o artigo: " + titulo);
                         }
+                    } else {
+                        System.out.println("Formato inválido da linha no arquivo CSV: " + linha);
                     }
                 }
             } catch (IOException e) {
@@ -124,6 +106,7 @@ public class ArquivoArtigo {
         System.out.println("A lista de artigos foi lida com sucesso!");
         return conteudo.toString();
     }
+
     
     // Método auxiliar para converter uma string em uma data
     private Date parseData(String dataString) {

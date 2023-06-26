@@ -10,11 +10,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class ArquivoEmprestimo {
 	// Caminho do arquivo onde os emprestimos serão gravados
     private static final String CAMINHO_ARQUIVO = "Arquivos/emprestimos.csv";
+    private static final String CAMINHO_ARQUIVO_backup = "Arquivos/backup/emprestimos.csv";
     
 
     // Método para gravar os emprestimos no arquivo
@@ -23,7 +23,7 @@ public class ArquivoEmprestimo {
         emprestimos = biblioteca.getListaEmprestimo();
 
         // Cria uma cópia do arquivo atual como backup
-        File arquivoBackup = new File(CAMINHO_ARQUIVO + ".backup");
+        File arquivoBackup = new File(CAMINHO_ARQUIVO_backup + ".backup");
         File arquivoAtual = new File(CAMINHO_ARQUIVO);
         
         // Verifica se o arquivo atual existe
@@ -53,58 +53,51 @@ public class ArquivoEmprestimo {
         }
     }
 
-    // Método para ler o arquivo
-    public String lerArquivo(Bibliotecario bibliotecario) {
+    // Método para ler o arquivo CSV
+    public String lerArquivoCSV(File arquivo, Bibliotecario bibliotecario) {
         StringBuilder conteudo = new StringBuilder();
         Biblioteca biblioteca = bibliotecario.getBiblioteca();
-        File arquivo = new File(CAMINHO_ARQUIVO);
 
         // Verifica se o arquivo existe
         if (arquivo.exists()) {
             try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
                 String linha;
-                
+
                 // Lê a primeira linha do arquivo (cabeçalho) e descarta
                 reader.readLine();
 
                 // Lê cada linha do arquivo a partir da segunda linha
                 while ((linha = reader.readLine()) != null) {
-                	// Quebra a linha em campos usando a vírgula como separador
-                    StringTokenizer tokenizer = new StringTokenizer(linha, ",");
-                    
-                    // Verifica se há mais elementos antes de chamar nextToken()
-                    if (tokenizer.hasMoreTokens()) {
-                        String itemTitulo = tokenizer.nextToken();
-                        // Verifica se há mais elementos antes de chamar nextToken()
-                        if (tokenizer.hasMoreTokens()) {
-                            String membroCPF = tokenizer.nextToken();
-                            // Verifica se há mais elementos antes de chamar nextToken()
-                            if (tokenizer.hasMoreTokens()) {
-                            	String dataEmprestimoString = tokenizer.nextToken();
-                                LocalDate dataEmprestimo = LocalDate.parse(dataEmprestimoString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                                // Verifica se há mais elementos antes de chamar nextToken()
-                                if (tokenizer.hasMoreTokens()) {
-                                    String dataDevolucaoString = tokenizer.nextToken();
-                                    LocalDate dataDevolucao = LocalDate.parse(dataDevolucaoString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                                    
-                                    Item itemEmprestado = buscarItemPorTitulo(itemTitulo, biblioteca);
-                                    Membro membro = buscarMembroPorCPF(membroCPF, biblioteca);
+                    // Quebra a linha em campos usando a vírgula como separador
+                    String[] campos = linha.split(",");
 
-                                    // Cria uma instância de Emprestimo com os dados da linha
-                                    Emprestimo emprestimo = new Emprestimo(itemEmprestado, membro, dataEmprestimo, dataDevolucao);
-                                    
-                                    biblioteca.getListaEmprestimo().add(emprestimo); // Emprestimo adicionado à lista de emprestimos da biblioteca
-                                    membro.getEmprestimos().add(emprestimo); // Emprestimo adicionado à lista de emprestimos do membro
-                            		int numero = itemEmprestado.getExemplares() - 1;
-                            		itemEmprestado.setExemplares(numero);
-                            		if(itemEmprestado.getExemplares()==0)
-                            		{
-                            			itemEmprestado.setDisponivel(false);
-                            		}
+                    // Verifica se há campos suficientes
+                    if (campos.length >= 4) {
+                        String itemTitulo = campos[0].trim();
+                        String membroCPF = campos[1].trim();
+                        String dataEmprestimoString = campos[2].trim();
+                        String dataDevolucaoString = campos[3].trim();
 
-                                }
-                            }
+                        LocalDate dataEmprestimo = LocalDate.parse(dataEmprestimoString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                        LocalDate dataDevolucao = LocalDate.parse(dataDevolucaoString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+                        Item itemEmprestado = buscarItemPorTitulo(itemTitulo, biblioteca);
+                        Membro membro = new Membro(null, null, null, null, null);
+                        membro = buscarMembroPorCPF(membroCPF, biblioteca);
+
+                        // Cria uma instância de Emprestimo com os dados da linha
+                        Emprestimo emprestimo = new Emprestimo(itemEmprestado, membro, dataEmprestimo, dataDevolucao);
+
+                        biblioteca.getListaEmprestimo().add(emprestimo); // Emprestimo adicionado à lista de emprestimos da biblioteca
+                        membro.getEmprestimos().add(emprestimo); // Emprestimo adicionado à lista de emprestimos do membro
+
+                        int numero = itemEmprestado.getExemplares() - 1;
+                        itemEmprestado.setExemplares(numero);
+                        if (itemEmprestado.getExemplares() == 0) {
+                            itemEmprestado.setDisponivel(false);
                         }
+                    } else {
+                        System.out.println("Formato inválido da linha no arquivo CSV: " + linha);
                     }
                 }
             } catch (IOException e) {
@@ -117,6 +110,8 @@ public class ArquivoEmprestimo {
         System.out.println("A lista de empréstimos foi lida com sucesso!");
         return conteudo.toString();
     }
+
+
 
     private Item buscarItemPorTitulo(String itemTitulo, Biblioteca biblioteca) {
         for (Item item : biblioteca.getListaItem()) {

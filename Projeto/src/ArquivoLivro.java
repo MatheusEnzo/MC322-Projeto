@@ -11,11 +11,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class ArquivoLivro {
 	// Caminho do arquivo onde os livros serão gravados
     private static final String CAMINHO_ARQUIVO = "Arquivos/livros.csv";
+    private static final String CAMINHO_ARQUIVO_backup = "Arquivos/backup/livros.csv";
 
     // Método para gravar os livros no arquivo
     public static void gravarLivros(Biblioteca biblioteca) {
@@ -23,7 +23,7 @@ public class ArquivoLivro {
     	itens = biblioteca.getListaItem();
     	
         // Cria uma cópia do arquivo atual como backup
-        File arquivoBackup = new File(CAMINHO_ARQUIVO + ".backup");
+        File arquivoBackup = new File(CAMINHO_ARQUIVO_backup + ".backup");
         File arquivoAtual = new File(CAMINHO_ARQUIVO);
         
         // Verifica se o arquivo atual existe
@@ -58,11 +58,9 @@ public class ArquivoLivro {
     }
     
     
- // Método para ler o arquivo
-    public String lerArquivo(Bibliotecario bibliotecario) {
+    // Método para ler o arquivo CSV
+    public String lerArquivoCSV(File arquivo, Bibliotecario bibliotecario) {
         StringBuilder conteudo = new StringBuilder();
-
-        File arquivo = new File(CAMINHO_ARQUIVO);
 
         // Verifica se o arquivo existe
         if (arquivo.exists()) {
@@ -75,46 +73,30 @@ public class ArquivoLivro {
                 // Lê cada linha do arquivo a partir da segunda linha
                 while ((linha = reader.readLine()) != null) {
                     // Quebra a linha em campos usando a vírgula como separador
-                    StringTokenizer tokenizer = new StringTokenizer(linha, ",");
+                    String[] campos = linha.split(",");
 
-                    // Verifica se há mais elementos antes de chamar nextToken()
-                    if (tokenizer.hasMoreTokens()) {
-                        String titulo = tokenizer.nextToken();
-                        // Verifica novamente antes de chamar nextToken()
-                        if (tokenizer.hasMoreTokens()) {
-                            String autor = tokenizer.nextToken();
-                            // Verifica novamente antes de chamar nextToken()
-                            if (tokenizer.hasMoreTokens()) {
-                                String editora = tokenizer.nextToken();
-                                // Verifica novamente antes de chamar nextToken()
-                                if (tokenizer.hasMoreTokens()) {
-                                    String dataString = tokenizer.nextToken();
-                                    // Verifica novamente antes de chamar nextToken()
-                                    if (tokenizer.hasMoreTokens()) {
-                                        String genero = tokenizer.nextToken();
-                                        // Verifica novamente antes de chamar nextToken()
-                                        if (tokenizer.hasMoreTokens()) {
-                                            String isbn = tokenizer.nextToken();
-                                            // Verifica novamente antes de chamar nextToken()
-                                            if (tokenizer.hasMoreTokens()) {
-                                                int exemplares = Integer.parseInt(tokenizer.nextToken());
-                                                
-                                                // Cria uma instância de Livro com os dados da linha
-                                                Livro livro = new Livro(titulo, autor, editora, parseData(dataString), genero, isbn, exemplares);
-                                                
-                                                // Verifica se a data é nula antes de adicionar o livro à biblioteca
-                                                if (livro.getData() != null) {
-                                                    // Adiciona o livro à biblioteca
-                                                    bibliotecario.adicionarItem(livro);
-                                                } else {
-                                                    System.out.println("Data de publicação inválida para o livro: " + titulo);
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                    // Verifica se há campos suficientes
+                    if (campos.length >= 7) {
+                        String titulo = campos[0].trim();
+                        String autor = campos[1].trim();
+                        String editora = campos[2].trim();
+                        String dataString = campos[3].trim();
+                        String genero = campos[4].trim();
+                        String isbn = campos[5].trim();
+                        int exemplares = Integer.parseInt(campos[6].trim());
+
+                        // Cria uma instância de Livro com os dados da linha
+                        Livro livro = new Livro(titulo, autor, editora, parseData(dataString), genero, isbn, exemplares);
+
+                        // Verifica se a data é nula antes de adicionar o livro à biblioteca
+                        if (livro.getData() != null) {
+                            // Adiciona o livro à biblioteca (você pode ajustar o nome do objeto Bibliotecario conforme necessário)
+                            bibliotecario.adicionarItem(livro);
+                        } else {
+                            System.out.println("Data de publicação inválida para o livro: " + titulo);
                         }
+                    } else {
+                        System.out.println("Formato inválido da linha no arquivo CSV: " + linha);
                     }
                 }
             } catch (IOException e) {
