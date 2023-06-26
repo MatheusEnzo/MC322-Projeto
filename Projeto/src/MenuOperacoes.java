@@ -2,7 +2,7 @@
 public enum MenuOperacoes {
     CADASTRAR(1),
     LISTAR(2),
-    EXCLUIR(3),
+    REMOVER(3),
     SAIR(0);
 
     public int operacao;

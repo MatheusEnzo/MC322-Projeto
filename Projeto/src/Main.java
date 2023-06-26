@@ -36,16 +36,6 @@ public class Main {
         String conteudoArquivoEmprestimo = arquivoEmprestimo.lerArquivo(bibliotecario);
         System.out.println(conteudoArquivoEmprestimo);
                
-        // Printa os membros da biblioteca
-        System.out.println("---- MEMBROS ----");
-        System.out.println(biblioteca.PrintaListaMembros());
-        
-        // Printa os emprestimos da biblioteca
-        System.out.println("---- EMPRÉSTIMOS ----");
-        System.out.println(biblioteca.PrintaListaEmprestimos());
-        
-        // Printa os itens da biblioteca
-		biblioteca.PrintaListaItens();
      
     	// Gravação de arquivos
 		// ÚTIL FAZER ALTERAÇÕES NOS MEMBROS,
@@ -70,6 +60,9 @@ public class Main {
             switch (escolha) {
                 case 1:
                     menuCadastro(scanner, bibliotecario);
+                    break;
+                case 2:
+                    menuListar(scanner, bibliotecario);
                     break;
                 case 0:
                     sair();
@@ -127,7 +120,104 @@ public class Main {
         System.out.println("0 - Voltar");
         System.out.print("Escolha uma opção: ");
     }
+    
+	private static void menuListar(Scanner scanner, Bibliotecario bibliotecario) {
+	    int escolha; // Valor inicial para a variável escolha
+	    Biblioteca biblioteca = bibliotecario.getBiblioteca();
+        StringBuilder sb = new StringBuilder();
+        StringBuilder artigos = new StringBuilder();
+        StringBuilder livros = new StringBuilder();
+        StringBuilder revistas = new StringBuilder();
+	    
+        do {
+            exibirMenuListar();
+            escolha = scanner.nextInt();
+            scanner.nextLine(); // Limpar o buffer do scanner
+
+            // Executar a operação de cadastro escolhida
+            switch (escolha) {
+                case 1:              	
+                    if (biblioteca.getListaItem().isEmpty()) {
+                        sb.append("A biblioteca não possui itens.");
+                        System.out.println(sb);
+                    } else {
+                        for (Item item : biblioteca.getListaItem()) {
+                            if (item instanceof Artigo) {
+                            	artigos.append(item).append("\n");
+                            }
+                        }
+                    }
+                    System.out.println("---- ARTIGOS ----");
+                    System.out.println(artigos);
+                    break;
+                    
+                case 2:	
+                    if (biblioteca.getListaItem().isEmpty()) {
+                        sb.append("A biblioteca não possui itens.");
+                        System.out.println(sb);
+                    } else {
+                        for (Item item : biblioteca.getListaItem()) {
+                            if (item instanceof Livro) {
+                            	livros.append(item).append("\n");
+                            }
+                        }
+                    }
+                    System.out.println("---- LIVROS ----");
+                	System.out.println(livros);
+                    break;
+                    
+                case 3:
+                    if (biblioteca.getListaItem().isEmpty()) {
+                        sb.append("A biblioteca não possui itens.");
+                        System.out.println(sb);
+                    } else {
+                        for (Item item : biblioteca.getListaItem()) {
+                            if (item instanceof Revista) {
+                            	revistas.append(item).append("\n");
+                            }
+                        }
+                    }
+                    System.out.println("---- REVISTAS ----");
+                	System.out.println(revistas);
+                	break;
+                	
+                case 4:
+                    // Printa os membros da biblioteca
+                    System.out.println("---- MEMBROS ----");
+                    System.out.println(biblioteca.PrintaListaMembros());
+                	break;
+                	
+                case 5:
+                    // Printa os emprestimos da biblioteca
+                    System.out.println("---- EMPRÉSTIMOS ----");
+                    System.out.println(biblioteca.PrintaListaEmprestimos());
+                	break;
+                	
+                case 0:
+                    System.out.println("Voltando ao menu principal...");
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+                    break;
+            }
+        } while (escolha != 0);
+    }
+
+
+    
+    private static void exibirMenuListar() {
+        System.out.println("----- Menu de Cadastro -----");
+        System.out.println("1 - Listar Artigos");
+        System.out.println("2 - Listar Livros");
+        System.out.println("3 - Listar Revistas");
+        System.out.println("4 - Listar Membros");
+        System.out.println("5 - Listar Emprestimos");
+        System.out.println("0 - Voltar");
+        System.out.print("Escolha uma opção: ");
+    }
 	
+
+    
 
     private static void cadastrarMembro(Bibliotecario bibliotecario) {
         try (Scanner scanner = new Scanner(System.in)) {
