@@ -45,7 +45,7 @@ public class Bibliotecario extends Usuario {
     }
 
     // Método para adicionar um item à biblioteca
-    public boolean adicionarItem(Item item) {
+    public void adicionarItem(Item item) {
         if(biblioteca.getListaItem().contains(item))
         {
         	for(int i=0; i<biblioteca.getListaItem().size(); i++)
@@ -54,15 +54,13 @@ public class Bibliotecario extends Usuario {
         		{
         			int exemplares = biblioteca.getListaItem().get(i).getExemplares();
         			biblioteca.getListaItem().get(i).setExemplares(exemplares+1);
-        			return true;
         		}
         	}
         }
         else
         {
-        	return biblioteca.getListaItem().add(item);
+        	biblioteca.getListaItem().add(item);
         }
-        return false;
     }
 
     // Método para remover um item da biblioteca
@@ -79,7 +77,16 @@ public class Bibliotecario extends Usuario {
         				biblioteca.getListaItem().get(i).setExemplares(exemplares-1);
         				if(exemplares-1 == 0)
         				{
-        					biblioteca.getListaItem().get(i).setDisponivel(false);
+        					for(int j=0; j<biblioteca.getListaEmprestimo().size(); j++)
+        					{
+        						if(biblioteca.getListaEmprestimo().get(j).getItem().equals(item))
+        						{
+        							biblioteca.getListaItem().get(i).setDisponivel(false);
+        							return true;
+        						}
+        					}
+        					biblioteca.getListaItem().remove(item);
+        					return true;
         				}
         				return true;
         			}
