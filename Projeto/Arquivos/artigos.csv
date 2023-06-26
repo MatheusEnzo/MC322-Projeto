@@ -1,30 +1,30 @@
-Título, Autor, Editora, Data de Publicação, Gênero, DOI, Exemplares, Disponível
-A influência da tecnologia na sociedade contemporânea,Lucas Santos,Editora Alpha,16/06/1959,Tecnologia,3648221332623980,5,Sim
-Os desafios da inteligência artificial na medicina,Ana Oliveira,Edições Beta,02/04/1968,Saúde,2142413453505370,10,Sim
-O impacto das redes sociais na comunicação,Pedro Costa,Casa dos Livros,04/09/1969,Ciência,9204558199378390,8,Sim
-A sustentabilidade ambiental como pilar do desenvolvimento,Beatriz Silva,Publicações Gama,08/06/1936,Economia,9124597371072240,7,Sim
-A importância da educação inclusiva para uma sociedade igualitária,Thiago Martins,Editora Delta,11/04/1947,Educação,7309795590999830,10,Sim
-A revolução da indústria 4.0: oportunidades e desafios,Isabella Pereira,Livraria Épsilon,08/04/1958,Política,2546023449708090,5,Sim
-Os benefícios do exercício físico para a saúde mental,Rafael Souza,Edições Zeta,02/09/1992,Meio Ambiente,2253641209141490,7,Sim
-A ética na inteligência artificial: reflexões e perspectivas,Gabriela Almeida,Editora Ômega,27/11/1940,Arte,7529783541802580,8,Sim
-A importância da diversidade nas organizações,Matheus Ferreira,Casa das Letras,21/08/1939,Cultura,9805669998303330,5,Sim
-O papel das energias renováveis na transição energética,Sofia Carvalho,Publicações Theta,25/11/1972,Esportes,8765986924195560,2,Sim
-A influência da cultura na formação da identidade,Gabriel Rodrigues,Editora Iota,12/10/1940,Alimentação,9465525613214210,3,Sim
-Os impactos da globalização na economia mundial,Laura Gomes,Livraria Kappa,27/09/1963,Psicologia,4155288310942850,7,Sim
-A importância da educação financeira para uma vida próspera,Bruno Santos,Edições Lambda,20/02/1915,História,4284219952694740,10,Sim
-A arte como forma de expressão e transformação social,Manuela Silva,Editora Mu,27/08/1907,Filosofia,113858302035524,1,Sim
-A psicologia positiva e o bem-estar emocional,Victor Oliveira,Casa dos Escritores,03/05/1906,Religião,625582074353200,2,Sim
-A relevância do voluntariado na construção de uma sociedade solidária,Marina Costa,Publicações Nu,10/09/1912,Moda,7067016327001840,2,Sim
-Os avanços da medicina regenerativa no tratamento de doenças,Leonardo Martins,Editora Xi,01/08/1913,Música,7894573977903090,3,Sim
-A importância do empreendedorismo para o desenvolvimento econômico,Luiza Rodrigues,Livraria Ômicron,18/07/1951,Cinema,1326468573995860,4,Sim
-O impacto das fake news na sociedade contemporânea,João Pereira,Edições Pi,18/02/1905,Literatura,2765601388235710,2,Sim
-A valorização da cultura local no turismo sustentável,Carolina Almeida,Editora Rô,28/12/1997,Sociedade,9145595997295870,6,Sim
-A relação entre tecnologia e meio ambiente,Gustavo Ferreira,Casa das Palavras,20/04/1987,Direito,5097951867192820,7,Sim
-A importância da ética na pesquisa científica,Juliana Carvalho,Publicações Sigma,03/12/1927,Engenharia,1655442773521840,3,Sim
-A inclusão digital como ferramenta de inclusão social,Eduardo Souza,Editora Tau,14/03/1961,Matemática,3107151461444580,8,Sim
-Os desafios da gestão de projetos em ambientes complexos,Fernanda Alves,Livraria Úpsilon,28/01/1988,Física,6509188618558740,1,Sim
-A importância da educação ambiental para a preservação do meio ambiente,Vinicius Santos,Edições Fi,24/07/1946,Química,3831678952799830,8,Sim
-A inovação tecnológica como impulsionadora do crescimento econômico,Maria Oliveira,Editora Qui,28/06/1961,Biologia,6344387189429740,6,Sim
-Os impactos da inteligência artificial no mercado de trabalho,Marcelo Costa,Casa dos Autores,09/09/1906,Arquitetura,5136697136491400,6,Sim
-A relação entre alimentação saudável e qualidade de vida,Letícia Gomes,Publicações Chi,16/09/1955,Comunicação,3080833009842700,4,Sim
-A arte e sua influência na percepção estética,Felipe Rodrigues,Editora Psi,03/02/1907,Turismo,6854068606220150,8,Sim
+Título,Autor,Editora,Data de Publicação,Gênero,DOI,Exemplares,Disponível
+A influência da tecnologia na sociedade contemporânea,Lucas Santos,Editora Alpha,16/06/1959,Tecnologia,10.1234/abcde.5678,5,Sim
+Os desafios da inteligência artificial na medicina,Ana Oliveira,Edições Beta,02/04/1968,Saúde,10.9876/xyz.54321,10,Sim
+O impacto das redes sociais na comunicação,Pedro Costa,Casa dos Livros,04/09/1969,Ciência,10.abcdef/123456789,8,Sim
+A sustentabilidade ambiental como pilar do desenvolvimento,Beatriz Silva,Publicações Gama,08/06/1936,Economia,10.xyz/987654321,7,Sim
+A importância da educação inclusiva para uma sociedade igualitária,Thiago Martins,Editora Delta,11/04/1947,Educação,10.qwerty/123.456,10,Sim
+A revolução da indústria 4.0: oportunidades e desafios,Isabella Pereira,Livraria Épsilon,08/04/1958,Política,10.0987/abcd.efgh,5,Sim
+Os benefícios do exercício físico para a saúde mental,Rafael Souza,Edições Zeta,02/09/1992,Meio Ambiente,10.doi/9876543210,7,Sim
+A ética na inteligência artificial: reflexões e perspectivas,Gabriela Almeida,Editora Ômega,27/11/1940,Arte,10.example/doi.123,8,Sim
+A importância da diversidade nas organizações,Matheus Ferreira,Casa das Letras,21/08/1939,Cultura,10.abcdef/ghijklmnop,5,Sim
+O papel das energias renováveis na transição energética,Sofia Carvalho,Publicações Theta,25/11/1972,Esportes,10.ijklmnop/abcdefg,2,Sim
+A influência da cultura na formação da identidade,Gabriel Rodrigues,Editora Iota,12/10/1940,Alimentação,10.doi/example.1234,3,Sim
+Os impactos da globalização na economia mundial,Laura Gomes,Livraria Kappa,27/09/1963,Psicologia,10.12345/6789.abc,7,Sim
+A importância da educação financeira para uma vida próspera,Bruno Santos,Edições Lambda,20/02/1915,História,10.abcdefghi/0123456789,10,Sim
+A arte como forma de expressão e transformação social,Manuela Silva,Editora Mu,27/08/1907,Filosofia,10.ijklmnop/qrstuvwxyz,1,Sim
+A psicologia positiva e o bem-estar emocional,Victor Oliveira,Casa dos Escritores,03/05/1906,Religião,10.doi/doiexample,2,Sim
+A relevância do voluntariado na construção de uma sociedade solidária,Marina Costa,Publicações Nu,10/09/1912,Moda,10.example/1234567890,2,Sim
+Os avanços da medicina regenerativa no tratamento de doenças,Leonardo Martins,Editora Xi,01/08/1913,Música,10.qwerty/doi.1234,3,Sim
+A importância do empreendedorismo para o desenvolvimento econômico,Luiza Rodrigues,Livraria Ômicron,18/07/1951,Cinema,10.abcdef/ghijklmnopq,4,Sim
+O impacto das fake news na sociedade contemporânea,João Pereira,Edições Pi,18/02/1905,Literatura,10.987654/3210.doi,2,Sim
+A valorização da cultura local no turismo sustentável,Carolina Almeida,Editora Rô,28/12/1997,Sociedade,10.doi/abcdefg.123,6,Sim
+A relação entre tecnologia e meio ambiente,Gustavo Ferreira,Casa das Palavras,20/04/1987,Direito,10.example/doiexample,7,Sim
+A importância da ética na pesquisa científica,Juliana Carvalho,Publicações Sigma,03/12/1927,Engenharia,10.qwerty/doiexample,3,Sim
+A inclusão digital como ferramenta de inclusão social,Eduardo Souza,Editora Tau,14/03/1961,Matemática,10.123/456.7890doi,8,Sim
+Os desafios da gestão de projetos em ambientes complexos,Fernanda Alves,Livraria Úpsilon,28/01/1988,Física,10.abcdef/1234567890,1,Sim
+A importância da educação ambiental para a preservação do meio ambiente,Vinicius Santos,Edições Fi,24/07/1946,Química,10.987654/doiexample,8,Sim
+A inovação tecnológica como impulsionadora do crescimento econômico,Maria Oliveira,Editora Qui,28/06/1961,Biologia,10.example/doi.12345,6,Sim
+Os impactos da inteligência artificial no mercado de trabalho,Marcelo Costa,Casa dos Autores,09/09/1906,Arquitetura,10.qwerty/doiexample.1,6,Sim
+A relação entre alimentação saudável e qualidade de vida,Letícia Gomes,Publicações Chi,16/09/1955,Comunicação,10.123456/7890.abcdef,4,Sim
+A arte e sua influência na percepção estética,Felipe Rodrigues,Editora Psi,03/02/1907,Turismo,10.abcdefg/12345doi,8,Sim

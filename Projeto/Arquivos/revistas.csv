@@ -1,21 +1,21 @@
-Título, Autor, Editora, Data de Publicação, Gênero, ISSN, Exemplares, Disponível
-Ciência Moderna,Maria Silva,Editora Alpha,15/02/1974,Ciência e Tecnologia,63325771,8,Sim
-Saúde em Foco,Pedro Santos,Edições Beta,01/07/1925,Saúde e Bem-estar,99369017,10,Sim
-Arte e Cultura,Ana Oliveira,Casa dos Livros,16/12/1993,Arte e Cultura,5024501,3,Sim
-Negócios Globais,João Costa,Publicações Gama,28/02/1919,Negócios e Economia,49380463,9,Sim
-Tecnologia Avançada,Carolina Rodrigues,Editora Delta,21/11/1954,Tecnologia e Inovação,14670640,6,Sim
-Esportes Radicais,André Almeida,Livraria Épsilon,26/04/1982,Esportes e Aventura,79470210,2,Sim
-Moda e Estilo,Sofia Ferreira,Edições Zeta,22/02/1962,Moda e Estilo de Vida,52491960,2,Sim
-Gastronomia Internacional,Lucas Pereira,Editora Ômega,10/09/2013,Gastronomia e Culinária,66253373,5,Sim
-Viagens Exóticas,Isabella Martins,Casa das Letras,25/02/1923,Viagens e Turismo,83570809,9,Sim
-História Viva,Rafael Oliveira,Publicações Theta,24/12/1999,História e Patrimônio,25871716,4,Sim
-Ciência da Computação,Mariana Costa,Editora Iota,02/10/1958,Computação e Tecnologia,74445827,10,Sim
-Natureza Preservada,Tiago Sousa,Livraria Kappa,01/11/1982,Natureza e Meio Ambiente,56599570,2,Sim
-Política Atual,Beatriz Fernandes,Edições Lambda,09/10/1924,Política e Atualidades,35326469,10,Sim
-Cinema e Entretenimento,Gabriel Gonçalves,Editora Mu,09/06/1929,Cinema e Entretenimento,73941034,9,Sim
-Arquitetura Contemporânea,Laura Mendes,Casa dos Escritores,20/06/2020,Arquitetura e Design,60982215,1,Sim
-Música em Harmonia,Guilherme Carvalho,Publicações Nu,20/01/1917,Música e Entretenimento,98156931,3,Sim
-Fotografia Inspiradora,Camila Silva,Editora Xi,06/12/1955,Fotografia e Arte Visual,56288064,6,Sim
-Psicologia em Foco,Felipe Santos,Livraria Ômicron,04/10/1960,Psicologia e Comportamento,85141795,10,Sim
-Literatura em Destaque,Manuela Alves,Edições Pi,07/06/1985,Literatura e Escrita,98976259,10,Sim
-Espaço e Astronomia,Gustavo Lima,Editora Rô,18/11/1954,Espaço e Astronomia,96289565,7,Sim
+Título,Autor,Editora,Data de Publicação,Gênero,ISSN,Exemplares,Disponível
+Ciência Moderna,Maria Silva,Editora Alpha,15/02/1974,Ciência e Tecnologia,2159-8274,8,Sim
+Saúde em Foco,Pedro Santos,Edições Beta,01/07/1925,Saúde e Bem-estar,1538-0653,10,Sim
+Arte e Cultura,Ana Oliveira,Casa dos Livros,16/12/1993,Arte e Cultura,0929-8673,3,Sim
+Negócios Globais,João Costa,Publicações Gama,28/02/1919,Negócios e Economia,0475-2358,9,Sim
+Tecnologia Avançada,Carolina Rodrigues,Editora Delta,21/11/1954,Tecnologia e Inovação,1746-0441,6,Sim
+Esportes Radicais,André Almeida,Livraria Épsilon,26/04/1982,Esportes e Aventura,2159-8275,2,Sim
+Moda e Estilo,Sofia Ferreira,Edições Zeta,22/02/1962,Moda e Estilo de Vida,1538-0654,2,Sim
+Gastronomia Internacional,Lucas Pereira,Editora Ômega,10/09/2013,Gastronomia e Culinária,0929-8674,5,Sim
+Viagens Exóticas,Isabella Martins,Casa das Letras,25/02/1923,Viagens e Turismo,0475-2359,9,Sim
+História Viva,Rafael Oliveira,Publicações Theta,24/12/1999,História e Patrimônio,1746-0442,4,Sim
+Ciência da Computação,Mariana Costa,Editora Iota,02/10/1958,Computação e Tecnologia,2159-8276,10,Sim
+Natureza Preservada,Tiago Sousa,Livraria Kappa,01/11/1982,Natureza e Meio Ambiente,1538-0655,2,Sim
+Política Atual,Beatriz Fernandes,Edições Lambda,09/10/1924,Política e Atualidades,0929-8675,10,Sim
+Cinema e Entretenimento,Gabriel Gonçalves,Editora Mu,09/06/1929,Cinema e Entretenimento,0475-2360,9,Sim
+Arquitetura Contemporânea,Laura Mendes,Casa dos Escritores,20/06/2020,Arquitetura e Design,1746-0443,1,Sim
+Música em Harmonia,Guilherme Carvalho,Publicações Nu,20/01/1917,Música e Entretenimento,2159-8277,3,Sim
+Fotografia Inspiradora,Camila Silva,Editora Xi,06/12/1955,Fotografia e Arte Visual,1538-0656,6,Sim
+Psicologia em Foco,Felipe Santos,Livraria Ômicron,04/10/1960,Psicologia e Comportamento,0929-8676,10,Sim
+Literatura em Destaque,Manuela Alves,Edições Pi,07/06/1985,Literatura e Escrita,0475-2361,10,Sim
+Espaço e Astronomia,Gustavo Lima,Editora Rô,18/11/1954,Espaço e Astronomia,1746-0444,7,Sim
