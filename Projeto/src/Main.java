@@ -57,6 +57,12 @@ public class Main {
                 case 3:
                     menuGravar(scanner, bibliotecario);
                     break;
+                case 4:
+                    menuRemover(scanner, bibliotecario);
+                    break;
+                case 5:
+                    menuEmprestar(scanner, bibliotecario);
+                    break;
                 case 0:
                     sair();
                     break;
@@ -290,7 +296,94 @@ public class Main {
         System.out.print("Escolha uma opção: ");
     }
     
+	private static void menuRemover(Scanner scanner, Bibliotecario bibliotecario) {
+	    int escolha; // Valor inicial para a variável escolha
+
+        do {
+            exibirMenuRemover();
+            escolha = scanner.nextInt();
+            scanner.nextLine(); // Limpar o buffer do scanner
+
+            // Executar a operação de cadastro escolhida
+            switch (escolha) {
+                case 1:
+                	// FUNÇÃO PARA REMOVER MEMBRO
+                	System.out.println("Digite o CPF do membro que deseja remover: " + "\n");
+                	String CPF = scanner.nextLine();
+                	bibliotecario.removerMembro(CPF);
+                    break;
+                case 2:	
+                	// FUNÇÃO PARA REMOVER ITEM
+                	System.out.println("Digite o titulo do item que deseja remover: " + "\n");
+                	String titulo = scanner.nextLine();
+                	bibliotecario.removerItemPorTitulo(titulo);
+                    break;
+                case 0:
+                    System.out.println("Voltando ao menu principal...");
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+                    break;
+            }
+        } while (escolha != 0);
+    }
+
+
     
+    private static void exibirMenuRemover() {
+        System.out.println("----- Menu de Remoções -----");
+        System.out.println("1 - Remover Membro");
+        System.out.println("2 - Remover Item");
+        System.out.println("0 - Voltar");
+        System.out.print("Escolha uma opção: ");
+    }
+    
+    
+    private static void menuEmprestar(Scanner scanner, Bibliotecario bibliotecario) {
+	    int escolha; // Valor inicial para a variável escolha
+
+        do {
+            exibirMenuEmprestar();
+            escolha = scanner.nextInt();
+            scanner.nextLine(); // Limpar o buffer do scanner
+
+            // Executar a operação de cadastro escolhida
+            switch (escolha) {
+                case 1:
+                	// Função para Emprestar Item
+                	System.out.println("Digite o Título do item que deseja emprestar: " );
+                	String titulo = scanner.nextLine();
+                	System.out.println("Digite o CPF do membro que solicitou o empréstimo: " );
+                	String cpf = scanner.nextLine();
+                	bibliotecario.emprestarItemPorTitulo(cpf, titulo);
+                    break;
+                case 2:	
+                	// Função para Devolver Item
+                	System.out.println("Digite o Título do item que deseja devolver: " );
+                	String titulo1 = scanner.nextLine();
+                	System.out.println("Digite o CPF do membro que solicitou devolução: " );
+                	String cpf1 = scanner.nextLine();
+                	bibliotecario.devolverItemPorTitulo(cpf1, titulo1);
+                    break;
+                case 0:
+                    System.out.println("Voltando ao menu principal...");
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+                    break;
+            }
+        } while (escolha != 0);
+    }
+
+
+    
+    private static void exibirMenuEmprestar() {
+        System.out.println("----- Menu de Empréstimo e Devolução -----");
+        System.out.println("1 - Emprestar Item");
+        System.out.println("2 - Devolver Item");
+        System.out.println("0 - Voltar");
+        System.out.print("Escolha uma opção: ");
+    }
     
 
     private static void cadastrarMembro(Bibliotecario bibliotecario) {

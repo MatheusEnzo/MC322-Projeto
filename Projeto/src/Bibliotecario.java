@@ -99,6 +99,37 @@ public class Bibliotecario extends Usuario {
         }
         return false;
     }
+    
+    // Método para remover um item da biblioteca pelo título
+    public boolean removerItemPorTitulo(String titulo) {
+        for (Item item : biblioteca.getListaItem()) { // Percorre a lista de itens da biblioteca
+            if (item.getTitulo().equalsIgnoreCase(titulo)) { // Verifica se o título do item corresponde ao título fornecido
+                if (item.getExemplares() > 0) { // Verifica se há exemplares disponíveis do item
+                    int exemplares = item.getExemplares(); // Obtém o número de exemplares do item
+                    item.setExemplares(exemplares - 1); // Reduz o número de exemplares em 1
+                    if (exemplares - 1 == 0) { // Verifica se o número de exemplares após a redução é igual a zero
+                        for (Emprestimo emprestimo : biblioteca.getListaEmprestimo()) { // Percorre a lista de empréstimos da biblioteca
+                            if (emprestimo.getItem().equals(item)) { // Verifica se o item está emprestado
+                                item.setDisponivel(false); // Define o item como indisponível
+                                return true; // Retorna verdadeiro indicando que o item foi removido
+                            }
+                        }
+                        biblioteca.getListaItem().remove(item); // Remove o item da lista de itens da biblioteca
+                        System.out.println("Item removido com sucesso");
+                        return true; // Retorna verdadeiro indicando que o item foi removido
+                    }
+                    System.out.println("Item removido com sucesso");
+                    return true; // Retorna verdadeiro indicando que o item foi removido
+                } else {
+                	System.out.println("Não há exemplares do item para remover.");
+                    return false; // Retorna falso indicando que não há exemplares disponíveis do item
+                }
+            }
+        }
+        System.out.println("Não foi possível remover o item.");
+        return false; // Retorna falso indicando que o item não foi encontrado na biblioteca
+    }
+
 
     // Método para emprestar um item para um membro (usuário)
     public void emprestarItem(Membro membro, Item item) {
@@ -139,6 +170,59 @@ public class Bibliotecario extends Usuario {
             System.out.println("O item não está disponível na biblioteca: " + item.getTitulo());
         }
     }
+    
+ // Método para emprestar um item para um membro (usuário) pelo CPF
+    public void emprestarItemPorTitulo(String cpf, String nomeItem) {
+        Membro membro = null;
+        Biblioteca biblioteca = this.getBiblioteca();
+        
+        // Procurar o membro pelo CPF
+        for (Usuario usuario : biblioteca.getListaUsuario()) {
+        	if (usuario instanceof Membro) {
+        		Membro membro1 = (Membro) usuario;
+                if (membro1.getCpf().equals(cpf)) {
+                    membro = membro1;
+                    break;
+                }
+        	}
+        }
+
+        if (membro != null) {
+            boolean itemEncontrado = false;
+            // Procurar o item pelo nome
+            for (Item item : biblioteca.getListaItem()) {
+                if (item.getTitulo().equalsIgnoreCase(nomeItem)) {
+                    itemEncontrado = true;
+                    if (membro.getEmprestimos().size() == membro.getLimite()) {
+                        System.out.println("Limite máximo de empréstimos atingido.");
+                    } else {
+                        if (item.isDisponivel()) {
+                            LocalDate dataAtual = LocalDate.now();
+                            Emprestimo novo = new Emprestimo(item, membro, dataAtual, dataAtual.plusDays(7));
+                            biblioteca.getListaEmprestimo().add(novo);
+                            membro.getEmprestimos().add(novo);
+                            membro.getHistorico().add(novo);
+                            System.out.println("Item emprestado para " + membro.getNome() + ": " + item.getTitulo());
+                            int numero = item.getExemplares() - 1;
+                            item.setExemplares(numero);
+                            if (numero == 0) {
+                                item.setDisponivel(false);
+                            }
+                        } else {
+                            System.out.println("O item já está emprestado: " + item.getTitulo());
+                        }
+                    }
+                    break;
+                }
+            }
+            if (!itemEncontrado) {
+                System.out.println("O item não está disponível na biblioteca: " + nomeItem);
+            }
+        } else {
+            System.out.println("Membro não encontrado com o CPF: " + cpf);
+        }
+    }
+
 
 
     // Método para devolver um item emprestado por um membro (usuário)
@@ -156,6 +240,56 @@ public class Bibliotecario extends Usuario {
         }
         System.out.println("Item devolvido: " + emprestimo.getItem().getTitulo());
     }
+    
+    // Método para devolver um item emprestado por um membro (usuário) pelo CPF e título do item
+    public void devolverItemPorTitulo(String cpf, String tituloItem) {
+        Membro membro = null;
+        Biblioteca biblioteca = this.getBiblioteca();
+        
+        // Procurar o membro pelo CPF
+        for (Usuario usuario : biblioteca.getListaUsuario()) {
+        	if (usuario instanceof Membro) {
+        		Membro membro1 = (Membro) usuario;
+                if (membro1.getCpf().equals(cpf)) {
+                    membro = membro1;
+                    break;
+                }
+        	}
+        }
+
+        if (membro != null) {
+            Emprestimo emprestimoEncontrado = null;
+            // Procurar o empréstimo pelo título do item
+            for (Emprestimo emprestimo : biblioteca.getListaEmprestimo()) {
+                if (emprestimo.getMembro().equals(membro) && emprestimo.getItem().getTitulo().equalsIgnoreCase(tituloItem)) {
+                    emprestimoEncontrado = emprestimo;
+                    break;
+                }
+            }
+
+            if (emprestimoEncontrado != null) {
+                biblioteca.getListaEmprestimo().remove(emprestimoEncontrado);
+                membro.getEmprestimos().remove(emprestimoEncontrado);
+
+                Item itemDevolvido = emprestimoEncontrado.getItem();
+                for (Item item : biblioteca.getListaItem()) {
+                    if (item.equals(itemDevolvido)) {
+                        int exemplares = item.getExemplares();
+                        item.setExemplares(exemplares + 1);
+                        item.setDisponivel(true);
+                        break;
+                    }
+                }
+
+                System.out.println("Item devolvido: " + itemDevolvido.getTitulo());
+            } else {
+                System.out.println("O membro não possui empréstimo do item com título: " + tituloItem);
+            }
+        } else {
+            System.out.println("Membro não encontrado com o CPF: " + cpf);
+        }
+    }
+
     
     
 }
