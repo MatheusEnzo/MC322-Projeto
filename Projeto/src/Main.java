@@ -64,6 +64,9 @@ public class Main {
                 case 2:
                     menuListar(scanner, bibliotecario);
                     break;
+                case 3:
+                    menuGravar(scanner, bibliotecario);
+                    break;
                 case 0:
                     sair();
                     break;
@@ -217,6 +220,87 @@ public class Main {
     }
 	
 
+	private static void menuGravar(Scanner scanner, Bibliotecario bibliotecario) {
+	    int escolha; // Valor inicial para a variável escolha
+	    Biblioteca biblioteca = bibliotecario.getBiblioteca();
+        do {
+            exibirMenuGravar();
+            escolha = scanner.nextInt();
+            scanner.nextLine(); // Limpar o buffer do scanner
+                       
+            // Executar a operação de cadastro escolhida
+            switch (escolha) {
+                case 1:
+                	ArquivoArtigo.gravarArtigos(biblioteca);
+                    break;
+                case 2:	
+                	ArquivoLivro.gravarLivros(biblioteca);
+                    break;
+                case 3:
+                	ArquivoRevista.gravarRevistas(biblioteca);
+                    break;
+                case 4:	
+                	ArquivoMembro.gravarMembros(biblioteca);
+                    break;
+                case 5:
+                	ArquivoEmprestimo.gravarEmprestimos(biblioteca);
+                    break;
+                case 6:	
+                	ArquivoArtigo arquivoArtigo = new ArquivoArtigo();
+                    String conteudoArquivoArtigo = arquivoArtigo.lerArquivo(bibliotecario);
+                    System.out.println(conteudoArquivoArtigo);
+                    break;
+                case 7:
+                    ArquivoLivro arquivoLivro = new ArquivoLivro();
+                    String conteudoArquivoLivro = arquivoLivro.lerArquivo(bibliotecario);
+                    System.out.println(conteudoArquivoLivro);
+                    break;
+                case 8:	
+                	ArquivoRevista arquivoRevista = new ArquivoRevista();
+                    String conteudoArquivoRevista = arquivoRevista.lerArquivo(bibliotecario);
+                    System.out.println(conteudoArquivoRevista);
+
+                    break;
+                case 9:
+                	ArquivoMembro arquivoMembro = new ArquivoMembro();
+                    String conteudoArquivoMembro = arquivoMembro.lerArquivo(bibliotecario);
+                    System.out.println(conteudoArquivoMembro);
+                    break;
+                case 10:	
+                    ArquivoEmprestimo arquivoEmprestimo = new ArquivoEmprestimo();
+                    String conteudoArquivoEmprestimo = arquivoEmprestimo.lerArquivo(bibliotecario);
+                    System.out.println(conteudoArquivoEmprestimo);
+                    break;
+                case 0:
+                    System.out.println("Voltando ao menu principal...");
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+                    break;
+            }
+        } while (escolha != 0);
+    }
+
+
+    
+    private static void exibirMenuGravar() {
+        System.out.println("----- Menu de Gravações -----");
+        System.out.println("1 - Gravar Artigos");
+        System.out.println("2 - Gravar Livros");
+        System.out.println("3 - Gravar Revistas");
+        System.out.println("4 - Gravar Membros");
+        System.out.println("5 - Gravar Empréstimos");
+        System.out.println("----- Menu de Leituras -----");
+        System.out.println("6 - Ler Artigos");
+        System.out.println("7 - Ler Livros");
+        System.out.println("8 - Ler Revistas");
+        System.out.println("9 - Ler Membros");
+        System.out.println("10 - Ler Empréstimos");
+        System.out.println("0 - Voltar");
+        System.out.print("Escolha uma opção: ");
+    }
+    
+    
     
 
     private static void cadastrarMembro(Bibliotecario bibliotecario) {

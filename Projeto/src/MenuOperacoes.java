@@ -2,7 +2,8 @@
 public enum MenuOperacoes {
     CADASTRAR(1),
     LISTAR(2),
-    REMOVER(3),
+    GRAVAR_LER_ARQUIVO(3),
+    REMOVER(4),
     SAIR(0);
 
     public int operacao;
