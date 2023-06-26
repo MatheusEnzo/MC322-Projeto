@@ -18,6 +18,11 @@ public class Validacao {
         this.codigo = artigo.getDoi();
     }
 
+    Validacao(String cpf){
+        this.tipo = "CPF";
+        this.codigo = cpf;
+    }
+
     //Getters e Setters
     public String getCodigo() {
 		return codigo;
@@ -44,6 +49,13 @@ public class Validacao {
             return validarRevista(this.codigo);
             case "Artigo":
             return validarArtigo(this.codigo);
+            case "CPF":
+            {
+            boolean valido = validarCPF(this.codigo);
+            if (!valido)
+                System.out.println("Credenciais inválidas. . . Tente novamente");
+            return valido;
+            }
             default:
             return false;
         }
@@ -82,7 +94,54 @@ public class Validacao {
         else if (prefixo.charAt(4) != '1' || prefixo.charAt(5) != '0')
             return false;
         return true;
+    }
 
+    //Verifica validade do CPF de Usuario
+    public boolean validarCPF(String cpf){
+        //Remover Caracteres Nao Numericos
+		String numeros = cpf.replaceAll("[^0-9]", "");
+		//Verificar Se Contem 11 Digitos 
+		if (numeros.length() != 11)
+			return false;
+		//Verificar Se Todos os Digitos Sao Iguais
+		if (repetidos(numeros))
+			return false;
+		//Calculando Algoritmo de Verificacao
+		return algoritmoCPF(numeros);
+		}
+	
+    //Verifica se todos os digitos numéricos são idênticos
+	public boolean repetidos(String numeros) {
+		int l = numeros.length();
+		for (int i = 1; i < l; i++)
+			if (numeros.charAt(0) != numeros.charAt(i))
+				return false;
+		return true;
+	}
+		
+	//Verifica se 10o e 11o digitos são condizentes com os 9 primeiros
+    public boolean algoritmoCPF(String numeros) {
+		//Verificando 10o Digito
+		int soma = 0, mult = 10;
+		for (int i = 0; i < 9; i++) //Subtrai 48 de acordo com tabela ASCII 
+			soma += (mult - i) * (numeros.charAt(i) - 48); //multiplica 1os 9 digitos por multiplicador descendo de 10-2 
+		int resto = (soma % 11); //resto da soma por 11
+		if (resto <= 2)
+			if (numeros.charAt(9) - 48 != 0) //se resto é menor ou igual do que 2, 10o digito deve ser 0
+				return false;
+		else if (numeros.charAt(9) - 48 != 11 - resto) //se resto é maior do que 2, 10o digito deve ser 11 menos resto
+			return false;
+			
+		//Verificando 11o Digito
+		soma = 0;
+        mult = 11;
+		for (int i = 0; i < 10; i++) //Mesmo processo, porem agora indo ate o 10o digito e multiplicador desce de 11-2
+			soma += (mult - i) * (numeros.charAt(i) - 48);
+		resto = (soma % 11);
+		if (resto <= 2)
+			return (numeros.charAt(10) - 48 == 0);
+		else
+            return (numeros.charAt(10) - 48 == 11 - resto);
     }
 
     //Verifica se 10o digito condiz com 9 primeiros
