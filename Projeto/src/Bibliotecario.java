@@ -21,6 +21,7 @@ public class Bibliotecario extends Usuario {
     // Método para cadastrar um membro (usuário)
     public void cadastrarMembro(Usuario usuario) {
         biblioteca.getListaUsuario().add(usuario);
+        System.out.println("Membro cadastrado com sucesso: " + usuario.getNome());
     }
 
     // Método para remover um membro (usuário)
@@ -47,6 +48,7 @@ public class Bibliotecario extends Usuario {
     // Método para adicionar um item à biblioteca
     public void adicionarItem(Item item) {
         biblioteca.getListaItem().add(item);
+        System.out.println("Item adicionado com sucesso: " + item.getTitulo());
     }
 
     // Método para remover um item da biblioteca
@@ -64,23 +66,31 @@ public class Bibliotecario extends Usuario {
     // Método para emprestar um item para um membro (usuário)
     public void emprestarItem(Membro membro, Item item) {
         if (biblioteca.getListaItem().contains(item)) {
-            if (item.isDisponivel()) {
-                LocalDate dataAtual = LocalDate.now();
-                Emprestimo novo = new Emprestimo(item, membro, dataAtual, dataAtual.plusDays(7));
-                biblioteca.getListaEmprestimo().add(novo);
-                membro.getEmprestimos().add(novo);
-                System.out.println("Item emprestado para " + membro.getNome() + ": " + item.getTitulo());
-                int numero = item.getExemplares() - 1;
-                item.setExemplares(numero);
-                if(item.getExemplares()==0)
-                {
-                	item.setDisponivel(false);
-                }
+            if(membro.getEmprestimos().size() == membro.getLimite())
+            {
+            	System.out.println("Limite máximo de empréstimos atingido.");
             }
-            else {
-                System.out.println("O item já está emprestado: " + item.getTitulo());
-            }
-        } else {
+            else
+        	{
+            	if (item.isDisponivel()) {
+            		LocalDate dataAtual = LocalDate.now();
+            		Emprestimo novo = new Emprestimo(item, membro, dataAtual, dataAtual.plusDays(7));
+            		biblioteca.getListaEmprestimo().add(novo);
+            		membro.getEmprestimos().add(novo);
+            		System.out.println("Item emprestado para " + membro.getNome() + ": " + item.getTitulo());
+            		int numero = item.getExemplares() - 1;
+            		item.setExemplares(numero);
+            		if(item.getExemplares()==0)
+            		{
+            			item.setDisponivel(false);
+            		}
+            	}
+            	else {
+            		System.out.println("O item já está emprestado: " + item.getTitulo());
+            	}
+        	}
+        } 
+        else {
             System.out.println("O item não está disponível na biblioteca: " + item.getTitulo());
         }
     }
@@ -97,28 +107,5 @@ public class Bibliotecario extends Usuario {
         }
     }
     
-    //Método para verificar validade de código Isbn
-    public void verificarValidade(Livro livro){
-        String validade = "inválido";
-        if (livro.isValido())
-            validade = "válido";
-        System.out.println("Item possui Isbn " + validade);
-    }
-
-    //Método para verificar validade de código Issn
-    public void verificarValidade(Revista revista){
-        String validade = "inválido";
-        if (revista.isValido())
-            validade = "válido";
-        System.out.println("Item possui Issn " + validade);
-    }
-
-    //Método para verificar validade de código Issn
-    public void verificarValidade(Artigo artigo){
-        String validade = "inválido";
-        if (artigo.isValido())
-            validade = "válido";
-        System.out.println("Item possui Doi " + validade);
-    }
     
 }
