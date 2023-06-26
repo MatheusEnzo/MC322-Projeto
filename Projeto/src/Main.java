@@ -95,7 +95,7 @@ public class Main {
             // Executar a operação de cadastro escolhida
             switch (escolha) {
                 case 1:
-                	cadastrarMembro(bibliotecario);
+                	cadastrarMembro(scanner, bibliotecario);
                     break;
                 case 2:	
                 	MenuCadastrarItem(scanner, bibliotecario);
@@ -386,8 +386,7 @@ public class Main {
     }
     
 
-    private static void cadastrarMembro(Bibliotecario bibliotecario) {
-        try (Scanner scanner = new Scanner(System.in)) {
+    private static void cadastrarMembro(Scanner scanner, Bibliotecario bibliotecario) {
 			System.out.println("----- Cadastro de Membro -----");
 			System.out.print("Nome: ");
 			String nome = scanner.nextLine();
@@ -412,7 +411,6 @@ public class Main {
 			// Instancia o membro
 			Membro membro = new Membro(nome, endereco, cpf, email, telefone);
 			bibliotecario.cadastrarMembro(membro);
-		}
 
         System.out.println("Membro cadastrado com sucesso!");
 
