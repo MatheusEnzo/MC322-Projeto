@@ -50,7 +50,6 @@ public class Membro extends Usuario {
 	public void setSuspensao(int suspensao) {
 		this.suspensao = suspensao;
 	}
-
     
     public String toCsvString() {
         String csvString = super.toCsvString();  // Chamada ao método toCsvString() da classe Usuario

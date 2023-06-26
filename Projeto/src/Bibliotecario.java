@@ -45,20 +45,52 @@ public class Bibliotecario extends Usuario {
     }
 
     // Método para adicionar um item à biblioteca
-    public void adicionarItem(Item item) {
-        biblioteca.getListaItem().add(item);
+    public boolean adicionarItem(Item item) {
+        if(biblioteca.getListaItem().contains(item))
+        {
+        	for(int i=0; i<biblioteca.getListaItem().size(); i++)
+        	{
+        		if(biblioteca.getListaItem().get(i).equals(item))
+        		{
+        			int exemplares = biblioteca.getListaItem().get(i).getExemplares();
+        			biblioteca.getListaItem().get(i).setExemplares(exemplares+1);
+        			return true;
+        		}
+        	}
+        }
+        else
+        {
+        	return biblioteca.getListaItem().add(item);
+        }
+        return false;
     }
 
     // Método para remover um item da biblioteca
     public boolean removerItem(Item item) {
-        boolean removido = biblioteca.getListaItem().remove(item);
-        if (removido) {
-            System.out.println("Item removido com sucesso: " + item.getTitulo());
-            return true;
-        } else {
-            System.out.println("Não foi possível remover o item: " + item.getTitulo());
-            return false;
+        if(biblioteca.getListaItem().contains(item))
+        {
+        	for(int i=0; i<biblioteca.getListaItem().size(); i++)
+        	{
+        		if(biblioteca.getListaItem().get(i).equals(item))
+        		{
+        			if(biblioteca.getListaItem().get(i).getExemplares() > 0)
+        			{
+        				int exemplares = biblioteca.getListaItem().get(i).getExemplares();
+        				biblioteca.getListaItem().get(i).setExemplares(exemplares-1);
+        				if(exemplares-1 == 0)
+        				{
+        					biblioteca.getListaItem().get(i).setDisponivel(false);
+        				}
+        				return true;
+        			}
+        			else
+        			{
+        				return false;
+        			}
+        		}
+        	}
         }
+        return false;
     }
 
     // Método para emprestar um item para um membro (usuário)
@@ -70,21 +102,29 @@ public class Bibliotecario extends Usuario {
             }
             else
         	{
-            	if (item.isDisponivel()) {
-            		LocalDate dataAtual = LocalDate.now();
-            		Emprestimo novo = new Emprestimo(item, membro, dataAtual, dataAtual.plusDays(7));
-            		biblioteca.getListaEmprestimo().add(novo);
-            		membro.getEmprestimos().add(novo);
-            		System.out.println("Item emprestado para " + membro.getNome() + ": " + item.getTitulo());
-            		int numero = item.getExemplares() - 1;
-            		item.setExemplares(numero);
-            		if(item.getExemplares()==0)
+            	for(int i=0; i<biblioteca.getListaItem().size(); i++)
+            	{
+            		if(biblioteca.getListaItem().get(i).equals(item))
             		{
-            			item.setDisponivel(false);
+            			if(biblioteca.getListaItem().get(i).isDisponivel())
+            			{
+                    		LocalDate dataAtual = LocalDate.now();
+                    		Emprestimo novo = new Emprestimo(item, membro, dataAtual, dataAtual.plusDays(7));
+                    		biblioteca.getListaEmprestimo().add(novo);
+                    		membro.getEmprestimos().add(novo);
+                    		membro.getHistorico().add(novo);
+                    		System.out.println("Item emprestado para " + membro.getNome() + ": " + item.getTitulo());
+                    		int numero = item.getExemplares() - 1;
+                    		biblioteca.getListaItem().get(i).setExemplares(numero);
+                    		if(numero == 0)
+                    		{
+                    			biblioteca.getListaItem().get(i).setDisponivel(false);
+                    		}
+                    	}
+                    	else {
+                    		System.out.println("O item já está emprestado: " + item.getTitulo());
+                    	}
             		}
-            	}
-            	else {
-            		System.out.println("O item já está emprestado: " + item.getTitulo());
             	}
         	}
         } 
@@ -95,14 +135,19 @@ public class Bibliotecario extends Usuario {
 
 
     // Método para devolver um item emprestado por um membro (usuário)
-    public void devolverItem(Membro membro, Item item) {
-        if (membro.getEmprestimos().contains(item)) {
-            item.setDisponivel(true);
-            membro.removerItemEmprestado(item);
-            System.out.println("Item devolvido por " + membro.getNome() + ": " + item.getTitulo());
-        } else {
-            System.out.println("O item não está em posse de " + membro.getNome() + ": " + item.getTitulo());
+    public void devolverItem(Membro membro, Emprestimo emprestimo) {
+        biblioteca.getListaEmprestimo().remove(emprestimo);
+        membro.getEmprestimos().remove(emprestimo);
+        for(int i=0; i<biblioteca.getListaItem().size(); i++)
+        {
+        	if(biblioteca.getListaItem().get(i).equals(emprestimo.getItem()))
+        	{
+        		int exemplares = biblioteca.getListaItem().get(i).getExemplares();
+        		biblioteca.getListaItem().get(i).setExemplares(exemplares+1);
+        		biblioteca.getListaItem().get(i).setDisponivel(true);
+        	}
         }
+        System.out.println("Item devolvido: " + emprestimo.getItem().getTitulo());
     }
     
     
