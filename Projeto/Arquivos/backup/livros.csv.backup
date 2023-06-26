@@ -1,30 +1,30 @@
-Título,Autor,Editora,Data de Publicação,Gênero,ISBN,Exemplares
-(AANEE) Atendimento de alunos com necessidades educacionais especiais,Gilza Helena Madureira,Cengage Learning Brasil,20/06/2000,Ficção,978-3-16-148410-0,1
-10 mandamentos: Do país que somos para o Brasil que queremos,Luiz Felipe D’Avila,Grupo Almedina (Portugal),09/06/1951,Romance,978-1-56619-909-4,3
-10 Princípios para a Aprendizagem Visível: Educar para o Sucesso,John Hattie; Klaus Zierer,Grupo A,03/06/1960,Romance,978-0-596-52068-8,8
-100 Indicadores da Gestão - Key Performance Indicators,Jorge Caldeira,Grupo Almedina (Portugal),17/06/1954,Ficção,978-0-262-13472-6,5
-1001 Questões Para Fazer Antes de Passar no ENEM - Coleção Me Salva!,Rafael Guerra Ortiz (Org.),Grupo A,14/06/1948,Romance,978-1-4028-9462-6,6
-12 ingredientes e uma dose: uma viagem pelo brasil através da comida,João Luiz Maximo da Silva; Sandro Marques,Editora Alta Books,14/06/1905,Ficção,978-3-16-148411-7,6
-20 anos do Estatuto da Cidade: reflexões e proposições para cidades humanas e sustentáveis,Lilian Regina Gabriel Moreira Pires,Grupo Almedina (Portugal),08/06/1952,Ficção,978-1-56619-910-0,2
-2030: Como As Maiores Tendências de Hoje Vão Colidir com o Futuro de Todas as Coisas e Remodelá-las,Mauro F. Guillén,Editora Alta Books,17/06/1975,Ficção,978-0-596-52069-5,1
-35 Estratégias para Desenvolver a Leitura com Textos Informativos,Barbara Moss; Virginia S. Loh,Grupo A,18/06/1958,Romance,978-0-262-13473-3,9
-400 Questões de física para vestibular e enem,André Luiz Cosenza Diestel; Ricieri Andrella Neto,Grupo A,15/06/1933,Ficção,978-1-4028-9463-3,3
-49 Perguntas sobre Câncer de Próstata,Jean Ikonomidis,Editora Manole,04/06/1953,Ficção,978-3-16-148412-4,4
-49 Perguntas sobre Estresse,Daniel Martins de Barros; Guilherme Funke; Rafael Brandes Lourenço,Editora Manole,20/06/1969,Ficção,978-1-56619-911-7,2
-49 Perguntas sobre o Ronco,Fernando Hirose; João Ricardo P. Bastos; Tatiana Mercuri,Editora Manole,20/06/1978,Ficção,978-0-596-52070-1,7
-49 Perguntas sobre Paralisia Cerebral,Marcos Kenji; Maurício Almoster; Paulo Potiguara Novazzi; Sandra Alamino,Editora Manole,14/06/1972,Ficção,978-0-262-13474-0,8
-500 anos de educação no Brasil.,Cynthia Greive Veiga; Luciano Mendes de Faria Filho; Eliane Marta Teixeira Lopes,Grupo Autêntica,17/06/2000,Romance,978-1-4028-9464-0,2
-A Abordagem Gestáltica e Testemunha Ocular da Terapia,Frederick S. Perls,Grupo GEN,06/06/1925,Ficção,978-3-16-148413-1,9
-A afirmação histórica dos direitos humanos,Fábio Konder Comparato,Editora Saraiva,07/06/1901,Ficção,978-1-56619-912-4,3
-A Alfabetização como processo discursivo: 30 anos de A criança na fase inicial da escrita,Cecília M. A. Goulart; Cláudia Maria Mendes Gontijo; Norma Sandra de A. Ferreira,Cortez,07/06/1910,Ficção,978-0-596-52071-8,5
-A Arquitetura da Cidade,Aldo Rossi,Grupo Almedina (Portugal),06/06/1945,Ficção,978-0-262-13475-7,7
-A Arte da Palavra: Como Criar um Estilo Pessoal na Comunicação Escrita,Gabriel Perissé,Editora Manole,09/06/1959,Romance,978-1-4028-9465-7,8
-A Arte de Escrever Histórias,Esther Proença Soares,Editora Manole,01/06/1958,Ficção,978-3-16-148414-8,7
-A Arte de Motivar os Estudantes do Ensino Médio para a Matemática,Alfred S. Posamentier; Stephen Krulik,Grupo A,07/06/1910,Ficção,978-1-56619-913-1,7
-A Arte de Receber em Eventos,Marlene Matias,Editora Manole,17/06/1900,Ficção,978-0-596-52072-5,6
-A atenção aprisionada: psicopedagogia da capacidade atencional,Alicia Fernández,Grupo A,13/06/1968,Ficção,978-0-262-13476-4,7
-A Aventura da Filosofia: de Parmênides a Nietzsche,Paulo Ghiraldelli Jr.,Editora Manole,10/06/1948,Romance,978-1-4028-9466-4,3
-À Beira do Leito: Geriatria e Gerontologia na Prática Hospitalar,João Toniolo Neto; Vitor Last Pintarelli; Talita Hatsumi Yamatto,Editora Manole,15/06/1912,Romance,978-3-16-148415-5,2
-A Borda,Marco Antonio Leonel Caetano,Editora Blucher,06/06/1988,Romance,978-1-56619-914-8,3
-A Busca pela Natureza: Turismo e Aventura,Heloisa Turini Bruhns,Editora Manole,04/06/1996,Romance,978-0-596-52073-2,5
-A Caçada,Steve Murphy; Javier F. Peña,Editora Alta Books,01/06/1950,Romance,978-0-262-13477-1,10
+Título, Autor, Editora, Data de Publicação, Gênero, ISBN, Exemplares, Disponível
+(AANEE) Atendimento de alunos com necessidades educacionais especiais,Gilza Helena Madureira,Cengage Learning Brasil,20/06/2000,Ficção,978-3-16-148410-0,1,Sim
+10 mandamentos: Do país que somos para o Brasil que queremos,Luiz Felipe D’Avila,Grupo Almedina (Portugal),09/06/1951,Romance,978-1-56619-909-4,3,Sim
+10 Princípios para a Aprendizagem Visível: Educar para o Sucesso,John Hattie; Klaus Zierer,Grupo A,03/06/1960,Romance,978-0-596-52068-8,8,Sim
+100 Indicadores da Gestão - Key Performance Indicators,Jorge Caldeira,Grupo Almedina (Portugal),17/06/1954,Ficção,978-0-262-13472-6,5,Sim
+1001 Questões Para Fazer Antes de Passar no ENEM - Coleção Me Salva!,Rafael Guerra Ortiz (Org.),Grupo A,14/06/1948,Romance,978-1-4028-9462-6,6,Sim
+12 ingredientes e uma dose: uma viagem pelo brasil através da comida,João Luiz Maximo da Silva; Sandro Marques,Editora Alta Books,14/06/1905,Ficção,978-3-16-148411-7,6,Sim
+20 anos do Estatuto da Cidade: reflexões e proposições para cidades humanas e sustentáveis,Lilian Regina Gabriel Moreira Pires,Grupo Almedina (Portugal),08/06/1952,Ficção,978-1-56619-910-0,2,Sim
+2030: Como As Maiores Tendências de Hoje Vão Colidir com o Futuro de Todas as Coisas e Remodelá-las,Mauro F. Guillén,Editora Alta Books,17/06/1975,Ficção,978-0-596-52069-5,1,Sim
+35 Estratégias para Desenvolver a Leitura com Textos Informativos,Barbara Moss; Virginia S. Loh,Grupo A,18/06/1958,Romance,978-0-262-13473-3,9,Sim
+400 Questões de física para vestibular e enem,André Luiz Cosenza Diestel; Ricieri Andrella Neto,Grupo A,15/06/1933,Ficção,978-1-4028-9463-3,3,Sim
+49 Perguntas sobre Câncer de Próstata,Jean Ikonomidis,Editora Manole,04/06/1953,Ficção,978-3-16-148412-4,4,Sim
+49 Perguntas sobre Estresse,Daniel Martins de Barros; Guilherme Funke; Rafael Brandes Lourenço,Editora Manole,20/06/1969,Ficção,978-1-56619-911-7,2,Sim
+49 Perguntas sobre o Ronco,Fernando Hirose; João Ricardo P. Bastos; Tatiana Mercuri,Editora Manole,20/06/1978,Ficção,978-0-596-52070-1,7,Sim
+49 Perguntas sobre Paralisia Cerebral,Marcos Kenji; Maurício Almoster; Paulo Potiguara Novazzi; Sandra Alamino,Editora Manole,14/06/1972,Ficção,978-0-262-13474-0,8,Sim
+500 anos de educação no Brasil.,Cynthia Greive Veiga; Luciano Mendes de Faria Filho; Eliane Marta Teixeira Lopes,Grupo Autêntica,17/06/2000,Romance,978-1-4028-9464-0,2,Sim
+A Abordagem Gestáltica e Testemunha Ocular da Terapia,Frederick S. Perls,Grupo GEN,06/06/1925,Ficção,978-3-16-148413-1,9,Sim
+A afirmação histórica dos direitos humanos,Fábio Konder Comparato,Editora Saraiva,07/06/1901,Ficção,978-1-56619-912-4,3,Sim
+A Alfabetização como processo discursivo: 30 anos de A criança na fase inicial da escrita,Cecília M. A. Goulart; Cláudia Maria Mendes Gontijo; Norma Sandra de A. Ferreira,Cortez,07/06/1910,Ficção,978-0-596-52071-8,5,Sim
+A Arquitetura da Cidade,Aldo Rossi,Grupo Almedina (Portugal),06/06/1945,Ficção,978-0-262-13475-7,7,Sim
+A Arte da Palavra: Como Criar um Estilo Pessoal na Comunicação Escrita,Gabriel Perissé,Editora Manole,09/06/1959,Romance,978-1-4028-9465-7,8,Sim
+A Arte de Escrever Histórias,Esther Proença Soares,Editora Manole,01/06/1958,Ficção,978-3-16-148414-8,7,Sim
+A Arte de Motivar os Estudantes do Ensino Médio para a Matemática,Alfred S. Posamentier; Stephen Krulik,Grupo A,07/06/1910,Ficção,978-1-56619-913-1,7,Sim
+A Arte de Receber em Eventos,Marlene Matias,Editora Manole,17/06/1900,Ficção,978-0-596-52072-5,6,Sim
+A atenção aprisionada: psicopedagogia da capacidade atencional,Alicia Fernández,Grupo A,13/06/1968,Ficção,978-0-262-13476-4,7,Sim
+A Aventura da Filosofia: de Parmênides a Nietzsche,Paulo Ghiraldelli Jr.,Editora Manole,10/06/1948,Romance,978-1-4028-9466-4,3,Sim
+À Beira do Leito: Geriatria e Gerontologia na Prática Hospitalar,João Toniolo Neto; Vitor Last Pintarelli; Talita Hatsumi Yamatto,Editora Manole,15/06/1912,Romance,978-3-16-148415-5,2,Sim
+A Borda,Marco Antonio Leonel Caetano,Editora Blucher,06/06/1988,Romance,978-1-56619-914-8,3,Sim
+A Busca pela Natureza: Turismo e Aventura,Heloisa Turini Bruhns,Editora Manole,04/06/1996,Romance,978-0-596-52073-2,5,Sim
+A Caçada,Steve Murphy; Javier F. Peña,Editora Alta Books,01/06/1950,Romance,978-0-262-13477-1,10,Sim
