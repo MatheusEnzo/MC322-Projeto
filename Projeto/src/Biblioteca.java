@@ -159,6 +159,19 @@ public class Biblioteca {
         return sb.toString();
     }
 
+    public String PrintaListaEmprestimos() {
+        StringBuilder sb = new StringBuilder();
+
+        if (listaEmprestimo.isEmpty()) {
+            sb.append("A biblioteca não possui empréstimos.");
+        } else {
+            for (Emprestimo emprestimo : listaEmprestimo) {
+                sb.append(emprestimo).append("\n");
+            }
+        }
+
+        return sb.toString();
+    }
     
     @Override
     public String toString() {

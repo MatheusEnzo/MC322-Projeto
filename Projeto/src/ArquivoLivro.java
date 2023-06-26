@@ -4,9 +4,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,20 @@ public class ArquivoLivro {
     public static void gravarLivros(Biblioteca biblioteca) {
     	List<Item> itens = new ArrayList<>();
     	itens = biblioteca.getListaItem();
+    	
+        // Cria uma cópia do arquivo atual como backup
+        File arquivoBackup = new File(CAMINHO_ARQUIVO + ".backup");
+        File arquivoAtual = new File(CAMINHO_ARQUIVO);
+        
+        // Verifica se o arquivo atual existe
+        if (arquivoAtual.exists()) {
+            try {
+                Files.copy(arquivoAtual.toPath(), arquivoBackup.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Backup do arquivo anterior criado com sucesso.");
+            } catch (IOException e) {
+                System.out.println("Erro ao criar o backup do arquivo anterior: " + e.getMessage());
+            }
+        }
     	
     	// Itera sobre os artigos e os escreve no arquivo
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CAMINHO_ARQUIVO))) {

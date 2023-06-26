@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -18,29 +18,41 @@ public class ArquivoArtigo {
 
     // Método para gravar os artigos no arquivo
     public static void gravarArtigos(Biblioteca biblioteca) {
-    	List<Item> itens = new ArrayList<>();
-    	itens = biblioteca.getListaItem();
-    	
-    	// Itera sobre os artigos e os escreve no arquivo
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CAMINHO_ARQUIVO))) {
+        List<Item> itens = biblioteca.getListaItem();
+
+        // Cria uma cópia do arquivo atual como backup
+        File arquivoBackup = new File(CAMINHO_ARQUIVO + ".backup");
+        File arquivoAtual = new File(CAMINHO_ARQUIVO);
+
+        // Verifica se o arquivo atual existe
+        if (arquivoAtual.exists()) {
+            try {
+                Files.copy(arquivoAtual.toPath(), arquivoBackup.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Backup do arquivo anterior criado com sucesso.");
+            } catch (IOException e) {
+                System.out.println("Erro ao criar o backup do arquivo anterior: " + e.getMessage());
+            }
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivoAtual))) {
             // Escreve os nomes das colunas no início do arquivo
             writer.write("Título, Autor, Editora, Data de Publicação, Gênero, DOI, Exemplares, Disponível");
             writer.newLine();
-            
+
             // Itera sobre os artigos e os escreve no arquivo
             for (Item item : itens) {
-            	if (item instanceof Artigo) {
-            		Artigo artigo = (Artigo) item;
+                if (item instanceof Artigo) {
+                    Artigo artigo = (Artigo) item;
                     writer.write(artigo.toCsvString());
                     writer.newLine();
-            	}
-
+                }
             }
             System.out.println("Artigos gravados com sucesso.");
         } catch (IOException e) {
             System.out.println("Erro ao gravar artigos: " + e.getMessage());
         }
     }
+
     
     // Método para ler o arquivo
     public String lerArquivo(Bibliotecario bibliotecario) {

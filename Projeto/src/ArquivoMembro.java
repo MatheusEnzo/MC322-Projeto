@@ -4,7 +4,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalTime;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -17,6 +18,20 @@ public class ArquivoMembro {
     public static void gravarMembros(Biblioteca biblioteca) {
     	List<Usuario> usuarios = new ArrayList<>();
     	usuarios = biblioteca.getListaUsuario();
+    	
+        // Cria uma cópia do arquivo atual como backup
+        File arquivoBackup = new File(CAMINHO_ARQUIVO + ".backup");
+        File arquivoAtual = new File(CAMINHO_ARQUIVO);
+        
+        // Verifica se o arquivo atual existe
+        if (arquivoAtual.exists()) {
+            try {
+                Files.copy(arquivoAtual.toPath(), arquivoBackup.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Backup do arquivo anterior criado com sucesso.");
+            } catch (IOException e) {
+                System.out.println("Erro ao criar o backup do arquivo anterior: " + e.getMessage());
+            }
+        }
     	
     	// Itera sobre os membros e os escreve no arquivo
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CAMINHO_ARQUIVO))) {

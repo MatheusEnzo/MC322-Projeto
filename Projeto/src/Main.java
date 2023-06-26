@@ -1,4 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
@@ -28,10 +31,18 @@ public class Main {
     	ArquivoRevista arquivoRevista = new ArquivoRevista();
         String conteudoArquivoRevista = arquivoRevista.lerArquivo(bibliotecario);
         System.out.println(conteudoArquivoRevista);
+        
+        ArquivoEmprestimo arquivoEmprestimo = new ArquivoEmprestimo();
+        String conteudoArquivoEmprestimo = arquivoEmprestimo.lerArquivo(bibliotecario);
+        System.out.println(conteudoArquivoEmprestimo);
                
         // Printa os membros da biblioteca
         System.out.println("---- MEMBROS ----");
         System.out.println(biblioteca.PrintaListaMembros());
+        
+        // Printa os emprestimos da biblioteca
+        System.out.println("---- EMPRÉSTIMOS ----");
+        System.out.println(biblioteca.PrintaListaEmprestimos());
         
         // Printa os itens da biblioteca
 		biblioteca.PrintaListaItens();
@@ -43,6 +54,7 @@ public class Main {
         ArquivoArtigo.gravarArtigos(biblioteca);
         ArquivoLivro.gravarLivros(biblioteca);
         ArquivoRevista.gravarRevistas(biblioteca);
+        ArquivoEmprestimo.gravarEmprestimos(biblioteca);
         ///////////////////////////////////////////
         
         // Implementação de um menu iterativo (SUBSTITUIR O QUE PRECISAR PRA IMPLEMENTAR A INTERFACE GRAFICA)
@@ -78,9 +90,10 @@ public class Main {
             }
 		System.out.println("-----------------------------");
 		System.out.print("Escolha uma opção: ");
-        }
+	}
+	
 	private static void menuCadastro(Scanner scanner, Bibliotecario bibliotecario) {
-        int escolha;
+	    int escolha; // Valor inicial para a variável escolha
 
         do {
             exibirMenuCadastro();
@@ -90,51 +103,31 @@ public class Main {
             // Executar a operação de cadastro escolhida
             switch (escolha) {
                 case 1:
-                    MenuCadastrarMembro(scanner, bibliotecario);
+                	cadastrarMembro(bibliotecario);
                     break;
-                case 3:
+                case 2:	
+                	MenuCadastrarItem(scanner, bibliotecario);
+                    break;
+                case 0:
                     System.out.println("Voltando ao menu principal...");
-                    sair();
                     break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
                     break;
             }
-        } while (escolha != 3);
+        } while (escolha != 0);
     }
+
+
     
     private static void exibirMenuCadastro() {
         System.out.println("----- Menu de Cadastro -----");
         System.out.println("1 - Cadastrar Membro");
         System.out.println("2 - Cadastrar Item");
-        System.out.println("3 - Voltar");
+        System.out.println("0 - Voltar");
         System.out.print("Escolha uma opção: ");
     }
 	
-    private static void MenuCadastrarMembro(Scanner scanner, Bibliotecario bibliotecario) {
-    	int escolha;
-    	
-    	do {
-    		System.out.println("----- Cadastrar Membro -----");
-    		System.out.println("1 - Cadastrar membro");
-            System.out.println("0 - Voltar");
-            
-            escolha = scanner.nextInt();
-            scanner.nextLine(); // Limpar o buffer do scanner
-            switch (escolha) {        
-            case 1:
-                cadastrarMembro(bibliotecario);
-                break;
-            case 0:
-                System.out.println("Voltando ao menu anterior");
-                sair();
-                break;
-            default:
-                System.out.println("Opção inválida. Tente novamente.");
-                break;
-            }
-    	} while (escolha != 0);
-    }
 
     private static void cadastrarMembro(Bibliotecario bibliotecario) {
         try (Scanner scanner = new Scanner(System.in)) {
@@ -163,7 +156,157 @@ public class Main {
 
     }
     
-    private static void sair() {
+    private static void MenuCadastrarItem(Scanner scanner, Bibliotecario bibliotecario) {
+    	int escolha;
+        do {
+    		System.out.println("----- Selecione o tipo de Item -----");
+    		System.out.println("1 - Artigo");
+            System.out.println("2 - Livro");
+            System.out.println("3 - Revista");
+            System.out.println("0 - Voltar");
+            
+            escolha = scanner.nextInt();
+            scanner.nextLine(); // Limpar o buffer do scanner
+            switch (escolha) {        
+            case 1:
+            	cadastrarArtigo(bibliotecario);
+                break;
+            case 2:
+            	cadastrarLivro(bibliotecario);
+                break;
+            case 3:
+            	cadastrarRevista(bibliotecario);
+                break;
+            case 0:
+                System.out.println("Voltando ao menu anterior");
+                sair();
+                break;
+            default:
+                System.out.println("Opção inválida. Tente novamente.");
+                break;
+            }
+    	} while (escolha != 0);
+    }
+    
+    private static void cadastrarArtigo(Bibliotecario bibliotecario) {
+        try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("----- Cadastro de Artigo -----");
+			System.out.print("Título: ");
+			String titulo = scanner.nextLine();
+
+			System.out.print("Autor: ");
+			String autor = scanner.nextLine();
+
+			System.out.print("Editora: ");
+			String editora = scanner.nextLine();
+
+			System.out.print("Data de publicação: ");
+			String data = scanner.nextLine();
+
+			System.out.print("Gênero: ");
+			String genero = scanner.nextLine();
+			
+			System.out.print("Número de exemplares: ");
+			int exemplares = scanner.nextInt();	
+			scanner.nextLine(); // Consumir a quebra de linha pendente
+			
+			System.out.print("Identificação DOI: ");
+			String doi = scanner.nextLine();	
+			
+			// Instancia o item
+			Artigo artigo = new Artigo(titulo, autor,editora, parseData(data), genero, doi, exemplares);
+			bibliotecario.adicionarItem(artigo);
+		}
+
+        System.out.println("Artigo cadastrado com sucesso!");
+
+    }
+    
+    private static void cadastrarLivro(Bibliotecario bibliotecario) {
+        try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("----- Cadastro de Livro -----");
+			System.out.print("Título: ");
+			String titulo = scanner.nextLine();
+
+			System.out.print("Autor: ");
+			String autor = scanner.nextLine();
+
+			System.out.print("Editora: ");
+			String editora = scanner.nextLine();
+
+			System.out.print("Data de publicação: ");
+			String data = scanner.nextLine();
+
+			System.out.print("Gênero: ");
+			String genero = scanner.nextLine();
+			
+			System.out.print("Número de exemplares: ");
+			int exemplares = scanner.nextInt();
+			scanner.nextLine(); // Consumir a quebra de linha pendente
+			
+			System.out.print("Identificação ISBN: ");
+			String isbn = scanner.nextLine();	
+			
+			// Instancia o item
+			Livro livro = new Livro(titulo, autor,editora, parseData(data), genero, isbn, exemplares);
+			bibliotecario.adicionarItem(livro);
+		}
+
+        System.out.println("Artigo cadastrado com sucesso!");
+
+    }
+    
+    private static void cadastrarRevista(Bibliotecario bibliotecario) {
+        try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("----- Cadastro de Revista -----");
+			System.out.print("Título: ");
+			String titulo = scanner.nextLine();
+
+			System.out.print("Autor: ");
+			String autor = scanner.nextLine();
+
+			System.out.print("Editora: ");
+			String editora = scanner.nextLine();
+
+			System.out.print("Data de publicação: ");
+			String data = scanner.nextLine();
+
+			System.out.print("Gênero: ");
+			String genero = scanner.nextLine();
+			
+			System.out.print("Número de exemplares: ");
+			int exemplares = scanner.nextInt();
+			scanner.nextLine(); // Consumir a quebra de linha pendente
+			
+			System.out.print("Identificação ISSN: ");
+			String issn = scanner.nextLine();	
+			
+			// Instancia o item
+			Revista revista = new Revista(titulo, autor,editora, parseData(data), genero, issn, exemplares);
+			bibliotecario.adicionarItem(revista);
+		}
+
+        System.out.println("Artigo cadastrado com sucesso!");
+
+    }
+
+    
+    
+    
+    
+    
+    // Método auxiliar para converter uma string em uma data
+    private static Date parseData(String dataString) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            return dateFormat.parse(dataString);
+        } catch (ParseException e) {
+            System.out.println("Erro ao converter a data.");
+            return null;
+        }
+    }
+
+	private static void sair() {
         System.out.println("Opção 0 - Sair");
         System.out.println("PROGRAMA ENCERRADO");
     }
