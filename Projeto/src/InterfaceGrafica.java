@@ -39,6 +39,10 @@ public class InterfaceGrafica extends JFrame {
         
         // Cria o menu "Arquivo"
         JMenu menuArquivo = new JMenu("Arquivo");
+        // Cria o menu "Exibir"
+        JMenu menuExibir = new JMenu("Exibir");
+        // Cria o menu "Emprestar"
+        JMenu menuEmprestar = new JMenu("Emprestar");
         // Cria o submenu "Abrir"
         JMenu menuAbrir = new JMenu("Abrir");
         
@@ -68,8 +72,10 @@ public class InterfaceGrafica extends JFrame {
         menuAbrir.addSeparator(); // Adiciona uma linha separadora
         menuAbrir.add(itemSairSubMenu);
         
-        // Adiciona o menu "Arquivo" à barra de menu
+        // Adiciona os menus à barra de menu
         menuBar.add(menuArquivo);
+        menuBar.add(menuExibir);
+        menuBar.add(menuEmprestar);
         
         // Define a barra de menu na janela
         setJMenuBar(menuBar);
