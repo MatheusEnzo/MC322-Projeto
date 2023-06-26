@@ -27,9 +27,9 @@ public class ArquivoMembro {
         if (arquivoAtual.exists()) {
             try {
                 Files.copy(arquivoAtual.toPath(), arquivoBackup.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("Backup do arquivo anterior criado com sucesso.");
+                InterfaceGrafica.exibirMensagem("Backup do arquivo anterior criado com sucesso.");
             } catch (IOException e) {
-                System.out.println("Erro ao criar o backup do arquivo anterior: " + e.getMessage());
+            	InterfaceGrafica.exibirMensagem("Erro ao criar o backup do arquivo anterior: " + e.getMessage());
             }
         }
     	
@@ -47,9 +47,9 @@ public class ArquivoMembro {
             	}
 
             }
-            System.out.println("Membros gravados com sucesso.");
+            InterfaceGrafica.exibirMensagem("Membros gravados com sucesso.");
         } catch (IOException e) {
-            System.out.println("Erro ao gravar membros: " + e.getMessage());
+        	InterfaceGrafica.exibirMensagem("Erro ao gravar membros: " + e.getMessage());
         }
     }
 
@@ -83,18 +83,18 @@ public class ArquivoMembro {
                         // Adiciona o membro à biblioteca (ajuste o nome do objeto Bibliotecario conforme necessário)
                         bibliotecario.cadastrarMembro(membro);
                     } else {
-                        System.out.println("Formato inválido da linha no arquivo CSV: " + linha);
+                    	InterfaceGrafica.exibirMensagem("Formato inválido da linha no arquivo CSV: " + linha);
                     }
                 }
             } catch (IOException e) {
-                System.out.println("Erro ao ler o arquivo: " + e.getMessage());
+            	InterfaceGrafica.exibirMensagem("Erro ao ler o arquivo: " + e.getMessage());
             }
         } else {
-            System.out.println("Arquivo não encontrado.");
+        	InterfaceGrafica.exibirMensagem("Arquivo não encontrado.");
         }
 
         // Retorna o conteúdo do arquivo como uma string
-        System.out.println("A lista de membros foi lida com sucesso!");
+        InterfaceGrafica.exibirMensagem("A lista de membros foi lida com sucesso!");
         return conteudo.toString();
     }
 

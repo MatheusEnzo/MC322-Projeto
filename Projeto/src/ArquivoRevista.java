@@ -30,9 +30,9 @@ public class ArquivoRevista {
         if (arquivoAtual.exists()) {
             try {
                 Files.copy(arquivoAtual.toPath(), arquivoBackup.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("Backup do arquivo anterior criado com sucesso.");
+                InterfaceGrafica.exibirMensagem("Backup do arquivo anterior criado com sucesso.");
             } catch (IOException e) {
-                System.out.println("Erro ao criar o backup do arquivo anterior: " + e.getMessage());
+            	InterfaceGrafica.exibirMensagem("Erro ao criar o backup do arquivo anterior: " + e.getMessage());
             }
         }
     	
@@ -51,9 +51,9 @@ public class ArquivoRevista {
             	}
 
             }
-            System.out.println("Revistas gravadas com sucesso.");
+            InterfaceGrafica.exibirMensagem("Revistas gravadas com sucesso.");
         } catch (IOException e) {
-            System.out.println("Erro ao gravar revistas: " + e.getMessage());
+        	InterfaceGrafica.exibirMensagem("Erro ao gravar revistas: " + e.getMessage());
         }
     }
 
@@ -93,21 +93,21 @@ public class ArquivoRevista {
                             // Adiciona a revista à biblioteca (ajuste o nome do objeto Bibliotecario conforme necessário)
                             bibliotecario.adicionarItem(revista);
                         } else {
-                            System.out.println("Data de publicação inválida para a revista: " + titulo);
+                        	InterfaceGrafica.exibirMensagem("Data de publicação inválida para a revista: " + titulo);
                         }
                     } else {
-                        System.out.println("Formato inválido da linha no arquivo CSV: " + linha);
+                    	InterfaceGrafica.exibirMensagem("Formato inválido da linha no arquivo CSV: " + linha);
                     }
                 }
             } catch (IOException e) {
-                System.out.println("Erro ao ler o arquivo: " + e.getMessage());
+            	InterfaceGrafica.exibirMensagem("Erro ao ler o arquivo: " + e.getMessage());
             }
         } else {
-            System.out.println("Arquivo não encontrado.");
+        	InterfaceGrafica.exibirMensagem("Arquivo não encontrado.");
         }
 
         // Retorna o conteúdo do arquivo como uma string
-        System.out.println("A lista de revistas foi lida com sucesso!");
+        InterfaceGrafica.exibirMensagem("A lista de revistas foi lida com sucesso!");
         return conteudo.toString();
     }
 
@@ -119,7 +119,7 @@ public class ArquivoRevista {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             return dateFormat.parse(dataString);
         } catch (ParseException e) {
-            System.out.println("Erro ao converter a data.");
+        	InterfaceGrafica.exibirMensagem("Erro ao converter a data.");
             return null;
         }
     }

@@ -30,9 +30,9 @@ public class ArquivoLivro {
         if (arquivoAtual.exists()) {
             try {
                 Files.copy(arquivoAtual.toPath(), arquivoBackup.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("Backup do arquivo anterior criado com sucesso.");
+                InterfaceGrafica.exibirMensagem("Backup do arquivo anterior criado com sucesso.");
             } catch (IOException e) {
-                System.out.println("Erro ao criar o backup do arquivo anterior: " + e.getMessage());
+            	InterfaceGrafica.exibirMensagem("Erro ao criar o backup do arquivo anterior: " + e.getMessage());
             }
         }
     	
@@ -51,9 +51,9 @@ public class ArquivoLivro {
             	}
 
             }
-            System.out.println("Livros gravados com sucesso.");
+            InterfaceGrafica.exibirMensagem("Livros gravados com sucesso.");
         } catch (IOException e) {
-            System.out.println("Erro ao gravar livros: " + e.getMessage());
+        	InterfaceGrafica.exibirMensagem("Erro ao gravar livros: " + e.getMessage());
         }
     }
     
@@ -93,21 +93,21 @@ public class ArquivoLivro {
                             // Adiciona o livro à biblioteca (você pode ajustar o nome do objeto Bibliotecario conforme necessário)
                             bibliotecario.adicionarItem(livro);
                         } else {
-                            System.out.println("Data de publicação inválida para o livro: " + titulo);
+                        	InterfaceGrafica.exibirMensagem("Data de publicação inválida para o livro: " + titulo);
                         }
                     } else {
-                        System.out.println("Formato inválido da linha no arquivo CSV: " + linha);
+                    	InterfaceGrafica.exibirMensagem("Formato inválido da linha no arquivo CSV: " + linha);
                     }
                 }
             } catch (IOException e) {
-                System.out.println("Erro ao ler o arquivo: " + e.getMessage());
+            	InterfaceGrafica.exibirMensagem("Erro ao ler o arquivo: " + e.getMessage());
             }
         } else {
-            System.out.println("Arquivo não encontrado.");
+        	InterfaceGrafica.exibirMensagem("Arquivo não encontrado.");
         }
 
         // Retorna o conteúdo do arquivo como uma string
-        System.out.println("A lista de livros foi lida com sucesso!");
+        InterfaceGrafica.exibirMensagem("A lista de livros foi lida com sucesso!");
         return conteudo.toString();
     }
 
@@ -123,13 +123,13 @@ public class ArquivoLivro {
             } else if (dataString.matches("\\d{2}/\\d{4}")) {
                 dateFormat = new SimpleDateFormat("MM/yyyy");
             } else {
-                System.out.println("Formato de data inválido: " + dataString);
+            	InterfaceGrafica.exibirMensagem("Formato de data inválido: " + dataString);
                 return null;
             }
 
             return dateFormat.parse(dataString);
         } catch (ParseException e) {
-            System.out.println("Erro ao converter a data: " + e.getMessage());
+        	InterfaceGrafica.exibirMensagem("Erro ao converter a data: " + e.getMessage());
             return null;
         }
     }

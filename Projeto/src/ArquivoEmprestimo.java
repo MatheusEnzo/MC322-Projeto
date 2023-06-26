@@ -30,9 +30,9 @@ public class ArquivoEmprestimo {
         if (arquivoAtual.exists()) {
             try {
                 Files.copy(arquivoAtual.toPath(), arquivoBackup.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("Backup do arquivo anterior criado com sucesso.");
+                InterfaceGrafica.exibirMensagem("Backup do arquivo anterior criado com sucesso.");
             } catch (IOException e) {
-                System.out.println("Erro ao criar o backup do arquivo anterior: " + e.getMessage());
+            	InterfaceGrafica.exibirMensagem("Erro ao criar o backup do arquivo anterior: " + e.getMessage());
             }
         }
         
@@ -47,9 +47,9 @@ public class ArquivoEmprestimo {
                 writer.newLine();
 
             }
-            System.out.println("Empréstimos gravados com sucesso.");
+            InterfaceGrafica.exibirMensagem("Empréstimos gravados com sucesso.");
         } catch (IOException e) {
-            System.out.println("Erro ao gravar empréstimos: " + e.getMessage());
+        	InterfaceGrafica.exibirMensagem("Erro ao gravar empréstimos: " + e.getMessage());
         }
     }
 
@@ -97,17 +97,17 @@ public class ArquivoEmprestimo {
                             itemEmprestado.setDisponivel(false);
                         }
                     } else {
-                        System.out.println("Formato inválido da linha no arquivo CSV: " + linha);
+                    	InterfaceGrafica.exibirMensagem("Formato inválido da linha no arquivo CSV: " + linha);
                     }
                 }
             } catch (IOException e) {
-                System.out.println("Erro ao ler o arquivo: " + e.getMessage());
+            	InterfaceGrafica.exibirMensagem("Erro ao ler o arquivo: " + e.getMessage());
             }
         } else {
-            System.out.println("Arquivo não encontrado.");
+        	InterfaceGrafica.exibirMensagem("Arquivo não encontrado.");
         }
 
-        System.out.println("A lista de empréstimos foi lida com sucesso!");
+        InterfaceGrafica.exibirMensagem("A lista de empréstimos foi lida com sucesso!");
         return conteudo.toString();
     }
 
@@ -140,5 +140,5 @@ public class ArquivoEmprestimo {
         }
         return null;
     }
-
+    
 }

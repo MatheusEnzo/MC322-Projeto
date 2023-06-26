@@ -3,6 +3,8 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JFileChooser;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,7 +12,7 @@ import java.io.File;
 import java.time.LocalTime;
 
 public class InterfaceGrafica extends JFrame {
-
+	private static JTextArea textArea;
     private static final long serialVersionUID = 1L;
 
     public InterfaceGrafica() {
@@ -33,7 +35,7 @@ public class InterfaceGrafica extends JFrame {
         // Define o ícone da janela
         ImageIcon icon = new ImageIcon("images/icon.png");
         setIconImage(icon.getImage());
-        
+
         // Cria a barra de menu
         JMenuBar menuBar = new JMenuBar();
         
@@ -62,15 +64,13 @@ public class InterfaceGrafica extends JFrame {
         JMenuItem itemAbrirRevista = new JMenuItem("Revistas");
         JMenuItem itemAbrirMembro = new JMenuItem("Membros");
         JMenuItem itemAbrirEmprestimo = new JMenuItem("Emprestimos");
-        JMenuItem itemSairSubMenu = new JMenuItem("Sair");
         
         menuAbrir.add(itemAbrirArtigo);
         menuAbrir.add(itemAbrirLivro);
         menuAbrir.add(itemAbrirRevista);
         menuAbrir.add(itemAbrirMembro);
         menuAbrir.add(itemAbrirEmprestimo);
-        menuAbrir.addSeparator(); // Adiciona uma linha separadora
-        menuAbrir.add(itemSairSubMenu);
+
         
         // Adiciona os menus à barra de menu
         menuBar.add(menuArquivo);
@@ -79,6 +79,12 @@ public class InterfaceGrafica extends JFrame {
         
         // Define a barra de menu na janela
         setJMenuBar(menuBar);
+        
+        // Cria o JTextArea
+        textArea = new JTextArea();
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setBounds(10, 10, 480, 400);
+        add(scrollPane);
         
         // Adicione os componentes gráficos aqui
 
@@ -196,9 +202,20 @@ public class InterfaceGrafica extends JFrame {
             }
         });
         
-
+        itemSair.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Fecha a janela
+            }
+        });
+        
     }
 
+    // Método para exibir mensagens do sistema no JTextArea
+    public static void exibirMensagem(String mensagem) {
+        textArea.append(mensagem + "\n");
+    }
+    
     public static void main(String[] args) {
     	
         // Crie e exiba a janela
