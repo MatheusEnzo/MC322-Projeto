@@ -54,7 +54,7 @@ public class Validacao {
             {
 	            boolean valido = validarCPF(this.codigo);
 	            if (!valido) {
-	                System.out.println("Credenciais inválidas. . . Tente novamente");
+	                System.out.println("CPF inválido. . . Tente novamente");
 	            }
 	            return valido;
             }
