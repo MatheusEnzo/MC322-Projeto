@@ -138,8 +138,13 @@ public class Main {
 			System.out.print("Endereço: ");
 			String endereco = scanner.nextLine();
 
+            Validacao validacao;
+            String cpf;
+            do{
 			System.out.print("CPF: ");
-			String cpf = scanner.nextLine();
+			cpf = scanner.nextLine();
+            validacao = new Validacao(cpf);
+            } while (!validacao.validarCodigo());
 
 			System.out.print("Email: ");
 			String email = scanner.nextLine();
