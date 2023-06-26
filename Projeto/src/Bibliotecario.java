@@ -77,7 +77,16 @@ public class Bibliotecario extends Usuario {
         				biblioteca.getListaItem().get(i).setExemplares(exemplares-1);
         				if(exemplares-1 == 0)
         				{
-        					biblioteca.getListaItem().get(i).setDisponivel(false);
+        					for(int j=0; j<biblioteca.getListaEmprestimo().size(); j++)
+        					{
+        						if(biblioteca.getListaEmprestimo().get(j).getItem().equals(item))
+        						{
+        							biblioteca.getListaItem().get(i).setDisponivel(false);
+        							return true;
+        						}
+        					}
+        					biblioteca.getListaItem().remove(item);
+        					return true;
         				}
         				return true;
         			}
