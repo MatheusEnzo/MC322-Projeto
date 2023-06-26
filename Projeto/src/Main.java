@@ -36,16 +36,6 @@ public class Main {
         String conteudoArquivoEmprestimo = arquivoEmprestimo.lerArquivo(bibliotecario);
         System.out.println(conteudoArquivoEmprestimo);
                
-     
-    	// Gravação de arquivos
-		// ÚTIL FAZER ALTERAÇÕES NOS MEMBROS,
-		// ARTIGOS E LIVROS ANTES DE CHAMAR ESSAS 4 LINHAS ABAIXO
-        ArquivoMembro.gravarMembros(biblioteca);
-        ArquivoArtigo.gravarArtigos(biblioteca);
-        ArquivoLivro.gravarLivros(biblioteca);
-        ArquivoRevista.gravarRevistas(biblioteca);
-        ArquivoEmprestimo.gravarEmprestimos(biblioteca);
-        ///////////////////////////////////////////
         
         // Implementação de um menu iterativo (SUBSTITUIR O QUE PRECISAR PRA IMPLEMENTAR A INTERFACE GRAFICA)
         Scanner scanner = new Scanner(System.in);
