@@ -21,7 +21,6 @@ public class Bibliotecario extends Usuario {
     // Método para cadastrar um membro (usuário)
     public void cadastrarMembro(Usuario usuario) {
         biblioteca.getListaUsuario().add(usuario);
-        System.out.println("Membro cadastrado com sucesso: " + usuario.getNome());
     }
 
     // Método para remover um membro (usuário)
@@ -48,7 +47,6 @@ public class Bibliotecario extends Usuario {
     // Método para adicionar um item à biblioteca
     public void adicionarItem(Item item) {
         biblioteca.getListaItem().add(item);
-        System.out.println("Item adicionado com sucesso: " + item.getTitulo());
     }
 
     // Método para remover um item da biblioteca

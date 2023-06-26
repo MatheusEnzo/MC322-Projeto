@@ -110,6 +110,7 @@ public class ArquivoLivro {
         }
 
         // Retorna o conteúdo do arquivo como uma string
+        System.out.println("A lista de livros foi lida com sucesso!");
         return conteudo.toString();
     }
 
@@ -136,26 +137,5 @@ public class ArquivoLivro {
         }
     }
 
-    
-    // !!!!! APENAS PARA TESTE, TIRAR ISSO DEPOIS E IMPLEMENTAR NA CLASSE MAIN !!!!!
-    public static void main(String[] args) {
-    	// Teste da leitura de arquivos
-    	LocalTime horario1 = LocalTime.of(9, 0); //HORARIO DE ABERTURA DA BIBLIOTECA
-    	LocalTime horario2 = LocalTime.of(18, 0); //HORARIO DE FECHAMENTO DA BIBLIOTECA
-    	Biblioteca biblioteca = new Biblioteca("Biblioteca teste", "Rua A, 123", horario1, horario2);
-    	Bibliotecario bibliotecario = new Bibliotecario("Jose", "Rua B, 456", "12854091607", "emailteste@gmail.com", "(00) 912345678", biblioteca);
-    	biblioteca.getListaUsuario().add(bibliotecario);
-    	
-        ArquivoLivro arquivo = new ArquivoLivro();
-        String conteudoArquivo = arquivo.lerArquivo(bibliotecario);
-        System.out.println(conteudoArquivo);
-        
-        System.out.println("---- LIVROS ----");
-        System.out.println(biblioteca.PrintaListaItens());
-        
-    	//Teste da gravação de arquivos
-        ArquivoLivro.gravarLivros(biblioteca);
-
-    }
     
 }

@@ -102,19 +102,41 @@ public class Biblioteca {
     	return listaDisponiveis;
     }
     
-    public String PrintaListaItens() {
-    	StringBuilder sb = new StringBuilder();
+    public void PrintaListaItens() {
+        StringBuilder sb = new StringBuilder();
+        StringBuilder artigos = new StringBuilder();
+        StringBuilder livros = new StringBuilder();
+        StringBuilder revistas = new StringBuilder();
 
         if (listaItem.isEmpty()) {
             sb.append("A biblioteca não possui itens.");
+            System.out.println(sb);
         } else {
             for (Item item : listaItem) {
-            	sb.append(item).append("\n");
+                if (item instanceof Artigo) {
+                	artigos.append(item).append("\n");
+                }
+            }
+            for (Item item : listaItem) {
+                if (item instanceof Livro) {
+                	livros.append(item).append("\n");
+                }
+            }
+            for (Item item : listaItem) {
+                if (item instanceof Revista) {
+                	revistas.append(item).append("\n");
+                }
             }
         }
-        
-        return sb.toString();
+        System.out.println("---- ARTIGOS ----");
+        System.out.println(artigos);
+    	System.out.println("---- LIVROS ----");
+    	System.out.println(livros);
+    	System.out.println("---- REVISTAS ----");
+    	System.out.println(revistas);
+
     }
+
     
     public String PrintaListaMembros() {
         StringBuilder sb = new StringBuilder();
@@ -122,18 +144,21 @@ public class Biblioteca {
         if (listaUsuario.isEmpty()) {
             sb.append("A biblioteca não possui usuários.");
         } else {
+            boolean possuiMembros = false;
             for (Usuario usuario : listaUsuario) {
                 if (usuario instanceof Membro) {
                     sb.append(usuario).append("\n");
+                    possuiMembros = true;
                 }
-                else {
-                	sb.append("A biblioteca não possui membros.");
-                }
+            }
+            if (!possuiMembros) {
+                sb.append("A biblioteca não possui membros.");
             }
         }
 
         return sb.toString();
     }
+
     
     @Override
     public String toString() {
