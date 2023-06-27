@@ -9,10 +9,10 @@ Tema: Sistema de Gerenciamento de Bibliotecas
 - Felipe Leme de Argollo Ferrao (260431), 
 - Luis Felipe Rodrigues Dutra (260594)
 
-## UML:
+### UML:
 
 [UML - Sistema de Biblioteca](https://miro.com/app/board/uXjVM9xLOe4=/) - A ferramenta usada para construir o UML
 
-## Resumo:
+### Resumo:
 
-e
+[Resumo - Sistema de Biblioteca](https://docs.google.com/document/d/1dwKwMGRDIJ5v837ZEAwHjZUQiyQk2Qgx0NUNnG7SrrA/edit) - O documento com funcionamento detalhado do projeto
