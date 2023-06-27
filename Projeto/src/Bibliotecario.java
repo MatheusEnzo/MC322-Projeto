@@ -1,12 +1,14 @@
 import java.time.LocalDate;
 
 public class Bibliotecario extends Usuario {
+	private String senha;
     private Biblioteca biblioteca;
 
     //Construtor
-    public Bibliotecario(String nome, String endereco, String cpf, String email, String telefone, Biblioteca biblioteca) {
+    public Bibliotecario(String nome, String endereco, String cpf, String email, String telefone, Biblioteca biblioteca, String senha) {
         super(nome, endereco, cpf, email, telefone);
         this.biblioteca = biblioteca;
+        this.senha = senha;
     }
 
     //Getters e Setters
@@ -18,7 +20,15 @@ public class Bibliotecario extends Usuario {
 		this.biblioteca = biblioteca;
 	}
 
-    // Método para cadastrar um membro (usuário)
+    public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	// Método para cadastrar um membro (usuário)
     public void cadastrarMembro(Usuario usuario) {
         biblioteca.getListaUsuario().add(usuario);
     }
