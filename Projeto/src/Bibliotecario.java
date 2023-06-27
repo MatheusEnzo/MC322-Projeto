@@ -35,23 +35,23 @@ public class Bibliotecario extends Usuario {
 
     // Método para remover um membro (usuário)
     public boolean removerMembro(String cpf) {
-        boolean removido=false;
-    
+    	
         for(int i=0;i<biblioteca.getListaUsuario().size();i++) {
-        	if(biblioteca.getListaUsuario().get(i).getCpf().equals(cpf))
+        	String test = biblioteca.getListaUsuario().get(i).getCpf().replaceAll("\\D+", "");
+        	if(test.equals(cpf))
         	{
+        		for(Emprestimo j : biblioteca.getListaEmprestimo())
+        		{
+        			if(j.getMembro().equals(biblioteca.getListaUsuario().get(i)))
+        			{
+        				return false;
+        			}
+        		}
         		biblioteca.getListaUsuario().remove(i);
-        		removido = true;
-        		break;
+        		return true;
         	}
         }
-        if (removido) {
-            System.out.println("Membro removido com sucesso.");
-            return true;
-        } else {
-            System.out.println("Não foi possível remover o membro.");
-            return false;
-        }
+        return false;
     }
 
     // Método para adicionar um item à biblioteca
@@ -72,43 +72,6 @@ public class Bibliotecario extends Usuario {
         	biblioteca.getListaItem().add(item);
         }
     }
-
-    // Método para remover um item da biblioteca
-    public boolean removerItem(Item item) {
-        if(biblioteca.getListaItem().contains(item))
-        {
-        	for(int i=0; i<biblioteca.getListaItem().size(); i++)
-        	{
-        		if(biblioteca.getListaItem().get(i).equals(item))
-        		{
-        			if(biblioteca.getListaItem().get(i).getExemplares() > 0)
-        			{
-        				int exemplares = biblioteca.getListaItem().get(i).getExemplares();
-        				biblioteca.getListaItem().get(i).setExemplares(exemplares-1);
-        				if(exemplares-1 == 0)
-        				{
-        					for(int j=0; j<biblioteca.getListaEmprestimo().size(); j++)
-        					{
-        						if(biblioteca.getListaEmprestimo().get(j).getItem().equals(item))
-        						{
-        							biblioteca.getListaItem().get(i).setDisponivel(false);
-        							return true;
-        						}
-        					}
-        					biblioteca.getListaItem().remove(item);
-        					return true;
-        				}
-        				return true;
-        			}
-        			else
-        			{
-        				return false;
-        			}
-        		}
-        	}
-        }
-        return false;
-    }
     
     // Método para remover um item da biblioteca pelo título
     public boolean removerItemPorTitulo(String titulo) {
@@ -125,18 +88,14 @@ public class Bibliotecario extends Usuario {
                             }
                         }
                         biblioteca.getListaItem().remove(item); // Remove o item da lista de itens da biblioteca
-                        System.out.println("Item removido com sucesso");
                         return true; // Retorna verdadeiro indicando que o item foi removido
                     }
-                    System.out.println("Item removido com sucesso");
                     return true; // Retorna verdadeiro indicando que o item foi removido
                 } else {
-                	System.out.println("Não há exemplares do item para remover.");
                     return false; // Retorna falso indicando que não há exemplares disponíveis do item
                 }
             }
         }
-        System.out.println("Não foi possível remover o item.");
         return false; // Retorna falso indicando que o item não foi encontrado na biblioteca
     }
 

@@ -103,11 +103,23 @@ public class InterfaceGrafica extends JFrame {
         getContentPane().add(cadastrarMembro);
         
         JButton removerItem = new JButton("Remover Item");
+        removerItem.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		RemoverItem janela = new RemoverItem(bibliotecario);
+        		janela.setVisible(true);
+        	}
+        });
         removerItem.setFont(new Font("Tahoma", Font.PLAIN, 14));
         removerItem.setBounds(280, 182, 147, 41);
         getContentPane().add(removerItem);
         
-        JButton removerUsuario = new JButton("Remover Usuário");
+        JButton removerUsuario = new JButton("Remover Membro");
+        removerUsuario.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		RemoverMembro janela = new RemoverMembro(bibliotecario);
+        		janela.setVisible(true);
+        	}
+        });
         removerUsuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
         removerUsuario.setBounds(53, 262, 147, 41);
         getContentPane().add(removerUsuario);
