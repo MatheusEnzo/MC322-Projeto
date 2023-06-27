@@ -99,49 +99,9 @@ public class Bibliotecario extends Usuario {
         return false; // Retorna falso indicando que o item não foi encontrado na biblioteca
     }
 
-
-    // Método para emprestar um item para um membro (usuário)
-    public void emprestarItem(Membro membro, Item item) {
-        if (biblioteca.getListaItem().contains(item)) {
-            if(membro.getEmprestimos().size() == membro.getLimite())
-            {
-            	System.out.println("Limite máximo de empréstimos atingido.");
-            }
-            else
-        	{
-            	for(int i=0; i<biblioteca.getListaItem().size(); i++)
-            	{
-            		if(biblioteca.getListaItem().get(i).equals(item))
-            		{
-            			if(biblioteca.getListaItem().get(i).isDisponivel())
-            			{
-                    		LocalDate dataAtual = LocalDate.now();
-                    		Emprestimo novo = new Emprestimo(item, membro, dataAtual, dataAtual.plusDays(7));
-                    		biblioteca.getListaEmprestimo().add(novo);
-                    		membro.getEmprestimos().add(novo);
-                    		membro.getHistorico().add(novo);
-                    		System.out.println("Item emprestado para " + membro.getNome() + ": " + item.getTitulo());
-                    		int numero = item.getExemplares() - 1;
-                    		biblioteca.getListaItem().get(i).setExemplares(numero);
-                    		if(numero == 0)
-                    		{
-                    			biblioteca.getListaItem().get(i).setDisponivel(false);
-                    		}
-                    	}
-                    	else {
-                    		System.out.println("O item já está emprestado: " + item.getTitulo());
-                    	}
-            		}
-            	}
-        	}
-        } 
-        else {
-            System.out.println("O item não está disponível na biblioteca: " + item.getTitulo());
-        }
-    }
     
  // Método para emprestar um item para um membro (usuário) pelo CPF
-    public void emprestarItemPorTitulo(String cpf, String nomeItem) {
+    public String emprestarItemPorTitulo(String cpf, String nomeItem) {
         Membro membro = null;
         Biblioteca biblioteca = this.getBiblioteca();
         
@@ -149,7 +109,9 @@ public class Bibliotecario extends Usuario {
         for (Usuario usuario : biblioteca.getListaUsuario()) {
         	if (usuario instanceof Membro) {
         		Membro membro1 = (Membro) usuario;
-                if (membro1.getCpf().equals(cpf)) {
+        		String test = membro1.getCpf();
+        		test = test.replaceAll("\\D+", "");
+                if (test.equals(cpf)) {
                     membro = membro1;
                     break;
                 }
@@ -163,7 +125,7 @@ public class Bibliotecario extends Usuario {
                 if (item.getTitulo().equalsIgnoreCase(nomeItem)) {
                     itemEncontrado = true;
                     if (membro.getEmprestimos().size() == membro.getLimite()) {
-                        System.out.println("Limite máximo de empréstimos atingido.");
+                        return "Limite máximo de empréstimos do membro atingido.";
                     } else {
                         if (item.isDisponivel()) {
                             LocalDate dataAtual = LocalDate.now();
@@ -171,47 +133,28 @@ public class Bibliotecario extends Usuario {
                             biblioteca.getListaEmprestimo().add(novo);
                             membro.getEmprestimos().add(novo);
                             membro.getHistorico().add(novo);
-                            System.out.println("Item emprestado para " + membro.getNome() + ": " + item.getTitulo());
                             int numero = item.getExemplares() - 1;
                             item.setExemplares(numero);
                             if (numero == 0) {
                                 item.setDisponivel(false);
                             }
+                            return "Empréstimo realizado.";
                         } else {
-                            System.out.println("O item já está emprestado: " + item.getTitulo());
+                            return "O item já está emprestado.";
                         }
                     }
-                    break;
                 }
             }
             if (!itemEncontrado) {
-                System.out.println("O item não está disponível na biblioteca: " + nomeItem);
+                return "Item não encontrado na biblioteca.";
             }
-        } else {
-            System.out.println("Membro não encontrado com o CPF: " + cpf);
         }
+        return "Membro não encontrado.";
     }
 
-
-
-    // Método para devolver um item emprestado por um membro (usuário)
-    public void devolverItem(Membro membro, Emprestimo emprestimo) {
-        biblioteca.getListaEmprestimo().remove(emprestimo);
-        membro.getEmprestimos().remove(emprestimo);
-        for(int i=0; i<biblioteca.getListaItem().size(); i++)
-        {
-        	if(biblioteca.getListaItem().get(i).equals(emprestimo.getItem()))
-        	{
-        		int exemplares = biblioteca.getListaItem().get(i).getExemplares();
-        		biblioteca.getListaItem().get(i).setExemplares(exemplares+1);
-        		biblioteca.getListaItem().get(i).setDisponivel(true);
-        	}
-        }
-        System.out.println("Item devolvido: " + emprestimo.getItem().getTitulo());
-    }
     
     // Método para devolver um item emprestado por um membro (usuário) pelo CPF e título do item
-    public void devolverItemPorTitulo(String cpf, String tituloItem) {
+    public String devolverItemPorTitulo(String cpf, String tituloItem) {
         Membro membro = null;
         Biblioteca biblioteca = this.getBiblioteca();
         
@@ -219,7 +162,9 @@ public class Bibliotecario extends Usuario {
         for (Usuario usuario : biblioteca.getListaUsuario()) {
         	if (usuario instanceof Membro) {
         		Membro membro1 = (Membro) usuario;
-                if (membro1.getCpf().equals(cpf)) {
+        		String test = membro1.getCpf();
+        		test = test.replaceAll("\\D+", "");
+                if (test.equals(cpf)) {
                     membro = membro1;
                     break;
                 }
@@ -250,13 +195,12 @@ public class Bibliotecario extends Usuario {
                     }
                 }
 
-                System.out.println("Item devolvido: " + itemDevolvido.getTitulo());
+                return "Item devolvido.";
             } else {
-                System.out.println("O membro não possui empréstimo do item com título: " + tituloItem);
+                return "O membro não possui empréstimo do item com tal título.";
             }
-        } else {
-            System.out.println("Membro não encontrado com o CPF: " + cpf);
-        }
+        } 
+        return "Membro não encontrado,";
     }
 
     

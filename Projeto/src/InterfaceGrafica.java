@@ -77,7 +77,7 @@ public class InterfaceGrafica extends JFrame {
         	}
         });
         listarEmprestimos.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        listarEmprestimos.setBounds(53, 106, 147, 41);
+        listarEmprestimos.setBounds(47, 106, 160, 41);
         getContentPane().add(listarEmprestimos);
         
         JButton cadastrarItem = new JButton("Cadastrar Item");
@@ -145,11 +145,23 @@ public class InterfaceGrafica extends JFrame {
         getContentPane().add(listarMembros);
         
         JButton emprestar = new JButton("Emprestar Item");
+        emprestar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		EmprestarItem janela = new EmprestarItem(bibliotecario);
+        		janela.setVisible(true);
+        	}
+        });
         emprestar.setFont(new Font("Tahoma", Font.PLAIN, 14));
         emprestar.setBounds(280, 262, 147, 41);
         getContentPane().add(emprestar);
         
         JButton devolver = new JButton("Devolver Item");
+        devolver.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		DevolverItem janela = new DevolverItem(bibliotecario);
+        		janela.setVisible(true);
+        	}
+        });
         devolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
         devolver.setBounds(53, 353, 147, 41);
         getContentPane().add(devolver);
