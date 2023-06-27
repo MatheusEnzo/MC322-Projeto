@@ -1,4 +1,3 @@
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +13,10 @@ import javax.swing.border.EmptyBorder;
 
 public class DevolverItem extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField campoTitulo;
 	private JTextField campoCPF;

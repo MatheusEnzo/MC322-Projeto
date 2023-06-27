@@ -1,15 +1,15 @@
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.CardLayout;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 
 public class Text extends JFrame {
 
 
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Create the frame.

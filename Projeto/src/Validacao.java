@@ -65,36 +65,37 @@ public class Validacao {
 	
     
 	// Método para validar o ISBN 
-	public static boolean verificarISBN(String isbn) {
-	    // Removendo hífens e espaços em branco do ISBN
-	    String isbnLimpo = isbn.replaceAll("-", "").replaceAll("\\s+", "");
+    public static boolean verificarISBN(String isbn) {
+        // Removendo hífens e espaços em branco do ISBN
+        String isbnLimpo = isbn.replaceAll("-", "").replaceAll("\\s+", "");
 
-	    // Verificando se o ISBN possui 10 ou 13 dígitos
-	    if (isbnLimpo.length() != 10 && isbnLimpo.length() != 13) {
-	        return false;
-	    }
+        // Verificando se o ISBN possui 10 ou 13 dígitos
+        if (isbnLimpo.length() != 10 && isbnLimpo.length() != 13) {
+            return false;
+        }
 
-	    // Realizando a verificação do dígito verificador
-	    int soma = 0;
-	    int multiplicador = 10;
-	    for (int i = 0; i < isbnLimpo.length() - 1; i++) {
-	        char c = isbnLimpo.charAt(i);
-	        if (!Character.isDigit(c)) {
-	            return false;
-	        }
-	        int digito = Character.getNumericValue(c);
-	        soma += digito * multiplicador;
-	        multiplicador--;
-	    }
+        // Realizando a verificação do dígito verificador
+        int soma = 0;
+        int multiplicador = 1;
+        for (int i = 0; i < isbnLimpo.length() - 1; i++) {
+            char c = isbnLimpo.charAt(i);
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+            int digito = Character.getNumericValue(c);
+            soma += digito * multiplicador;
+            multiplicador = (multiplicador == 1) ? 3 : 1;
+        }
 
-	    int digitoVerificador = Character.getNumericValue(isbnLimpo.charAt(isbnLimpo.length() - 1));
+        int digitoVerificador = Character.getNumericValue(isbnLimpo.charAt(isbnLimpo.length() - 1));
 
-	    if (isbnLimpo.length() == 10) {
-	        return (soma % 11 == digitoVerificador);
-	    } else { // ISBN com 13 dígitos
-	        return ((soma % 10 == 0 && digitoVerificador == 0) || (10 - (soma % 10) == digitoVerificador));
-	    }
-	}
+        if (isbnLimpo.length() == 10) {
+            return (soma % 11 == digitoVerificador);
+        } else { // ISBN com 13 dígitos
+            return (10 - (soma % 10) == digitoVerificador);
+        }
+    }
+
 
 	// Método para validar o ISSN 
 	public static boolean verificarISSN(String issn) {

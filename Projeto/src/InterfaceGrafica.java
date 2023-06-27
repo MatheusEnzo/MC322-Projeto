@@ -3,7 +3,6 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JFileChooser;
@@ -13,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.JButton;
-import javax.swing.JTextPane;
 
 public class InterfaceGrafica extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -281,10 +279,10 @@ public class InterfaceGrafica extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ArquivoArtigo.gravarArtigos(biblioteca, bibliotecario);
-//                ArquivoLivro.gravarLivros(biblioteca);
-//                ArquivoRevista.gravarRevistas(biblioteca);
-//                ArquivoMembro.gravarMembros(biblioteca);
-//                ArquivoEmprestimo.gravarEmprestimos(biblioteca);
+                ArquivoLivro.gravarLivros(biblioteca, bibliotecario);
+                ArquivoRevista.gravarRevistas(biblioteca, bibliotecario);
+                ArquivoMembro.gravarMembros(biblioteca, bibliotecario);
+                ArquivoEmprestimo.gravarEmprestimos(biblioteca, bibliotecario);
             }
         });
         
