@@ -9,11 +9,11 @@ import javax.swing.JFileChooser;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
 public class InterfaceGrafica extends JFrame {
     private static final long serialVersionUID = 1L;
+    private JTextArea textArea;
 
     public InterfaceGrafica(Biblioteca biblioteca, Bibliotecario bibliotecario) {
 
@@ -73,6 +73,12 @@ public class InterfaceGrafica extends JFrame {
         });
         exibir.setBounds(76, 42, 101, 33);
         getContentPane().add(exibir);
+        
+        // Cria o JTextArea
+        textArea = new JTextArea();
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setBounds(10, 10, 480, 400);
+        add(scrollPane);
         
         // Adicione os componentes gráficos aqui
 
@@ -182,11 +188,11 @@ public class InterfaceGrafica extends JFrame {
         itemSalvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArquivoArtigo.gravarArtigos(biblioteca);
-                ArquivoLivro.gravarLivros(biblioteca);
-                ArquivoRevista.gravarRevistas(biblioteca);
-                ArquivoMembro.gravarMembros(biblioteca);
-                ArquivoEmprestimo.gravarEmprestimos(biblioteca);
+                ArquivoArtigo.gravarArtigos(biblioteca, bibliotecario);
+//                ArquivoLivro.gravarLivros(biblioteca);
+//                ArquivoRevista.gravarRevistas(biblioteca);
+//                ArquivoMembro.gravarMembros(biblioteca);
+//                ArquivoEmprestimo.gravarEmprestimos(biblioteca);
             }
         });
         
@@ -199,11 +205,11 @@ public class InterfaceGrafica extends JFrame {
     }
 
     // Método para exibir mensagens do sistema no JTextArea
-    public static void exibirMensagem(String mensagem) {
+    public void exibirMensagem(String mensagem) {
         textArea.append(mensagem + "\n");
     }
     // Método para exibir mensagens do sistema no JTextArea
-    public static void exibirMensagemSb(StringBuilder mensagem) {
+    public void exibirMensagemSb(StringBuilder mensagem) {
         textArea.append(mensagem + "\n");
     }
 }

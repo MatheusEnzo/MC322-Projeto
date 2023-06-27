@@ -18,9 +18,11 @@ public class ArquivoRevista {
     private static final String CAMINHO_ARQUIVO_backup = "Arquivos/backup/revistas.csv";
 
     // Método para gravar as revistas no arquivo
-    public static void gravarRevistas(Biblioteca biblioteca) {
+    public static void gravarRevistas(Biblioteca biblioteca, Bibliotecario bibliotecario) {
     	List<Item> itens = new ArrayList<>();
     	itens = biblioteca.getListaItem();
+        InterfaceGrafica InterfaceGrafica = new InterfaceGrafica(biblioteca, bibliotecario);
+
     	
         // Cria uma cópia do arquivo atual como backup
         File arquivoBackup = new File(CAMINHO_ARQUIVO_backup + ".backup");
@@ -60,6 +62,7 @@ public class ArquivoRevista {
  // Método para ler o arquivo CSV
     public String lerArquivoCSV(File arquivo, Bibliotecario bibliotecario) {
         StringBuilder conteudo = new StringBuilder();
+        InterfaceGrafica InterfaceGrafica = new InterfaceGrafica(bibliotecario.getBiblioteca(), bibliotecario);
 
         // Verifica se o arquivo existe
         if (arquivo.exists()) {
@@ -86,7 +89,7 @@ public class ArquivoRevista {
                         // Ajuste o índice conforme necessário para o campo adicional do CSV
 
                         // Cria uma instância de Revista com os dados da linha
-                        Revista revista = new Revista(titulo, autor, editora, parseData(dataString), genero, issn, exemplares);
+                        Revista revista = new Revista(titulo, autor, editora, parseData(dataString, bibliotecario), genero, issn, exemplares);
 
                         // Verifica se a data é nula antes de adicionar a revista à biblioteca
                         if (revista.getData() != null) {
@@ -114,7 +117,8 @@ public class ArquivoRevista {
     
     
     // Método auxiliar para converter uma string em uma data
-    private Date parseData(String dataString) {
+    private Date parseData(String dataString, Bibliotecario bibliotecario) {
+    	InterfaceGrafica InterfaceGrafica = new InterfaceGrafica(bibliotecario.getBiblioteca(), bibliotecario);
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             return dateFormat.parse(dataString);

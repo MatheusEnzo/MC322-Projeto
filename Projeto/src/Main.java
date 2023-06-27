@@ -37,7 +37,6 @@ public class Main {
         ArquivoEmprestimo arquivoEmprestimo = new ArquivoEmprestimo();
         arquivoEmprestimo.lerArquivoCSV(new File(caminhoEmprestimo), bibliotecario);
         
-        biblioteca.PrintaListaItens();
     	
         // Crie e exiba a janela
     	Login login = new Login(biblioteca, bibliotecario);

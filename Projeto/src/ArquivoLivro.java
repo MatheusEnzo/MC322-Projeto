@@ -18,9 +18,11 @@ public class ArquivoLivro {
     private static final String CAMINHO_ARQUIVO_backup = "Arquivos/backup/livros.csv";
 
     // Método para gravar os livros no arquivo
-    public static void gravarLivros(Biblioteca biblioteca) {
+    public static void gravarLivros(Biblioteca biblioteca, Bibliotecario bibliotecario) {
     	List<Item> itens = new ArrayList<>();
     	itens = biblioteca.getListaItem();
+    	InterfaceGrafica InterfaceGrafica = new InterfaceGrafica(biblioteca, bibliotecario);
+
     	
         // Cria uma cópia do arquivo atual como backup
         File arquivoBackup = new File(CAMINHO_ARQUIVO_backup + ".backup");
@@ -61,6 +63,7 @@ public class ArquivoLivro {
     // Método para ler o arquivo CSV
     public String lerArquivoCSV(File arquivo, Bibliotecario bibliotecario) {
         StringBuilder conteudo = new StringBuilder();
+        InterfaceGrafica InterfaceGrafica = new InterfaceGrafica(bibliotecario.getBiblioteca(), bibliotecario);
 
         // Verifica se o arquivo existe
         if (arquivo.exists()) {
@@ -86,7 +89,7 @@ public class ArquivoLivro {
                         int exemplares = Integer.parseInt(campos[6].trim());
 
                         // Cria uma instância de Livro com os dados da linha
-                        Livro livro = new Livro(titulo, autor, editora, parseData(dataString), genero, isbn, exemplares);
+                        Livro livro = new Livro(titulo, autor, editora, parseData(dataString, bibliotecario), genero, isbn, exemplares);
 
                         // Verifica se a data é nula antes de adicionar o livro à biblioteca
                         if (livro.getData() != null) {
@@ -113,7 +116,8 @@ public class ArquivoLivro {
 
     
     // Método auxiliar para converter uma string em uma data
-    private Date parseData(String dataString) {
+    private Date parseData(String dataString, Bibliotecario bibliotecario) {
+    	InterfaceGrafica InterfaceGrafica = new InterfaceGrafica(bibliotecario.getBiblioteca(), bibliotecario);
         try {
             SimpleDateFormat dateFormat;
 

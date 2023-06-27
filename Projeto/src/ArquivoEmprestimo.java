@@ -18,9 +18,10 @@ public class ArquivoEmprestimo {
     
 
     // Método para gravar os emprestimos no arquivo
-    public static void gravarEmprestimos(Biblioteca biblioteca) {
+    public static void gravarEmprestimos(Biblioteca biblioteca, Bibliotecario bibliotecario) {
         List<Emprestimo> emprestimos = new ArrayList<>();
         emprestimos = biblioteca.getListaEmprestimo();
+        InterfaceGrafica InterfaceGrafica = new InterfaceGrafica(biblioteca, bibliotecario);
 
         // Cria uma cópia do arquivo atual como backup
         File arquivoBackup = new File(CAMINHO_ARQUIVO_backup + ".backup");
@@ -57,7 +58,9 @@ public class ArquivoEmprestimo {
     public String lerArquivoCSV(File arquivo, Bibliotecario bibliotecario) {
         StringBuilder conteudo = new StringBuilder();
         Biblioteca biblioteca = bibliotecario.getBiblioteca();
+        InterfaceGrafica InterfaceGrafica = new InterfaceGrafica(biblioteca, bibliotecario);
 
+        
         // Verifica se o arquivo existe
         if (arquivo.exists()) {
             try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {

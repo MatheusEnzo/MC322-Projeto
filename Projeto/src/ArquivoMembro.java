@@ -15,9 +15,11 @@ public class ArquivoMembro {
     private static final String CAMINHO_ARQUIVO_backup = "Arquivos/backup/membros.csv";
 
     // Método para gravar os membros no arquivo
-    public static void gravarMembros(Biblioteca biblioteca) {
+    public static void gravarMembros(Biblioteca biblioteca, Bibliotecario bibliotecario) {
     	List<Usuario> usuarios = new ArrayList<>();
     	usuarios = biblioteca.getListaUsuario();
+        InterfaceGrafica InterfaceGrafica = new InterfaceGrafica(biblioteca, bibliotecario);
+
     	
         // Cria uma cópia do arquivo atual como backup
         File arquivoBackup = new File(CAMINHO_ARQUIVO_backup + ".backup");
@@ -53,9 +55,10 @@ public class ArquivoMembro {
         }
     }
 
- // Método para ler o arquivo CSV
+    // Método para ler o arquivo CSV
     public String lerArquivoCSV(File arquivo, Bibliotecario bibliotecario) {
         StringBuilder conteudo = new StringBuilder();
+        InterfaceGrafica InterfaceGrafica = new InterfaceGrafica(bibliotecario.getBiblioteca(), bibliotecario);
 
         // Verifica se o arquivo existe
         if (arquivo.exists()) {
