@@ -102,7 +102,7 @@ public class Biblioteca {
     	return listaDisponiveis;
     }
     
-    public void PrintaListaItens() {
+    public String PrintaListaItens() {
         StringBuilder sb = new StringBuilder();
         StringBuilder artigos = new StringBuilder();
         StringBuilder livros = new StringBuilder();
@@ -128,12 +128,13 @@ public class Biblioteca {
                 }
             }
         }
-        System.out.println("---- ARTIGOS ----");
-        System.out.println(artigos);
-    	System.out.println("---- LIVROS ----");
-    	System.out.println(livros);
-    	System.out.println("---- REVISTAS ----");
-    	System.out.println(revistas);
+        String s = "---- ARTIGOS ----\n";
+        s += artigos;
+    	s += "\n---- LIVROS ----\n";
+    	s += livros;
+    	s += "\n---- REVISTAS ----\n";
+    	s += revistas;
+    	return s;
 
     }
 
