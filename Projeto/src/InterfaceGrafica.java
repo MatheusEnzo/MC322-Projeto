@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.JButton;
-import java.awt.Font;
 
 public class InterfaceGrafica extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -67,50 +66,13 @@ public class InterfaceGrafica extends JFrame {
         setJMenuBar(menuBar);
         getContentPane().setLayout(null);
         
-        JButton listarEmprestimos = new JButton("Listar Emprestimos");
-        listarEmprestimos.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        listarEmprestimos.setBounds(53, 106, 147, 41);
-        getContentPane().add(listarEmprestimos);
-        
-        JButton cadastrarLivro = new JButton("Cadastrar Livro");
-        cadastrarLivro.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        cadastrarLivro.setBounds(280, 106, 147, 41);
-        getContentPane().add(cadastrarLivro);
-        
-        JButton cadastrarMembro = new JButton("Cadastrar Membro");
-        cadastrarMembro.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        cadastrarMembro.setBounds(53, 182, 147, 41);
-        getContentPane().add(cadastrarMembro);
-        
-        JButton removerLivro = new JButton("Remover Livro");
-        removerLivro.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        removerLivro.setBounds(280, 182, 147, 41);
-        getContentPane().add(removerLivro);
-        
-        JButton removerUsuario = new JButton("Remover Usuário");
-        removerUsuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        removerUsuario.setBounds(53, 262, 147, 41);
-        getContentPane().add(removerUsuario);
-        
-        JButton listarItens = new JButton("Listar Itens");
-        listarItens.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        listarItens.setBounds(53, 36, 147, 41);
-        getContentPane().add(listarItens);
-        
-        JButton listarMembros = new JButton("Listar Membros");
-        listarMembros.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        listarMembros.setBounds(280, 36, 147, 41);
-        getContentPane().add(listarMembros);
-        
-        JButton emprestar = new JButton("Emprestar Item");
-        emprestar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        emprestar.setBounds(280, 262, 147, 41);
-        getContentPane().add(emprestar);
-        
-        JButton devolver = new JButton("Devolver Item");
-        devolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        devolver.setBounds(53, 353, 147, 41);
-        getContentPane().add(devolver);
+        JButton exibir = new JButton("Listar Itens");
+        exibir.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        exibir.setBounds(76, 42, 101, 33);
+        getContentPane().add(exibir);
         
         // Cria o JTextArea
         textArea = new JTextArea();
