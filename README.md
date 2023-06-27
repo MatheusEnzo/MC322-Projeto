@@ -21,4 +21,9 @@ Tema: Sistema de Gerenciamento de Bibliotecas
 
 [Resumo - Sistema de Biblioteca](https://docs.google.com/document/d/1dwKwMGRDIJ5v837ZEAwHjZUQiyQk2Qgx0NUNnG7SrrA/edit) - O documento com funcionamento detalhado do projeto
 
+### Slides:
+
+[Slides - Sistema de Biblioteca](https://docs.google.com/presentation/d/10pHXojI4ScPeCovjkRDw9OGn06Xtw9R-vCs1EUO1XLY/edit) - Slides para apresentação presencial
+
+
 ![](https://github.com/MatheusEnzo/MC322-Projeto/blob/main/Projeto/images/bibliotecaimg.jpg)
