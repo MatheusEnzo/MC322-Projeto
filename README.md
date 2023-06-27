@@ -2,6 +2,10 @@
 
 Tema: Sistema de Gerenciamento de Bibliotecas
 
+
+![](https://github.com/MatheusEnzo/MC322-Projeto/blob/main/Projeto/images/faixaimg.jpg)
+
+
 ## Integrantes: 
 
 - Matheus Enzo Arimura Sinbo (222219), 
@@ -16,3 +20,5 @@ Tema: Sistema de Gerenciamento de Bibliotecas
 ### Resumo:
 
 [Resumo - Sistema de Biblioteca](https://docs.google.com/document/d/1dwKwMGRDIJ5v837ZEAwHjZUQiyQk2Qgx0NUNnG7SrrA/edit) - O documento com funcionamento detalhado do projeto
+
+![](https://github.com/MatheusEnzo/MC322-Projeto/blob/main/Projeto/images/bibliotecaimg.jpg)
