@@ -80,20 +80,32 @@ public class InterfaceGrafica extends JFrame {
         listarEmprestimos.setBounds(53, 106, 147, 41);
         getContentPane().add(listarEmprestimos);
         
-        JButton cadastrarLivro = new JButton("Cadastrar Livro");
-        cadastrarLivro.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        cadastrarLivro.setBounds(280, 106, 147, 41);
-        getContentPane().add(cadastrarLivro);
+        JButton cadastrarItem = new JButton("Cadastrar Item");
+        cadastrarItem.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		CadastrarItem janela = new CadastrarItem(bibliotecario);
+        		janela.setVisible(true);
+        	}
+        });
+        cadastrarItem.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        cadastrarItem.setBounds(280, 106, 147, 41);
+        getContentPane().add(cadastrarItem);
         
         JButton cadastrarMembro = new JButton("Cadastrar Membro");
+        cadastrarMembro.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		CadastrarMembro janela = new CadastrarMembro(bibliotecario);
+        		janela.setVisible(true);
+        	}
+        });
         cadastrarMembro.setFont(new Font("Tahoma", Font.PLAIN, 14));
         cadastrarMembro.setBounds(53, 182, 147, 41);
         getContentPane().add(cadastrarMembro);
         
-        JButton removerLivro = new JButton("Remover Livro");
-        removerLivro.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        removerLivro.setBounds(280, 182, 147, 41);
-        getContentPane().add(removerLivro);
+        JButton removerItem = new JButton("Remover Item");
+        removerItem.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        removerItem.setBounds(280, 182, 147, 41);
+        getContentPane().add(removerItem);
         
         JButton removerUsuario = new JButton("Remover Usuário");
         removerUsuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
