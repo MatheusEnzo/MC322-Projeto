@@ -110,7 +110,7 @@ public class Biblioteca {
 
         if (listaItem.isEmpty()) {
             sb.append("A biblioteca não possui itens.");
-            System.out.println(sb);
+            InterfaceGrafica.exibirMensagemSb(sb);
         } else {
             for (Item item : listaItem) {
                 if (item instanceof Artigo) {
@@ -128,12 +128,12 @@ public class Biblioteca {
                 }
             }
         }
-        System.out.println("---- ARTIGOS ----");
-        System.out.println(artigos);
-    	System.out.println("---- LIVROS ----");
-    	System.out.println(livros);
-    	System.out.println("---- REVISTAS ----");
-    	System.out.println(revistas);
+        InterfaceGrafica.exibirMensagem("---- ARTIGOS ----");
+        InterfaceGrafica.exibirMensagemSb(artigos);
+    	InterfaceGrafica.exibirMensagem("---- LIVROS ----");
+    	InterfaceGrafica.exibirMensagemSb(livros);
+    	InterfaceGrafica.exibirMensagem("---- REVISTAS ----");
+    	InterfaceGrafica.exibirMensagemSb(revistas);
 
     }
 
@@ -156,7 +156,7 @@ public class Biblioteca {
             }
         }
 
-        System.out.println(sb);
+        InterfaceGrafica.exibirMensagemSb(sb);
         return sb.toString();
     }
 

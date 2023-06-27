@@ -215,6 +215,10 @@ public class InterfaceGrafica extends JFrame {
     public static void exibirMensagem(String mensagem) {
         textArea.append(mensagem + "\n");
     }
+    // Método para exibir mensagens do sistema no JTextArea
+    public static void exibirMensagemSb(StringBuilder mensagem) {
+        textArea.append(mensagem + "\n");
+    }
     
     public static void main(String[] args) {
     	

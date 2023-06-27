@@ -54,7 +54,7 @@ public class Validacao {
             {
 	            boolean valido = validarCPF(this.codigo);
 	            if (!valido) {
-	                System.out.println("CPF inválido. . . Tente novamente");
+	                InterfaceGrafica.exibirMensagem("CPF inválido. . . Tente novamente");
 	            }
 	            return valido;
             }
@@ -180,7 +180,7 @@ public class Validacao {
             }
         }
         if (todosDigitosIguais) {
-        	System.out.println("O CPF fornecido pelo cliente é inválido");
+        	InterfaceGrafica.exibirMensagem("O CPF fornecido pelo cliente é inválido");
             return false;
         }
         // Calculando os dígitos verificadores
@@ -209,7 +209,7 @@ public class Validacao {
                 segundoDigitoVerificador == Character.getNumericValue(cpf.charAt(10))) {
             return true;
         } else {
-        	System.out.println("O CPF fornecido pelo cliente é inválido");
+        	InterfaceGrafica.exibirMensagem("O CPF fornecido pelo cliente é inválido");
             return false;
         }
     }

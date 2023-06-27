@@ -36,10 +36,10 @@ public class Bibliotecario extends Usuario {
         	}
         }
         if (removido) {
-            System.out.println("Membro removido com sucesso.");
+            InterfaceGrafica.exibirMensagem("Membro removido com sucesso.");
             return true;
         } else {
-            System.out.println("Não foi possível remover o membro.");
+            InterfaceGrafica.exibirMensagem("Não foi possível remover o membro.");
             return false;
         }
     }
@@ -115,18 +115,18 @@ public class Bibliotecario extends Usuario {
                             }
                         }
                         biblioteca.getListaItem().remove(item); // Remove o item da lista de itens da biblioteca
-                        System.out.println("Item removido com sucesso");
+                        InterfaceGrafica.exibirMensagem("Item removido com sucesso");
                         return true; // Retorna verdadeiro indicando que o item foi removido
                     }
-                    System.out.println("Item removido com sucesso");
+                    InterfaceGrafica.exibirMensagem("Item removido com sucesso");
                     return true; // Retorna verdadeiro indicando que o item foi removido
                 } else {
-                	System.out.println("Não há exemplares do item para remover.");
+                	InterfaceGrafica.exibirMensagem("Não há exemplares do item para remover.");
                     return false; // Retorna falso indicando que não há exemplares disponíveis do item
                 }
             }
         }
-        System.out.println("Não foi possível remover o item.");
+        InterfaceGrafica.exibirMensagem("Não foi possível remover o item.");
         return false; // Retorna falso indicando que o item não foi encontrado na biblioteca
     }
 
@@ -136,7 +136,7 @@ public class Bibliotecario extends Usuario {
         if (biblioteca.getListaItem().contains(item)) {
             if(membro.getEmprestimos().size() == membro.getLimite())
             {
-            	System.out.println("Limite máximo de empréstimos atingido.");
+            	InterfaceGrafica.exibirMensagem("Limite máximo de empréstimos atingido.");
             }
             else
         	{
@@ -151,7 +151,7 @@ public class Bibliotecario extends Usuario {
                     		biblioteca.getListaEmprestimo().add(novo);
                     		membro.getEmprestimos().add(novo);
                     		membro.getHistorico().add(novo);
-                    		System.out.println("Item emprestado para " + membro.getNome() + ": " + item.getTitulo());
+                    		InterfaceGrafica.exibirMensagem("Item emprestado para " + membro.getNome() + ": " + item.getTitulo());
                     		int numero = item.getExemplares() - 1;
                     		biblioteca.getListaItem().get(i).setExemplares(numero);
                     		if(numero == 0)
@@ -160,14 +160,14 @@ public class Bibliotecario extends Usuario {
                     		}
                     	}
                     	else {
-                    		System.out.println("O item já está emprestado: " + item.getTitulo());
+                    		InterfaceGrafica.exibirMensagem("O item já está emprestado: " + item.getTitulo());
                     	}
             		}
             	}
         	}
         } 
         else {
-            System.out.println("O item não está disponível na biblioteca: " + item.getTitulo());
+            InterfaceGrafica.exibirMensagem("O item não está disponível na biblioteca: " + item.getTitulo());
         }
     }
     
@@ -194,7 +194,7 @@ public class Bibliotecario extends Usuario {
                 if (item.getTitulo().equalsIgnoreCase(nomeItem)) {
                     itemEncontrado = true;
                     if (membro.getEmprestimos().size() == membro.getLimite()) {
-                        System.out.println("Limite máximo de empréstimos atingido.");
+                        InterfaceGrafica.exibirMensagem("Limite máximo de empréstimos atingido.");
                     } else {
                         if (item.isDisponivel()) {
                             LocalDate dataAtual = LocalDate.now();
@@ -202,24 +202,24 @@ public class Bibliotecario extends Usuario {
                             biblioteca.getListaEmprestimo().add(novo);
                             membro.getEmprestimos().add(novo);
                             membro.getHistorico().add(novo);
-                            System.out.println("Item emprestado para " + membro.getNome() + ": " + item.getTitulo());
+                            InterfaceGrafica.exibirMensagem("Item emprestado para " + membro.getNome() + ": " + item.getTitulo());
                             int numero = item.getExemplares() - 1;
                             item.setExemplares(numero);
                             if (numero == 0) {
                                 item.setDisponivel(false);
                             }
                         } else {
-                            System.out.println("O item já está emprestado: " + item.getTitulo());
+                            InterfaceGrafica.exibirMensagem("O item já está emprestado: " + item.getTitulo());
                         }
                     }
                     break;
                 }
             }
             if (!itemEncontrado) {
-                System.out.println("O item não está disponível na biblioteca: " + nomeItem);
+                InterfaceGrafica.exibirMensagem("O item não está disponível na biblioteca: " + nomeItem);
             }
         } else {
-            System.out.println("Membro não encontrado com o CPF: " + cpf);
+            InterfaceGrafica.exibirMensagem("Membro não encontrado com o CPF: " + cpf);
         }
     }
 
@@ -238,7 +238,7 @@ public class Bibliotecario extends Usuario {
         		biblioteca.getListaItem().get(i).setDisponivel(true);
         	}
         }
-        System.out.println("Item devolvido: " + emprestimo.getItem().getTitulo());
+        InterfaceGrafica.exibirMensagem("Item devolvido: " + emprestimo.getItem().getTitulo());
     }
     
     // Método para devolver um item emprestado por um membro (usuário) pelo CPF e título do item
@@ -281,12 +281,12 @@ public class Bibliotecario extends Usuario {
                     }
                 }
 
-                System.out.println("Item devolvido: " + itemDevolvido.getTitulo());
+                InterfaceGrafica.exibirMensagem("Item devolvido: " + itemDevolvido.getTitulo());
             } else {
-                System.out.println("O membro não possui empréstimo do item com título: " + tituloItem);
+                InterfaceGrafica.exibirMensagem("O membro não possui empréstimo do item com título: " + tituloItem);
             }
         } else {
-            System.out.println("Membro não encontrado com o CPF: " + cpf);
+            InterfaceGrafica.exibirMensagem("Membro não encontrado com o CPF: " + cpf);
         }
     }
 
