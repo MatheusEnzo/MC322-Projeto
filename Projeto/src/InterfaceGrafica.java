@@ -9,23 +9,14 @@ import javax.swing.JFileChooser;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.time.LocalTime;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 
 public class InterfaceGrafica extends JFrame {
-	private static JTextArea textArea;
     private static final long serialVersionUID = 1L;
 
-    public InterfaceGrafica() {
-    	
-    	// Instanciação de um objeto Biblioteca
-    	LocalTime horario1 = LocalTime.of(9, 0); //Horario de abertura (09:00)
-    	LocalTime horario2 = LocalTime.of(18, 0); //Horario de fechamento (18:00)
-    	Biblioteca biblioteca = new Biblioteca("Biblioteca de Bytes da UNICAMP", "Rua Andrade da Silva, 199", horario1, horario2);
-    	
-    	// Instanciação de um objeto Bibliotecario (um dos possíveis usuários)
-    	Bibliotecario bibliotecario = new Bibliotecario("José Pereira", "Rua Arlindo da Cruz, 456", "650.885.770-36", "josepereira@bibliobytes.com", "(11) 99690-3704", biblioteca);
-    	biblioteca.getListaUsuario().add(bibliotecario); // Bibliotecario adicionado à lista de usuários da biblioteca
-    	
+    public InterfaceGrafica(Biblioteca biblioteca, Bibliotecario bibliotecario) {
+
         // Configurações da janela
         setTitle("Gestão da Biblioteca");
         setSize(500, 500);
@@ -41,10 +32,6 @@ public class InterfaceGrafica extends JFrame {
         
         // Cria o menu "Arquivo"
         JMenu menuArquivo = new JMenu("Arquivo");
-        // Cria o menu "Exibir"
-        JMenu menuExibir = new JMenu("Exibir");
-        // Cria o menu "Emprestar"
-        JMenu menuEmprestar = new JMenu("Emprestar");
         // Cria o submenu "Abrir"
         JMenu menuAbrir = new JMenu("Abrir");
         
@@ -74,17 +61,18 @@ public class InterfaceGrafica extends JFrame {
         
         // Adiciona os menus à barra de menu
         menuBar.add(menuArquivo);
-        menuBar.add(menuExibir);
-        menuBar.add(menuEmprestar);
         
         // Define a barra de menu na janela
         setJMenuBar(menuBar);
+        getContentPane().setLayout(null);
         
-        // Cria o JTextArea
-        textArea = new JTextArea();
-        JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setBounds(10, 10, 480, 400);
-        add(scrollPane);
+        JButton exibir = new JButton("Listar Itens");
+        exibir.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        exibir.setBounds(76, 42, 101, 33);
+        getContentPane().add(exibir);
         
         // Adicione os componentes gráficos aqui
 
@@ -208,18 +196,14 @@ public class InterfaceGrafica extends JFrame {
                 dispose(); // Fecha a janela
             }
         });
-        
     }
 
     // Método para exibir mensagens do sistema no JTextArea
     public static void exibirMensagem(String mensagem) {
         textArea.append(mensagem + "\n");
     }
-    
-    public static void main(String[] args) {
-    	
-        // Crie e exiba a janela
-        InterfaceGrafica interfaceGrafica = new InterfaceGrafica();
-        interfaceGrafica.setVisible(true);
+    // Método para exibir mensagens do sistema no JTextArea
+    public static void exibirMensagemSb(StringBuilder mensagem) {
+        textArea.append(mensagem + "\n");
     }
 }
